@@ -56,6 +56,8 @@ public class GameUiController : MonoBehaviour
         public void HandleInput() { }
         public void Enter(GameUiController parent) {
             _parent = parent;
+      
+
             parent.StartCoroutine(parent.SetTextAfterTime(parent.timer, 0, "3"));
             parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 0, "start_countdown"));
 
