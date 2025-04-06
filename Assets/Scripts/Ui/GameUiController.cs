@@ -11,6 +11,7 @@ public class GameUiController : MonoBehaviour
     public TMPro.TextMeshProUGUI timer;
     public Button retryButton;
     
+    
 
     private int state = 0;
 
@@ -58,18 +59,8 @@ public class GameUiController : MonoBehaviour
             _parent = parent;
       
 
-            parent.StartCoroutine(parent.SetTextAfterTime(parent.timer, 0, "3"));
             parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 0, "start_countdown"));
-
-            parent.StartCoroutine(parent.SetTextAfterTime(parent.timer, 1, "2"));
-            parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 1, "start_countdown"));
-
-            parent.StartCoroutine(parent.SetTextAfterTime(parent.timer, 2, "1"));
-            parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 2, "start_countdown"));
-
-            parent.StartCoroutine(parent.SetTextAfterTime(parent.timer, 3, "GO"));
-            parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 3, "start_countdown"));
-            parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 4, "move_corner"));
+    
             parent.StartCoroutine(parent.SetStateAfter(4, new Playing()));
 
         }
@@ -81,6 +72,35 @@ public class GameUiController : MonoBehaviour
         }
     }
 
+    public void SetText(string text)
+    {
+        timer.text = text;
+    }
+
+    public void setStateToPlaying()
+    {
+        Change(new Playing());
+    }
+    public void EnableRetryButton()
+    {
+        EnableRetryButton(true);
+
+    }
+    public void DisableRetryButton()
+    {
+        EnableRetryButton(false);
+
+    }
+
+
+    public void EnableRetryButton(bool enable)
+    {
+        Debug.Log("aaaaaaaaaaa" + enable);
+        retryButton.gameObject.SetActive(enable);
+
+    }
+
+
     public class Playing : UIState
     {
         GameUiController _parent;
@@ -90,6 +110,8 @@ public class GameUiController : MonoBehaviour
         }
         public void Enter(GameUiController parent)
         {
+            parent.countDownAnimator.SetTrigger("move_corner");
+
             _parent = parent;
             _parent._timer = 0;
 
@@ -116,10 +138,9 @@ public class GameUiController : MonoBehaviour
             _parent = parent;
 
             parent.countDownAnimator.SetTrigger("move_middle");
-            parent.StartCoroutine(parent.EnableAfterTime(parent.retryButton.gameObject, true, 0.2f));
         }
         public void Exit() {
-            _parent.retryButton.gameObject.SetActive(false);
+            _parent.EnableRetryButton(false);
             _parent.countDownAnimator.SetTrigger("reset");
 
         }

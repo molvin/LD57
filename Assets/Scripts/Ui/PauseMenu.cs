@@ -48,7 +48,7 @@ public class PauseMenu : MonoBehaviour
         public override void Enter()
         {
             _parent._animator.SetTrigger("main_enter");
-            _parent.StartCoroutine(_parent.SetStateAfter(1, new MainState(_parent)));
+           // _parent.StartCoroutine(_parent.SetStateAfter(1, new MainState(_parent)));
 
         }
     }
@@ -149,6 +149,16 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         Change(new EntryState(this));
+    }
+
+    public void SetStateToIdle()
+    {
+        Change(new MainState(this));
+    }
+
+    public void SetStateToEmpty()
+    {
+        Change(new EmptyState(this));
     }
 
     public void Resume()
