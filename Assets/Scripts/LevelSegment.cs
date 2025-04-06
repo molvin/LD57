@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 public enum RoomType
 {
-    None = 0,
-    Crossing = 1,
-    Item1Room = 1 << 1,
-    Item1Challange = 1 << 2,
-    Iteam2Room = 1 << 3,
-    Item2Challange = 1 << 4,
-    Goal = 1 << 5,
+    None,
+    Crossing,
+    Item1Room,
+    Item1Challange,
+    Iteam2Room,
+    Item2Challange,
+    Goal,
 }
 public class LevelSegment : MonoBehaviour
 {
@@ -27,6 +27,8 @@ public class LevelSegment : MonoBehaviour
             return _fetchedGroundColliders;
         }
     }
+    public GameObject SpawnSlot;
+
     [HideInInspector] public LevelSegment Prefab;
 
     [ContextMenu("Check Overlap")]
