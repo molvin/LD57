@@ -2,158 +2,244 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public LevelSegment StartSegment;
-    public LevelSegment[] AllSegments;
+    public LevelSegment[] StartSegments;
 
-    public int MinSegments = 15;
-    public int MaxSegments = 30;
-    public int MinSplitters = 1;
-    public int MaxSplitters = 3;
+    public LevelSegment[] FillerSegments;
+    public LevelSegment[] SplitterSegments;
+    public LevelSegment[] GoalSegments;
+
+    public int TargetLeafAmount = 2;
+    public float EndProbabilityGrowthRate = 0.1f;
+    public float SplitterProbabilityGrowthRate = 0.2f;
+    public int RetryAttemptsPerPath = 10;
 
     public int Seed;
 
-    private List<LevelSegment> Level = new();
-    private Dictionary<string, List<LevelSegment>> SegmentsByEntrance = new();
+    private LevelSegment root;
+    private bool generating;
 
     private void Start()
     {
-        Level.Add(StartSegment);
-        foreach(LevelSegment segment in AllSegments)
-        {
-            if(!SegmentsByEntrance.ContainsKey(segment.Entrance.Type))
-            {
-                SegmentsByEntrance.Add(segment.Entrance.Type, new());
-            }
-
-            SegmentsByEntrance[segment.Entrance.Type].Add(segment);
-        }
+        LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
+        LevelSegment start = Instantiate(startPrefab);
+        root = start;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(!generating && Input.GetKeyDown(KeyCode.Space))
         {
             Seed += 1;
-            StartCoroutine(BuildRandomPath(Seed));
+
+            DestroyPath(root);
+            for(int i = 0; i < 100; i++)
+            {
+                Debug.Log($"Building with seed {Seed}");
+
+                bool success = GenerateLevel(Seed);
+                if(success)
+                {
+                    break;
+                }
+                Seed += 1;
+                Debug.Log($"Failed: Retrying with seed {Seed}");
+            }
         }
     }
-    private IEnumerator BuildRandomPath(int seed)
+    
+    private class GenerationState
     {
-        foreach (Transform child in StartSegment.transform)
+        public Door Start = null;
+        public int Placed = 0;
+        public bool MustPlaceSplitter = false;
+        public float EndProbability = 0.0f;
+        public float SplitterProbability = 0.0f;
+
+        public bool ShouldEnd()
         {
-            if (child.GetComponent<LevelSegment>() != null)
+            if (MustPlaceSplitter)
+                return false;
+            float rand = Random.value;
+            if (rand < EndProbability)
             {
-                Destroy(child.gameObject);
+                return true;
+            }
+            return false;
+        }
+
+        public bool ShouldSplit()
+        {
+            if (!MustPlaceSplitter)
+                return false;
+
+            float rand = Random.value;
+            if (rand < SplitterProbability)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Place(LevelGenerator gen)
+        {
+            Placed += 1;
+            EndProbability += gen.EndProbabilityGrowthRate;
+            SplitterProbability += gen.SplitterProbabilityGrowthRate;
+        }
+    }
+
+    private bool GenerateLevel(int seed)
+    {
+        Random.InitState(seed);
+        int attempts = 0;
+
+        int availableLeafs = root.Exits.Length;
+        Queue<LevelSegment> roots = new();
+        roots.Enqueue(root);
+
+        while (roots.Count > 0)
+        {
+            LevelSegment start = roots.Dequeue();
+            foreach (Door exit in start.Exits)
+            {
+                bool success = true;
+                for (int i = 0; i < RetryAttemptsPerPath; i++)
+                {
+                    GenerationState state = new GenerationState
+                    {
+                        Start = exit,
+                        MustPlaceSplitter = availableLeafs < TargetLeafAmount
+                    };
+
+                    LevelSegment end = GeneratePath(state);
+                    if (end == null)
+                    {
+                        success = false;
+                        DestroyPath(exit);
+                        Physics2D.SyncTransforms();
+                        attempts += 1;
+                    }
+                    else
+                    {
+                        success = true;
+                        roots.Enqueue(end);
+
+                        if(end.Exits.Length > 1)
+                        {
+                            availableLeafs += end.Exits.Length - 1;
+                        }
+                        break;
+                    }
+                }
+
+                if (!success)
+                {
+                    return false;
+                }
             }
         }
-        yield return null;
-        Physics2D.SyncTransforms();
 
-        Random.InitState(seed);
+        Debug.Log($"Succeded after {attempts} attemps");
+        return true;
+    }
 
-        // TODO: attempt x times
-        for (int i = 0; i < 100; i++)
+    private LevelSegment GeneratePath(GenerationState state)
+    {
+        bool isEnd = false;
+        Queue<Door> pending = new();
+        pending.Enqueue(state.Start);
+        while (pending.Count > 0)
         {
-            bool success = true;
-            Queue<LevelSegment> pending = new();
-            pending.Enqueue(StartSegment);
-            int count = 0;
-            int numSplitters = 0;
-            while (pending.Count > 0)
+            Door exit = pending.Dequeue();
+            List<LevelSegment> bucket;
+            
+            if (state.ShouldEnd()) // TODO: and we have filled requirements for ending
             {
-                if(count >= MaxSegments)
-                {
-                    // TODO: add ends to the thing
-                    break;
-                }
-
-                LevelSegment segment = pending.Dequeue();
-                List<LevelSegment> spawned = AddSegments(segment, numSplitters);
-                yield return new WaitForSeconds(0.1f);
-                if (spawned == null)
-                {
-                    yield return null;
-                    // TODO: this whole run is invalid
-                    foreach (Transform child in StartSegment.transform)
-                    {
-                        if (child.GetComponent<LevelSegment>() != null)
-                        {
-                            Destroy(child.gameObject);
-                        }
-                    }
-                    Physics2D.SyncTransforms();
-                    success = false;
-                    break;
-                }
-                else
-                {
-                    count += spawned.Count;
-                    foreach(LevelSegment nextSegment in spawned)
-                    {
-                        if (nextSegment.Exits.Length > 1)
-                        {
-                            numSplitters += 1;
-                        }
-                        pending.Enqueue(nextSegment);
-                    }
-                }
-            }
-
-            if(success)
-            {
-                Debug.Log("Finished generating");
-                break;
+                // Pick the end segment
+                bucket = GoalSegments.ToList();
+                isEnd = true;
             }
             else
             {
-                Debug.Log($"Failed at {count}");
+                IEnumerable<LevelSegment> validSegments = FillerSegments;
+                if(state.ShouldSplit())
+                {
+                    validSegments = SplitterSegments;
+                }
+                // Make more unlikely to repeat segments
+                // TODO: make less likely to repeat segments
+                bucket = validSegments.OrderBy(x => Random.value).ToList();
             }
-        }
-    }
 
-    private List<LevelSegment> AddSegments(LevelSegment segment, int splitterCount)
-    {
-        List<LevelSegment> result = new();
-        foreach (Door exit in segment.Exits)
-        {
-            List<LevelSegment> validSegments = SegmentsByEntrance[exit.Type];
-            // Make more unlikely to repeat segments
-            var bucket = validSegments.OrderBy(x => x == segment.Prefab ? 0.8f : Random.value);
-
+            // Try to place each available segment, if all fails this path fails
+            LevelSegment spawned = null;
             foreach (LevelSegment next in bucket)
             {
-                if(splitterCount >= MaxSplitters && next.Exits.Length > 1)
-                {
-                    continue;
-                }
                 Vector3 offset = next.transform.position - next.Entrance.transform.position;
                 Vector3 targetPos = exit.transform.position + offset;
 
-                LevelSegment spawned = Instantiate(next, segment.transform);
+                spawned = Instantiate(next, exit.transform);
                 spawned.transform.position = targetPos;
 
                 Physics2D.SyncTransforms();
-
                 if (spawned.Overlaps())
                 {
-                    Destroy(spawned.gameObject);
+                    DestroyImmediate(spawned.gameObject);
                     spawned = null;
                 }
                 else
                 {
                     spawned.Prefab = next;
                     exit.Connection = spawned;
-                    result.Add(spawned);
                     break;
                 }
             }
-        }
-        if (result.Count != segment.Exits.Length)
-            return null;
 
-        return result;
+            // This path has failed to generate
+            if (spawned == null)
+            {
+                return null;
+            }
+
+            // Evaluate the next segment
+            if (!isEnd && 
+                spawned.Exits.Length == 1)
+            {
+                state.Place(this);
+                pending.Enqueue(spawned.Exits[0]);
+            }
+            // We have reached a split or an end, they need to be evaluated as separate paths
+            else
+            {
+                return spawned;
+            }
+        }
+
+        // Should never happen
+        Debug.Log("Failed to generate path unexpectedly");
+        return null;
+    }
+
+    private void DestroyPath(Door start)
+    {
+        foreach (Transform child in start.transform)
+        {
+            LevelSegment segment = child.GetComponentInChildren<LevelSegment>();
+            if(segment != null)
+            {
+                DestroyImmediate(segment.gameObject);
+            }
+        }
+    }
+    private void DestroyPath(LevelSegment start)
+    {
+        foreach (Door exit in start.Exits)
+        {
+            DestroyPath(exit);
+        }
     }
 }
