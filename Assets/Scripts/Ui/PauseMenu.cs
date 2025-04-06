@@ -31,6 +31,8 @@ public class PauseMenu : MonoBehaviour
 
         public override void Enter()
         {
+            Time.timeScale = 1;
+
         }
     }
 
@@ -42,13 +44,11 @@ public class PauseMenu : MonoBehaviour
 
         public override void Exit()
         {
-            //TODO set timescale to 0
-            
-            //enable layout?
         }
 
         public override void Enter()
         {
+            Time.timeScale = 0;
             _parent._animator.SetTrigger("main_enter");
            // _parent.StartCoroutine(_parent.SetStateAfter(1, new MainState(_parent)));
 
@@ -72,6 +72,11 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void ChangeStateToEmpty()
+    {
+        Change(new EmptyState(this));
+    }
+
     public class MainExitState : PState
     {
         public MainExitState(PauseMenu parent) : base(parent)
@@ -80,51 +85,16 @@ public class PauseMenu : MonoBehaviour
 
         public override void Exit()
         {
-           
-
-            //cal anim
+            Time.timeScale = 1;
         }
 
         public override void Enter()
         {
             _parent._animator.SetTrigger("main_exit");
-            _parent.StartCoroutine(_parent.SetStateAfter(1, new EmptyState(_parent)));
-        }
-    }
-
-    public class AudioEnterState : PState
-    {
-        public AudioEnterState(PauseMenu parent) : base(parent)
-        {
-        }
-
-        public override void Exit()
-        {
-            //cal anim
-        }
-
-        public override void Enter()
-        {
-            //cal anim
         }
     }
 
 
-    public class AudioState : PState
-    {
-        public AudioState(PauseMenu parent) : base(parent)
-        {
-        }
-
-        public override void Exit()
-        {
-            //call anim
-        }
-
-        public override void Enter()
-        {
-        }
-    }
 
     public void Change(PState state)
     {
