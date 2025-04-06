@@ -778,7 +778,7 @@ Transform:
   - {fileID: 7848667875592517498}
   - {fileID: 4469616693270479293}
   - {fileID: 2338129445164131434}
-  - {fileID: 985106035450358209}
+  - {fileID: 3929966902850035690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &996395430905241531
@@ -795,15 +795,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entrance: {fileID: 5309303383550747077}
   Exits: []
-  GroundColliders:
-  - {fileID: 3324472363640856326}
-  - {fileID: 4909692623096732759}
+  RoomTypes: 0
   GroundLayers:
     serializedVersion: 2
     m_Bits: 1
-  KeyPickupSlot: {fileID: 6983735155932615120}
+  SpawnSlot: {fileID: 8295228096469090247}
   Prefab: {fileID: 0}
---- !u!1 &6983735155932615120
+--- !u!1 &8295228096469090247
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -811,24 +809,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 985106035450358209}
+  - component: {fileID: 3929966902850035690}
   m_Layer: 0
-  m_Name: KeySlot
+  m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &985106035450358209
+--- !u!4 &3929966902850035690
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6983735155932615120}
+  m_GameObject: {fileID: 8295228096469090247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.2, y: -14.7, z: 0}
+  m_LocalPosition: {x: 20.39, y: -14.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
