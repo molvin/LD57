@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 7272319888310209928}
   - component: {fileID: 8370458266534878204}
   m_Layer: 0
-  m_Name: TurnAround
+  m_Name: TurnAroundInverted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,7 +737,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.12749606, y: -1.0711572, z: 0.012198448}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7752439808277885291}
