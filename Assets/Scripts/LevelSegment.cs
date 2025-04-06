@@ -27,6 +27,8 @@ public class LevelSegment : MonoBehaviour
             return _fetchedGroundColliders;
         }
     }
+    public GameObject KeyPickupSlot;
+
     [HideInInspector] public LevelSegment Prefab;
 
     [ContextMenu("Check Overlap")]
