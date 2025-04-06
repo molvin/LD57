@@ -10,14 +10,35 @@ public class GameUiController : MonoBehaviour
     public Animator countDownAnimator;
     public TMPro.TextMeshProUGUI timer;
     public Button retryButton;
-    
-    
+
+    private AudioSource source;
+
 
     private int state = 0;
 
     private float _timer = 0;
 
     private UIState _state;
+
+    public void Start()
+    {
+        this._state = new EmptyState();
+        _state.Enter(this);
+
+        source = this.GetComponent<AudioSource>();
+        if (this.GetComponent<AudioSource>() == null)
+        {
+            source = this.AddComponent<AudioSource>();
+        }
+
+
+    }
+    
+    public void playSound(AudioClip clip)
+    {
+        source.PlayOneShot(clip);
+
+    }
     public interface UIState
     {
         void Update(float dt);
@@ -95,7 +116,6 @@ public class GameUiController : MonoBehaviour
 
     public void EnableRetryButton(bool enable)
     {
-        Debug.Log("aaaaaaaaaaa" + enable);
         retryButton.gameObject.SetActive(enable);
 
     }
@@ -158,12 +178,7 @@ public class GameUiController : MonoBehaviour
      
 
     }
-    public void Start()
-    {
-        this._state = new EmptyState();
-        _state.Enter(this);
-
-    }
+   
 
     public void Change(UIState state)
     {

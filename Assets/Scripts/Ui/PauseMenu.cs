@@ -42,6 +42,8 @@ public class PauseMenu : MonoBehaviour
 
         public override void Exit()
         {
+            //TODO set timescale to 0
+            
             //enable layout?
         }
 
