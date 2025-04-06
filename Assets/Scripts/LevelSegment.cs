@@ -1,14 +1,32 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+public enum RoomType
+{
+    None = 0,
+    Crossing = 1,
+    Item1Room = 1 << 1,
+    Item1Challange = 1 << 2,
+    Iteam2Room = 1 << 3,
+    Item2Challange = 1 << 4,
+    Goal = 1 << 5,
+}
 public class LevelSegment : MonoBehaviour
 {
     public Door Entrance;
     public Door[] Exits;
-
-    public Collider2D[] GroundColliders;
+    public RoomType RoomTypes;
     public LayerMask GroundLayers;
 
+    //private stuff
+    private Collider2D[] _fetchedGroundColliders = new Collider2D[0];
+    public Collider2D[] GroundColliders
+    {
+        get {
+            if (_fetchedGroundColliders.Length <= 0)
+                _fetchedGroundColliders = GetComponentsInChildren<Collider2D>();
+            return _fetchedGroundColliders;
+        }
+    }
     [HideInInspector] public LevelSegment Prefab;
 
     [ContextMenu("Check Overlap")]
@@ -16,7 +34,6 @@ public class LevelSegment : MonoBehaviour
     {
         Debug.Log($"Overlaps something: {Overlaps()}");
     }
-
     public bool Overlaps()
     {
         List<Collider2D> collisions = new();
@@ -42,5 +59,4 @@ public class LevelSegment : MonoBehaviour
         }
         return false;
     }
-
 }
