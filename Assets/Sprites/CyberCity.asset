@@ -13,12 +13,31 @@ MonoBehaviour:
   m_Name: CyberCity
   m_EditorClassIdentifier: 
   m_Angles:
-  - m_Start: -180
-    m_End: 180
+  - m_Start: -75
+    m_End: 75
     m_Order: 0
     m_Sprites:
-    - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
-  m_FillTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+    - {fileID: -603728358, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+    - {fileID: 0}
+  - m_Start: -255
+    m_End: -105
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 578293512, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+    - {fileID: 0}
+  - m_Start: 75
+    m_End: 105
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 1426953709, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+    - {fileID: 0}
+  - m_Start: -105
+    m_End: -75
+    m_Order: 0
+    m_Sprites:
+    - {fileID: 1426953709, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+    - {fileID: 0}
+  m_FillTexture: {fileID: 2800000, guid: 42283deb46e7a8946a014b1afccdced0, type: 3}
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
