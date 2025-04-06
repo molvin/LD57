@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerState currentState = PlayerState.Ground;
 
+    public int GrantedItems = 0;
 
     // Environment Query
     bool wasGrounded;
