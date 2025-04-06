@@ -25,13 +25,14 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
-        LevelSegment start = Instantiate(startPrefab);
+        LevelSegment start = Instantiate(startPrefab, Vector3.zero, Quaternion.identity);
         root = start;
+        FindFirstObjectByType<PlayerController>().transform.position = start.SpawnSlot.transform.position;
     }
 
     private void Update()
     {
-        if(!generating && Input.GetKeyDown(KeyCode.Space))
+        if(!generating && Input.GetKeyDown(KeyCode.Return))
         {
             Seed += 1;
 
@@ -48,6 +49,20 @@ public class LevelGenerator : MonoBehaviour
                 Seed += 1;
                 Debug.Log($"Failed: Retrying with seed {Seed}");
             }
+
+            ZeroZ(root.transform);
+        }
+    }
+
+    private void ZeroZ(Transform trans)
+    {
+        Vector3 localPos = trans.localPosition;
+        localPos.z = 0;
+        trans.localPosition = localPos;
+
+        foreach (Transform t in trans)
+        {
+            ZeroZ(t);
         }
     }
     
