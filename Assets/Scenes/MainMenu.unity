@@ -3710,6 +3710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button_hover: {fileID: 8300000, guid: 6066544cab5696b46b0960d5bad9a91c, type: 3}
   swoosh: {fileID: 8300000, guid: 87052bcd8021c01478df2408225a04cd, type: 3}
+  bulbsmash: {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
 --- !u!82 &1630518503
 AudioSource:
   m_ObjectHideFlags: 0
