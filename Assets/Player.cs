@@ -61,6 +61,20 @@ public class Player : MonoBehaviour
 
         PreventCollision(Time.deltaTime, UseSmallCollider);
         // velocity = Vector2.ClampMagnitude(velocity, Speed * 10f);
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 100f, CollisionLayer);
+            if (hit)
+            {
+                Transform p = hit.transform;
+                while (p.parent != null && p.parent.parent != null)
+                {
+                    p = p.parent;
+                }
+                Debug.Log("You are in: " + p.gameObject.name + " in " + p.parent.gameObject.name);
+            }
+        }
     }
 
     public Vector2 InputCheck(Vector2 input)
