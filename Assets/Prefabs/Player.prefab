@@ -384,7 +384,7 @@ MonoBehaviour:
   CurrentState: {fileID: 3481498922970582336}
   Anim: {fileID: 6188492632332777030}
   Velocity: {x: 0, y: 0}
-  BonkVelocityMin: 3
+  BonkVelocityMin: 4
   HardLandVelocityMin: 18
   CollisionLayer:
     serializedVersion: 2
