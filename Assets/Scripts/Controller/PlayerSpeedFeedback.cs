@@ -4,7 +4,7 @@ public class PlayerSpeedFeedback : MonoBehaviour
 {
     public AudioEventData m_SpeedAudioData;
     public float m_IsFastFactor = 0.8f;
-    
+    public float m_GuessedMaxSpeed = 25f;
     private bool m_IsFast;
     private GroundState m_GroundState;
     private AirState m_AirState;
@@ -17,29 +17,20 @@ public class PlayerSpeedFeedback : MonoBehaviour
         m_AirState = GetComponent<AirState>();
         m_Player = GetComponent<Player>();
     }
-    private float GetSpeedFactor()
+    private bool IsInAValidState()
     {
-        if(m_Player.CurrentState == m_GroundState)
-        {
-            return m_GroundState.MaxSpeed;
-        }
-        else if(m_Player.CurrentState == m_AirState)
-        {
-            return m_AirState.MaxSpeed;
-        }
-
-        return 0;
+        return m_Player.CurrentState == m_GroundState || m_Player.CurrentState == m_AirState;
     }
     // Update is called once per frame
     void Update()
     {
-        float speed = GetSpeedFactor();
+        float speedFactor = m_Player.Velocity.magnitude / m_GuessedMaxSpeed;
 
-        if (!m_IsFast && speed >= m_IsFastFactor)
+        if (!m_IsFast && speedFactor >= m_IsFastFactor)
         {
             OnIsFast();
         }
-        else if(m_IsFast && speed < m_IsFastFactor)
+        else if(m_IsFast && speedFactor < m_IsFastFactor)
         {
             OnToSlow();
         }
