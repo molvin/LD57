@@ -149,22 +149,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSegments:
-  - {fileID: 6618336650794968113, guid: d4c702a77329a324f9f14d196331a291, type: 3}
+  - {fileID: 9209771237482449530, guid: cdd5b78b944ad2441aebf80741d04c58, type: 3}
   FillerSegments:
-  - {fileID: 9209771237482449530, guid: 475f8a33e2e46294fb23689056b5174b, type: 3}
+  - {fileID: 9209771237482449530, guid: b0793792bc64e1e479fa0cababa00aac, type: 3}
   - {fileID: 9209771237482449530, guid: 91c66c32647e8d94b945924ef84a4aec, type: 3}
   - {fileID: 9209771237482449530, guid: 3b86d33e72dce7a478f0d0e642c554f9, type: 3}
   - {fileID: 9209771237482449530, guid: d8563fdda4a9e30499e40c45bd496ecb, type: 3}
+  - {fileID: 9209771237482449530, guid: 2cb6971a268dc064dbd9789f69cb75bc, type: 3}
+  - {fileID: 9209771237482449530, guid: bfc8931ce5013214ab1a9c5c1c4a0300, type: 3}
   SplitterSegments:
-  - {fileID: 6618336650794968113, guid: d4c702a77329a324f9f14d196331a291, type: 3}
+  - {fileID: 9209771237482449530, guid: 0635f264fc1907545ba9c17752c7cfa9, type: 3}
+  - {fileID: 9209771237482449530, guid: ecf62fa7e1366144db65ea56b8aaf5b7, type: 3}
   GoalSegments:
   - {fileID: 996395430905241531, guid: 018ce861d25424a4a88c49441af44655, type: 3}
   - {fileID: 996395430905241531, guid: d235b7002d62e1041bfc346e8fda21ff, type: 3}
+  DoubleJumpChallenges:
+  - {fileID: 1551568243816109267, guid: efcc5df2d706d9a45b50f2ceeae1411f, type: 3}
+  - {fileID: 5370866164184684757, guid: fcda7d5105bc81941bbc70df81be94c3, type: 3}
+  SlideChallenges:
+  - {fileID: 3942517238224740888, guid: 1b32f130ea564844390b51158f632752, type: 3}
+  - {fileID: 1106070855058836703, guid: d5084b4e1ee042f4aa9151ed57ff5a99, type: 3}
   TargetLeafAmount: 3
-  EndProbabilityGrowthRate: 1
-  SplitterProbabilityGrowthRate: 1
+  EndProbabilityGrowthRate: 0.3
+  SplitterProbabilityGrowthRate: 0.4
+  ChallengeProbabilityGrowthRate: 0.2
   RetryAttemptsPerPath: 10
-  Seed: 0
+  Seed: 1078
   debugMode: 0
 --- !u!4 &228091927
 Transform:
@@ -515,6 +525,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1298762913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8388569149597181873, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}
+  m_PrefabInstance: {fileID: 913998427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c4a6fb0beb599429bb0e47b0f2792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1409487244
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2515709973946877244, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
   GameUi: {fileID: 913998429}
+  AbilitiesUi: {fileID: 1298762913}
 --- !u!4 &1409487246
 Transform:
   m_ObjectHideFlags: 0

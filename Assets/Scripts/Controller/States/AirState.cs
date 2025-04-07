@@ -34,7 +34,6 @@ public class AirState : State
         EnterTime = Time.time;
         fastFalling = false;
         canJump = Jumped && HasDoubleJump;
-
     }
 
     public override void Tick()
@@ -91,10 +90,16 @@ public class AirState : State
         {
             if (Input.GetButtonDown("Jump") && Owner.Velocity.y < Ground.MaxJumpBoost)
             {
+                Owner.particleController.PlayJumpParticle(Owner.Velocity);
                 float jumpSpeed = Mathf.Min(Mathf.Max(Owner.Velocity.y, 0) + JumpBoost, Ground.MaxJumpBoost);
                 Owner.Velocity.y = jumpSpeed;
                 canJump = false;
             }
+        }
+
+        if(!Jumped)
+        {
+            Ground.Jump();
         }
     }
 

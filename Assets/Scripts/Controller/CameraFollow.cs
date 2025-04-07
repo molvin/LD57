@@ -11,15 +11,17 @@ public class CameraFollow : MonoBehaviour
     public float MaxDistanceFromTarget = 6;
 
     private Vector2 cameraPos;
+    private Player player;
 
     private void Start()
     {
-        cameraPos = (Vector2)GameLoop.Player.transform.position + Vector2.up * OffsetY;
+        player = GetComponentInParent<Player>();
+        cameraPos = (Vector2)player.transform.position + Vector2.up * OffsetY;
     }
 
     void LateUpdate()
     {
-        Player player = GameLoop.Player;
+        player = GetComponentInParent<Player>();
 
         Vector2 targetPos = (Vector2)player.transform.position + Vector2.up * OffsetY;
         float verticalSmooth = player.Velocity.y > 0 ? VerticalUpSmooth : VerticalDownSmooth;

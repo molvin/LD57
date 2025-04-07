@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     private GroundState ground;
 
     public PlayerParticleController particleController;
-    public int GrantedItems = 0;
+    public bool UseSmallCollider;
 
     public List<Abilities> CurrentAbilities;
 
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     {
         CurrentState.Tick();
 
-        PreventCollision(Time.deltaTime, false);
+        PreventCollision(Time.deltaTime, UseSmallCollider);
         // velocity = Vector2.ClampMagnitude(velocity, Speed * 10f);
     }
 

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06cbcef0b5b95d6479e041d0a1f5b526, type: 3}
+  m_Name: AudioEvent_SlideLoop
+  m_EditorClassIdentifier: 
+  m_Clips:
+  - {fileID: 8300000, guid: d987901bfff1a8a41b43be16c444700e, type: 3}
+  m_PitchRange: 0
+  m_Volume: 1
+  m_AmplitudeRange: 0
+  m_MixerGroup: {fileID: -4934486290842149544, guid: 7feb24e6d00a1654bba1b3fc8a217352, type: 2}
+  m_IsLooping: 1
+  m_DontDestroyOnLoad: 0
+  m_FadeInAndOutTime: -1

@@ -5,19 +5,26 @@ public class SlideState : State
     public float Friction;
     public float Gravity;
     public float GroundCheckDistance = 0.2f;
+    public float PushForce;
     public AirState Air;
     public GroundState Ground;
+    public AudioEventData LoopingSound;
 
-
+    private AudioSource LoopingAudioSource;
 
     public override void Enter()
     {
         Owner.particleController.startSlide();
+        LoopingAudioSource = LoopingSound.Play();
+        Owner.UseSmallCollider = true;
     }
 
     public override void Exit()
     {
+        Owner.UseSmallCollider = false;
         Owner.particleController.stopSlide();
+        if (LoopingAudioSource != null)
+            LoopingSound.Stop(LoopingAudioSource);
     }
 
     public override void Tick()
