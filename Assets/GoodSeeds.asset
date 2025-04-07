@@ -13,25 +13,53 @@ MonoBehaviour:
   m_Name: GoodSeeds
   m_EditorClassIdentifier: 
   Seeds:
-  - Seed: 1172
-    Times: []
-  - Seed: 1174
-    Times:
-    - 20
-    - 30
-    - 35
-    - 40
-  - Seed: 1189
-    Times: []
-  - Seed: 1205
-    Times: []
-  - Seed: 1218
-    Times: []
-  - Seed: 1221
-    Times: []
-  - Seed: 1222
-    Times: []
-  - Seed: 1224
-    Times: []
-  - Seed: 1233
-    Times: []
+  - Seed: 1987
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 1989
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 1993
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 1997
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 1998
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 1998
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 1999
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 2000
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 2004
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
+  - Seed: 2004
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
