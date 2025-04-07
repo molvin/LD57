@@ -16,10 +16,54 @@ public class GameLoop : MonoBehaviour
     private Player player;
     private LevelGenerator generator;
 
+    private void TeleportToStartInitial()
+    {
+        StartCoroutine(Coroutine());
+
+        IEnumerator Coroutine()
+        {
+            Player.enabled = false;
+            Player.Anim.gameObject.SetActive(false);
+            Player.transform.position = Level.StartPosition;
+            Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
+            yield return new WaitForSeconds(1.5f);
+            Player.enabled = true;
+            Player.Anim.gameObject.SetActive(true);
+        }
+
+
+    }
+
     private void TeleportToStart()
     {
-        Player.transform.position = Level.StartPosition;
+        //Player.transform.position = Level.StartPosition;
         Player.Velocity = Vector2.zero;
+        StartCoroutine(Coroutine());
+
+        IEnumerator Coroutine()
+        {
+            //play teleport out anim
+
+            float speed = 10;
+            Player.enabled = false;
+            Player.GetComponent<PlayerParticleController>().PlayTeleportout();
+            yield return new WaitForSeconds(1);
+            Player.Anim.gameObject.SetActive(false);
+            while (Vector3.Distance(Player.transform.position, Level.StartPosition) > 1f)
+            {
+                Player.transform.position +=  ((Vector3)Level.StartPosition - Player.transform.position).normalized * speed * Time.deltaTime;
+         
+                yield return null;
+            }
+            Player.transform.position = Level.StartPosition;
+            Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
+            yield return new WaitForSeconds(1.5f);
+            Player.enabled = true;
+            Player.Anim.gameObject.SetActive(true);
+
+            //play teleport in anim
+            yield return null;
+        }
     }
 
     private void Awake()
@@ -51,7 +95,7 @@ public class GameLoop : MonoBehaviour
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
-            TeleportToStart();
+            TeleportToStartInitial();
 
             bool countdownDone = false;
             System.Action go = () => { countdownDone = true;  };
