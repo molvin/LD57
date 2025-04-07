@@ -494,6 +494,7 @@ MonoBehaviour:
   MaxAngle: 25
   RecoverFriction: 40
   GroundCheckDistance: 0.2
+  m_BonkSound: {fileID: 11400000, guid: 513f6762a317c9841b8e7163c63019cb, type: 2}
 --- !u!114 &4778927470258749633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8fef0eef880e84cad555f5e19248cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Owner: {fileID: 0}
 --- !u!1001 &938543931204190371
 PrefabInstance:
   m_ObjectHideFlags: 0
