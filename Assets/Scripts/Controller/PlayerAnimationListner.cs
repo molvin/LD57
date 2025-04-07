@@ -6,6 +6,6 @@ public class PlayerAnimationListner : MonoBehaviour
 
     public void Footstep(AnimationEvent animationEvent)
     {
-        m_StepAudio.Play();
+        m_StepAudio.Play(transform);
     }
 }
