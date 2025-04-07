@@ -208,8 +208,8 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
-            EndLevel();
-           // Respawn();
+            //EndLevel();
+            Respawn();
         }
     }
 
