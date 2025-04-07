@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6612536521382521559}
   - component: {fileID: 3406833157732041965}
   - component: {fileID: 1697655803953713921}
+  - component: {fileID: 9186364836934495660}
   m_Layer: 0
   m_Name: PerfectParticle
   m_TagString: Untagged
@@ -51,7 +52,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4902,6 +4903,24 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &9186364836934495660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275500322434787971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edc1fb29f6218be4d8c2e88b58542f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  run_rigth: {fileID: 2100000, guid: 02b0767a4578d7e4ebde3f902e44dd85, type: 2}
+  run_left: {fileID: 2100000, guid: 3c1e5c7834a68de44b030bbd4d6ec766, type: 2}
+  slide_rigth: {fileID: 2100000, guid: 2c8419546316c314489d952c149b3ae0, type: 2}
+  slide_left: {fileID: 2100000, guid: 512b65beefc91494a910d12a2ba6238f, type: 2}
+  imagePrticle: {fileID: 4872221126696802920}
+  mainParticle: {fileID: 3406833157732041965}
 --- !u!1 &7571456353402816153
 GameObject:
   m_ObjectHideFlags: 0
@@ -4929,7 +4948,7 @@ Transform:
   m_GameObject: {fileID: 7571456353402816153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.97, y: 0, z: 0.32}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4943,16 +4962,16 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7571456353402816153}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5008,7 +5027,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -5018,7 +5037,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.8
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5936,7 +5955,7 @@ ParticleSystem:
       repeatInterval: 0.01
       probability: 1
     - serializedVersion: 2
-      time: 0.5
+      time: 0.05
       countCurve:
         serializedVersion: 2
         minMaxState: 0
@@ -5994,7 +6013,7 @@ ParticleSystem:
       repeatInterval: 0.01
       probability: 1
     - serializedVersion: 2
-      time: 1
+      time: 0.1
       countCurve:
         serializedVersion: 2
         minMaxState: 0
