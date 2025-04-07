@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static GameLoop;
 using static System.Net.Mime.MediaTypeNames;
 
 public class GameUiController : MonoBehaviour
@@ -15,6 +16,10 @@ public class GameUiController : MonoBehaviour
     private AudioSource source;
 
     public Animator FadeAnim;
+
+    public UnityEngine.UI.Image m_MedalImage;
+    public TMPro.TextMeshProUGUI m_CompleteTime;
+    public TMPro.TextMeshProUGUI m_TimeToNextMedal;
 
     private int state = 0;
 
@@ -247,7 +252,7 @@ public class GameUiController : MonoBehaviour
         }
     }
 
-    public void CompleteLevel(System.Action retry)
+    public void CompleteLevel(System.Action retry, float completeTime, float timeToNextMeddal, MedalType meddalType)
     {
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()

@@ -23,7 +23,7 @@ public class LevelSegment : MonoBehaviour
     {
         get {
             if (_fetchedGroundColliders.Length <= 0)
-                _fetchedGroundColliders = GetComponentsInChildren<PolygonCollider2D>();
+                _fetchedGroundColliders = GetComponentsInChildren<Collider2D>();
             return _fetchedGroundColliders;
         }
     }
@@ -44,6 +44,11 @@ public class LevelSegment : MonoBehaviour
         contactFilter.SetLayerMask(GroundLayers);
         foreach(Collider2D ground in GroundColliders)
         {
+            if ((GroundLayers & (1 << ground.gameObject.layer)) == 0)
+            {
+                continue;
+            }
+
             int n = ground.Overlap(contactFilter, collisions);
             bool ignoreCollision = true;
             if (n > 0)
