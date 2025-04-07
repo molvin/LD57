@@ -8,10 +8,14 @@ public class SlideState : State
     public float PushForce;
     public AirState Air;
     public GroundState Ground;
+    public AudioEventData LoopingSound;
+
+    private AudioSource LoopingAudioSource;
 
     public override void Enter()
     {
         Owner.particleController.startSlide();
+        LoopingAudioSource = LoopingSound.Play();
         Owner.UseSmallCollider = true;
     }
 
@@ -19,6 +23,8 @@ public class SlideState : State
     {
         Owner.UseSmallCollider = false;
         Owner.particleController.stopSlide();
+        if (LoopingAudioSource != null)
+            LoopingSound.Stop(LoopingAudioSource);
     }
 
     public override void Tick()
