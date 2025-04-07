@@ -14,6 +14,7 @@ public class GroundState : State
     public float GroundCheckDistance = 0.2f;
     public bool PerfectLanding;
     public float PerfectLandingBoost;
+    public float JumpGroundCheckDistance = 0.5f;
     public bool HasSlidePower => Owner.CurrentAbilities.Contains(Abilities.Slide);
     public AudioEventData AudioEvent;
 
@@ -91,6 +92,13 @@ public class GroundState : State
     {
         if (Input.GetButtonDown("Jump") && Owner.Velocity.y < MaxJumpBoost)
         {
+            HitData grounded = Owner.GroundCheck(JumpGroundCheckDistance);
+            
+            if(!grounded.Hit)    
+            {
+                return false;
+            }
+
             float jumpSpeed = Mathf.Min(Mathf.Max(Owner.Velocity.y, 0) + JumpBoost, MaxJumpBoost);
             Owner.Velocity.y = jumpSpeed;
             Air.JumpBoost = JumpBoost;
