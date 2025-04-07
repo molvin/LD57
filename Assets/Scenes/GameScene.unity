@@ -163,8 +163,8 @@ MonoBehaviour:
   - {fileID: 996395430905241531, guid: 018ce861d25424a4a88c49441af44655, type: 3}
   - {fileID: 996395430905241531, guid: d235b7002d62e1041bfc346e8fda21ff, type: 3}
   TargetLeafAmount: 3
-  EndProbabilityGrowthRate: 0.3
-  SplitterProbabilityGrowthRate: 0.4
+  EndProbabilityGrowthRate: 1
+  SplitterProbabilityGrowthRate: 1
   RetryAttemptsPerPath: 10
   Seed: 0
   debugMode: 0

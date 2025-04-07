@@ -75,8 +75,14 @@ public class GameLoop : MonoBehaviour
         {
             player.Velocity = Vector3.zero;
             Debug.Log("Congrats");
-            yield return new WaitForSeconds(3.0f);
 
+            bool doRetry = false;
+            System.Action retry = () => { doRetry = true;  };
+            while(!doRetry)
+            {
+                GameUi.CompleteLevel(retry);
+                yield return null;
+            }
 
             StartLevel();
         }
