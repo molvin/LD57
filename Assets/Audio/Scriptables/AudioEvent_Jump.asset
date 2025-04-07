@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AudioEvent_Jump
   m_EditorClassIdentifier: 
   m_Clips:
-  - {fileID: 0}
-  m_PitchRange: 0
-  m_Volume: 1
+  - {fileID: 8300000, guid: 45100ee0436624f4fa84de0efd000a58, type: 3}
+  m_PitchRange: 0.1
+  m_Volume: 0.4
   m_AmplitudeRange: 0
   m_MixerGroup: {fileID: -4934486290842149544, guid: 7feb24e6d00a1654bba1b3fc8a217352, type: 2}
   m_IsLooping: 0
