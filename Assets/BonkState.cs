@@ -27,6 +27,7 @@ public class BonkState : State
         enterTime = Time.time;
         Owner.Anim.SetTrigger("Bonk");
         enterDir = Owner.transform.forward;
+        Owner.particleController.playBonk();
     }
 
     public override void Tick()
@@ -56,6 +57,7 @@ public class BonkState : State
                         substate = SubState.Recovering;
                         enterTime = Time.time;
                         Owner.Anim.SetTrigger("Bonk-Recovery");
+                        Owner.particleController.playedBonk();
                     }
                 }
                 break;

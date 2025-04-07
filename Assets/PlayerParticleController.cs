@@ -13,6 +13,11 @@ public class PlayerParticleController : MonoBehaviour
 
     public Material jump_rigth;
     public Material jump_left;
+
+    public ParticleSystem bonkParticle;
+    public ParticleSystem bonkedParticle;
+
+
     void Start()
     {
         
@@ -48,6 +53,14 @@ public class PlayerParticleController : MonoBehaviour
     public void stopSlide()
     {
         slideParticle.Stop();
+    }
+    public void playBonk()
+    {
+        bonkParticle.Play();
+    }
+    public void playedBonk()
+    {
+        bonkedParticle.Play();
     }
 
 
