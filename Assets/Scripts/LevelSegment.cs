@@ -23,7 +23,7 @@ public class LevelSegment : MonoBehaviour
     {
         get {
             if (_fetchedGroundColliders.Length <= 0)
-                _fetchedGroundColliders = GetComponentsInChildren<Collider2D>();
+                _fetchedGroundColliders = GetComponentsInChildren<PolygonCollider2D>();
             return _fetchedGroundColliders;
         }
     }
