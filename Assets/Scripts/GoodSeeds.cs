@@ -6,10 +6,10 @@ using System.Linq;
 public class GoodSeed
 {
     public int Seed;
-    public float Author = 20;
-    public float Gold = 30;
-    public float Silver = 40;
-    public float Bronze = 50;
+    public float Author = 65;
+    public float Gold = 85;
+    public float Silver = 100;
+    public float Bronze = 120;
 
     public float[] Times => new float[] { Author, Gold, Silver, Bronze };
 }
