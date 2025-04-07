@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
+using TMPro;
 
 public class GameLoop : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameLoop : MonoBehaviour
     public Player playerPrefab;
     public GameUiController GameUi;
     public AbilitiesUiCotroller AbilitiesUi;
+    public TextMeshProUGUI RespawnsRemaining;
     private Player player;
     private LevelGenerator generator;
     public int MaxRespawns = 3;
@@ -38,6 +40,8 @@ public class GameLoop : MonoBehaviour
 
     }
 
+    private bool disallowRespawn = false;
+    private bool ending = false;
 
     private void TeleportToStart()
     {
@@ -125,6 +129,9 @@ public class GameLoop : MonoBehaviour
 
     private void EndLevel()
     {
+        if (ending)
+            return;
+        ending = true;
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
         {
@@ -139,6 +146,7 @@ public class GameLoop : MonoBehaviour
                 yield return null;
             }
 
+            ending = false;
             StartLevel();
         }
     }
@@ -152,6 +160,8 @@ public class GameLoop : MonoBehaviour
             Timer += Time.deltaTime;
         }
 
+        RespawnsRemaining.text = $"Remaining Respawns: {MaxRespawns - respawns}";
+
         if (Input.GetButtonDown("Respawn"))
         {
             Respawn();
@@ -160,6 +170,11 @@ public class GameLoop : MonoBehaviour
 
     public void Respawn()
     {
+        if(disallowRespawn)
+        {
+            return;
+        }
+
         if(respawns < MaxRespawns)
         {
             Timer = 0.0f;
@@ -171,7 +186,6 @@ public class GameLoop : MonoBehaviour
         }
         else
         {
-            StartLevel();
         }
         
     }
@@ -184,9 +198,12 @@ public class GameLoop : MonoBehaviour
             instance.StartCoroutine(Coroutine());
             IEnumerator Coroutine()
             {
+                instance.disallowRespawn = true;
                 instance.AbilitiesUi.AddAbility(pos, itemType.ToString());
                 yield return new WaitForSeconds(2.0f);
                 instance.TeleportToStart();
+                instance.disallowRespawn = false;
+
             }
         }
         else

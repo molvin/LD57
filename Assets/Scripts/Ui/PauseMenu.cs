@@ -94,8 +94,6 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-
-
     public void Change(PState state)
     {
         _state.Exit();
@@ -112,9 +110,16 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetButtonDown("Pause"))
         {
-            Pause();
+            if (_state is EmptyState)
+            {
+                Pause();
+            }
+            else if(_state is EntryState)
+            {
+                Resume();
+            }
         }
     }
 
