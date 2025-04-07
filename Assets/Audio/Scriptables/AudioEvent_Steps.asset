@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06cbcef0b5b95d6479e041d0a1f5b526, type: 3}
+  m_Name: AudioEvent_Steps
+  m_EditorClassIdentifier: 
+  m_Clips:
+  - {fileID: 8300000, guid: 744f3200be313b544bce919b9963324c, type: 3}
+  - {fileID: 8300000, guid: 7e8b75a0f2af57042abb25ba2d049063, type: 3}
+  - {fileID: 8300000, guid: e4c151016b7b3ba44b52a0d819f5324f, type: 3}
+  - {fileID: 8300000, guid: d37ef971093130645a4e6eccb4c60086, type: 3}
+  m_PitchRange: 0.05
+  m_Volume: 1
+  m_AmplitudeRange: 0
+  m_IsLooping: 0
+  m_DontDestroyOnLoad: 0
