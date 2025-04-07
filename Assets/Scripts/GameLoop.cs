@@ -21,7 +21,6 @@ public class GameLoop : MonoBehaviour
     public float Timer = 0.0f;
 
     public GoodSeeds Seeds;
-    public bool UseGoodSeeds;
 
     private int respawns = 0;
     private bool runTimer = false;
