@@ -151,12 +151,10 @@ MonoBehaviour:
   StartSegments:
   - {fileID: 6618336650794968113, guid: d4c702a77329a324f9f14d196331a291, type: 3}
   FillerSegments:
-  - {fileID: 996395430905241531, guid: 8b349d97a258a524799fa25bd8b24cbb, type: 3}
-  - {fileID: 996395430905241531, guid: e89a083e740c3df4ebc14d636eeb63e4, type: 3}
-  - {fileID: 3692772593882420861, guid: 0a2dd0677f4c75640820db2597d07738, type: 3}
-  - {fileID: 3692772593882420861, guid: 5ae9bcc6fb0a7204ea702a2d81ae76ea, type: 3}
-  - {fileID: 8370458266534878204, guid: f608446e0d41b6448881db723815a7ac, type: 3}
-  - {fileID: 8370458266534878204, guid: cf0985c33c7ab5a4da0114c26f8d6219, type: 3}
+  - {fileID: 9209771237482449530, guid: 475f8a33e2e46294fb23689056b5174b, type: 3}
+  - {fileID: 9209771237482449530, guid: 91c66c32647e8d94b945924ef84a4aec, type: 3}
+  - {fileID: 9209771237482449530, guid: 3b86d33e72dce7a478f0d0e642c554f9, type: 3}
+  - {fileID: 9209771237482449530, guid: d8563fdda4a9e30499e40c45bd496ecb, type: 3}
   SplitterSegments:
   - {fileID: 6618336650794968113, guid: d4c702a77329a324f9f14d196331a291, type: 3}
   GoalSegments:
@@ -213,18 +211,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617456244342862098, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 16777215
+      value: 4227858431
       objectReference: {fileID: 0}
     - target: {fileID: 2013082486767595380, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3421058277269779338, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3546168803740897912, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4016182869975389793, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}

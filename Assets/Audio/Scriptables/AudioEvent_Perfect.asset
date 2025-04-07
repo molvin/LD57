@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Clips:
   - {fileID: 8300000, guid: c8e46f487b90e334c8057e34eba7ac95, type: 3}
+  - {fileID: 8300000, guid: 37b102ee4acd2974391a21d0fb0bd921, type: 3}
+  - {fileID: 8300000, guid: 82a64572d25667441a584d6a47ae2287, type: 3}
   m_PitchRange: 0
   m_Volume: 1
   m_AmplitudeRange: 0

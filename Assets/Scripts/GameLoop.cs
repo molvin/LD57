@@ -77,9 +77,9 @@ public class GameLoop : MonoBehaviour
 
             bool doRetry = false;
             System.Action retry = () => { doRetry = true;  };
-            while(!doRetry)
+            GameUi.CompleteLevel(retry);
+            while (!doRetry)
             {
-                GameUi.CompleteLevel(retry);
                 yield return null;
             }
 
