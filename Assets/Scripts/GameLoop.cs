@@ -22,6 +22,15 @@ public class GameLoop : MonoBehaviour
 
     private int respawns = 0;
     private bool runTimer = false;
+
+    public enum MeddalType
+    {
+        Bronze,
+        Silver,
+        Gold,
+        Author,
+    }
+
     private void TeleportToStartInitial()
     {
         StartCoroutine(Coroutine());
@@ -140,7 +149,11 @@ public class GameLoop : MonoBehaviour
 
             bool doRetry = false;
             System.Action retry = () => { doRetry = true;  };
-            GameUi.CompleteLevel(retry);
+
+            MeddalType meddal = MeddalType.Bronze;
+            
+
+            GameUi.CompleteLevel(retry, Timer, );
             while (!doRetry)
             {
                 yield return null;

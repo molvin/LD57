@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static GameLoop;
 using static System.Net.Mime.MediaTypeNames;
 
 public class GameUiController : MonoBehaviour
@@ -236,7 +237,7 @@ public class GameUiController : MonoBehaviour
         }
     }
 
-    public void CompleteLevel(System.Action retry)
+    public void CompleteLevel(System.Action retry, float completeTime, float timeToNextMeddal, MeddalType meddalType)
     {
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
