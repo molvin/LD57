@@ -19,39 +19,43 @@ public class LevelGenerator : MonoBehaviour
 
     public int Seed;
 
+    public Vector2 StartPosition => root.SpawnSlot.transform.position;
     private LevelSegment root;
-    private bool generating;
+    public bool debugMode = false;
 
-    private void Start()
+    private void Awake()
     {
         LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
         LevelSegment start = Instantiate(startPrefab, Vector3.zero, Quaternion.identity);
         root = start;
-        FindFirstObjectByType<PlayerController>().transform.position = start.SpawnSlot.transform.position;
     }
 
     private void Update()
     {
-        if(!generating && Input.GetKeyDown(KeyCode.Return))
+        if(debugMode && Input.GetKeyDown(KeyCode.Space))
         {
-            Seed += 1;
-
-            DestroyPath(root);
-            for(int i = 0; i < 100; i++)
-            {
-                Debug.Log($"Building with seed {Seed}");
-
-                bool success = GenerateLevel(Seed);
-                if(success)
-                {
-                    break;
-                }
-                Seed += 1;
-                Debug.Log($"Failed: Retrying with seed {Seed}");
-            }
-
-            ZeroZ(root.transform);
+            GenerateGraph();
         }
+    }
+
+    public void GenerateGraph()
+    {
+        DestroyPath(root);
+        for(int i = 0; i < 100; i++)
+        {
+            Debug.Log($"Building with seed {Seed}");
+
+            bool success = GenerateLevel(Seed);
+            if(success)
+            {
+                Seed += 1;
+                break;
+            }
+            Seed += 1;
+            Debug.Log($"Failed: Retrying with seed {Seed}");
+        }
+
+        ZeroZ(root.transform);
     }
 
     private void ZeroZ(Transform trans)
