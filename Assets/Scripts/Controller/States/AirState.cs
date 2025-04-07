@@ -31,6 +31,8 @@ public class AirState : State
 
     public override void Enter()
     {
+        Owner.Anim.speed = 1f;
+        Owner.Anim.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
         EnterTime = Time.time;
         fastFalling = false;
         canJump = Jumped && HasDoubleJump;
@@ -40,6 +42,9 @@ public class AirState : State
     public override void Tick()
     {
         Owner.Anim.SetBool("OnGround", false);
+        float currentPlaceInAnimation = (Owner.Velocity.y / Ground.JumpBoost)*2f - 1f;
+        Owner.Anim.Play("Jump", -1, currentPlaceInAnimation);
+       
         // Gravity
         float gravity = Gravity;
         if (Jumped)

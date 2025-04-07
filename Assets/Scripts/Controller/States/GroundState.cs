@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GroundState : State
 {
@@ -17,9 +18,12 @@ public class GroundState : State
     public bool HasSlidePower => Owner.CurrentAbilities.Contains(Abilities.Slide);
     public AudioEventData AudioEvent;
 
+    private float angleRotate= 0f;
     public override void Enter()
     {
-        if(PerfectLanding)
+        angleRotate = 0f;
+        Owner.Anim.speed = 1f;
+        if (PerfectLanding)
         {
             PerfectLanding = false;
             Owner.Velocity += Owner.Velocity.normalized * PerfectLandingBoost;
@@ -44,17 +48,20 @@ public class GroundState : State
 
             if(Mathf.Abs(input.x) > 0.1f)
             {
-                Owner.Anim.transform.forward = Vector2.right * Mathf.Sign(input.x);
+                float slopeAngle = Vector2.SignedAngle(Vector2.up, groundHit.Normal) * -Mathf.Sign(rawInput.x);
+                angleRotate = Mathf.Lerp(angleRotate, slopeAngle, Time.deltaTime * 10f);
+                Owner.Anim.transform.forward = (Vector2.right * Mathf.Sign(input.x) + (Vector2.down * angleRotate / 75f) / 2f).normalized;
             }
-
+            
             Vector2 projection = Vector3.ProjectOnPlane(input, groundHit.Normal).normalized;
             input = projection * input.magnitude;
 
             float inputAlongVelocity = Vector2.Dot(Owner.Velocity.normalized, input);
             {
-                float slopeAngle = Vector2.SignedAngle(Vector2.up, groundHit.Normal) * -Mathf.Sign(rawInput.x);
-                float maxSpeed = MaxSpeedBySlopeAngle.Evaluate(slopeAngle);
+                float angle = Vector2.SignedAngle(Vector2.up, groundHit.Normal) * -Mathf.Sign(rawInput.x);
+                float maxSpeed = MaxSpeedBySlopeAngle.Evaluate(angle);
                 Owner.Anim.SetBool("InputMove", true);
+                Owner.Anim.speed = (Owner.Velocity.magnitude / maxSpeed) + 0.5f;
                 // No Friction here
                 if (Owner.Velocity.magnitude < maxSpeed)
                 {

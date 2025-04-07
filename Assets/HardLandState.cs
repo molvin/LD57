@@ -13,7 +13,7 @@ public class HardLandState : State
     public override void Enter()
     {
         enterTime = Time.time;
-        Owner.Anim.SetTrigger("Hard-Land");
+        Owner.Anim.SetBool("HardLand", true);
         BadLandingSound?.Play();
     }
 
@@ -29,6 +29,7 @@ public class HardLandState : State
         if (Time.time - enterTime > Duration)
         {
             Owner.TransitionTo(Ground);
+            Owner.Anim.SetBool("HardLand", false);
         }
     }
 }

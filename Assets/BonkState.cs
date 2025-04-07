@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class BonkState : State
 {
@@ -9,7 +10,7 @@ public class BonkState : State
     public float MaxAngle;
     public float RecoverFriction;
     public float GroundCheckDistance = 0.2f;
-
+    public HitData HitThatGotMe;
     public AudioEventData m_BonkSound;
 
     private float enterTime;
@@ -31,12 +32,12 @@ public class BonkState : State
         enterDir = Owner.transform.forward;
         Owner.particleController.playBonk();
         m_BonkSound.Play();
+        Owner.Anim.transform.forward = -HitThatGotMe.Normal;
+        Owner.Anim.transform.position = (Vector3)HitThatGotMe.HitPoint;
     }
 
     public override void Tick()
     {
-        // Owner.Anim.transform.forward = -Owner.LastHit.Normal; 
-
         switch(substate)
         {
             case SubState.Stuck:
@@ -44,12 +45,16 @@ public class BonkState : State
                 Owner.Velocity = Vector2.zero;
                 if (Time.time - enterTime > StickDuration)
                 {
+                    Owner.Anim.transform.localPosition = new Vector3(0f, -0.5f, 0f);
                     substate = SubState.Falling;
+                    Owner.Anim.ResetTrigger("Bonk");
+                    Owner.Anim.SetTrigger("Falling");
                 }
                 break;
             }
             case SubState.Falling:
             {
+                Owner.Anim.transform.forward = new Vector2(Owner.LastHit.Normal.x, 0F).normalized;
                 Owner.Velocity += Vector2.down * Gravity * Time.deltaTime;
                 HitData hit = Owner.GroundCheck(GroundCheckDistance);
                 if(hit.Hit)
@@ -71,8 +76,8 @@ public class BonkState : State
 
                 if (Time.time - enterTime > RecoverDuration)
                 {
-                    // Owner.Anim.transform.forward = enterDir;
                     Owner.TransitionTo(Ground);
+                    Owner.Anim.SetTrigger("LeaveBonk");
                 }
             }
             break;
