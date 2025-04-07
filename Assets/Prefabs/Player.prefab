@@ -387,7 +387,7 @@ MonoBehaviour:
   CurrentState: {fileID: 3481498922970582336}
   Anim: {fileID: 6502445181388141890}
   Velocity: {x: 0, y: 0}
-  BonkVelocityMin: 4
+  BonkVelocityMin: 5
   HardLandVelocityMin: 18
   CollisionLayer:
     serializedVersion: 2
@@ -939,7 +939,7 @@ PrefabInstance:
     - target: {fileID: 490470509436219065, guid: 98c268371b4d67341aa572f5616db0e2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b9ec6396906c4dc4fb8d67cf7a1d0f37, type: 2}
+      objectReference: {fileID: 2100000, guid: f6c8f6c5b1914d74998359e0672cff0e, type: 2}
     - target: {fileID: 3184410771597972357, guid: 98c268371b4d67341aa572f5616db0e2, type: 3}
       propertyPath: m_Name
       value: Bonked
