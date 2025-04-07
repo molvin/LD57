@@ -54,16 +54,20 @@ public class LevelGenerator : MonoBehaviour
             parents.Clear();
 
             bool success = GenerateLevel(Seed);
-            if(success)
+
+            Seed += 1;
+
+            if (success)
             {
-                Seed += 1;
                 break;
             }
-            Seed += 1;
             Debug.Log($"Failed: Retrying with seed {Seed}");
         }
 
-        ZeroZ(root.transform);
+        foreach(Transform parent in parents)
+        {
+            ZeroZ(parent);
+        }
     }
 
     private void ZeroZ(Transform trans)

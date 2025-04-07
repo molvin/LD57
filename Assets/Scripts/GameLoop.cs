@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Assertions;
 
 public class GameLoop : MonoBehaviour
@@ -39,7 +41,24 @@ public class GameLoop : MonoBehaviour
         generator.GenerateGraph();
         PlayerPrefs.SetInt("seed", generator.Seed);
 
+        player.GrantedItems = 0;
+        player.GetComponent<GroundState>().HasSlidePower = false;
+        player.GetComponent<AirState>().DoubleJumpPower = false;
+
         TeleportToStart();
+    }
+
+    private void EndLevel()
+    {
+        StartCoroutine(Coroutine());
+        IEnumerator Coroutine()
+        {
+            player.Velocity = Vector3.zero;
+            Debug.Log("Congrats");
+            yield return new WaitForSeconds(3.0f);
+
+            StartLevel();
+        }
     }
 
     private void Update()
@@ -52,11 +71,22 @@ public class GameLoop : MonoBehaviour
 
     public static void PickupItem(KeyItemType itemType)
     {
-        Player.GrantedItems |= 1 << (int)itemType;
+        // Player.GrantedItems |= 1 << (int)itemType;
+        Player.GrantedItems += 1;
+        // if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
 
-        if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
+        if(Player.GrantedItems == 1)
         {
-            instance.StartLevel();
+            Player.GetComponent<GroundState>().HasSlidePower = true;
+        }
+        else if(Player.GrantedItems == 2)
+        {
+            Player.GetComponent<AirState>().DoubleJumpPower = true;
+        }
+
+        if (Player.GrantedItems == 3)
+        {
+            instance.EndLevel();
         }
         else
         {
