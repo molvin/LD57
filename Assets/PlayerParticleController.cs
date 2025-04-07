@@ -9,19 +9,12 @@ public class PlayerParticleController : MonoBehaviour
         
     }
 
-    public void PlayPerfectParticle()
+    public void PlayPerfectParticle(Vector3 velocity)
     {
-        perfectEffect.Play(Vector3.zero);        
+        perfectEffect.Play(velocity);        
     }
 
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            PlayPerfectParticle();
-        }
-    }
+
 }

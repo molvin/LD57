@@ -15,6 +15,8 @@ public class GroundState : State
     public bool PerfectLanding;
     public float PerfectLandingBoost;
 
+    PlayerParticleController particleController;
+
     public override void Enter()
     {
         if(PerfectLanding)
@@ -22,6 +24,8 @@ public class GroundState : State
             PerfectLanding = false;
             Owner.Velocity += Owner.Velocity.normalized * PerfectLandingBoost;
             Debug.Log("Perfect landing");
+            particleController.PlayPerfectParticle(Owner.Velocity);
+            
         }
     }
 
