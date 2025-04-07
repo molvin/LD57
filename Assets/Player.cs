@@ -98,7 +98,6 @@ public class Player : MonoBehaviour
                     {
                         if (velocityIntoCollision > HardLandVelocityMin)
                         {
-                            Debug.Log($"Hard land: {velocityIntoCollision}");
                             TransitionTo(GetComponent<HardLandState>());
                         }
                         else
@@ -106,7 +105,8 @@ public class Player : MonoBehaviour
                             float alongGround = Vector2.Dot(-LastHit.Normal, Velocity.normalized);
                             if (alongGround < air.PerfectLandingFactor && Velocity.y < air.PerfectLandingMinFallSpeed && Velocity.magnitude > air.PerfectLandingMinSpeed)
                             {
-                                ground.PerfectLanding = true;
+                                float hangtime = (Time.time - air.EnterTime);
+                                ground.PerfectLanding = hangtime > air.PerfectLandingMinAirTime;
                             }
                             TransitionTo(ground);
                         }

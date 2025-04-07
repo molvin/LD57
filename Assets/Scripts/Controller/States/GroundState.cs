@@ -13,13 +13,15 @@ public class GroundState : State
     public SlideState Slide;
     public float GroundCheckDistance = 0.2f;
     public bool PerfectLanding;
+    public float PerfectLandingBoost;
 
     public override void Enter()
     {
         if(PerfectLanding)
         {
-            Debug.Log("Perfect landing!");
             PerfectLanding = false;
+            Owner.Velocity += Owner.Velocity.normalized * PerfectLandingBoost;
+            Debug.Log("Perfect landing");
         }
     }
 

@@ -5,6 +5,7 @@ public class AirState : State
     public float Gravity = 10.0f;
     public float SlowFallGravity = 7.0f;
     public float MaxSpeed;
+    public float AccelerationMaxSpeed;
     public float AirResistance;
     public float FastFallBoost;
     public float HardLandVelocityMin;
@@ -16,6 +17,9 @@ public class AirState : State
     public float PerfectLandingFactor;
     public float PerfectLandingMinSpeed;
     public float PerfectLandingMinFallSpeed;
+    public float PerfectLandingMinAirTime;
+
+    public float Acceleration;
 
     public GroundState Ground;
 
@@ -23,8 +27,11 @@ public class AirState : State
 
     private bool canJump;
 
+    public float EnterTime;
+
     public override void Enter()
     {
+        EnterTime = Time.time;
         fastFalling = false;
         canJump = Jumped && DoubleJumpPower;
     }
@@ -44,10 +51,25 @@ public class AirState : State
         }
         Owner.Velocity += Vector2.down * gravity * Time.deltaTime;
 
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        Vector2 veloDelta = input * Acceleration * Time.deltaTime;
+        float d = Vector2.Dot(veloDelta.normalized, Owner.Velocity.normalized);
+        if(d >= 0)
+        {
+            if((Owner.Velocity + veloDelta).magnitude < AccelerationMaxSpeed)
+            {
+                Owner.Velocity += veloDelta;
+            }
+        }
+        else
+        {
+            Owner.Velocity += veloDelta;
+        }
+
         // Air Resistance
         if (Owner.Velocity.magnitude < MaxSpeed)
         {
-            // Owner.Velocity += input * Acceleration * Time.deltaTime;
+            
         }
         else
         {
