@@ -17,8 +17,6 @@ public class GameUiController : MonoBehaviour
 
     private int state = 0;
 
-    private float _timer = 0;
-
     private UIState _state;
 
     private bool retryPressed;
@@ -128,15 +126,13 @@ public class GameUiController : MonoBehaviour
     {
         GameUiController _parent;
         public void Update(float dt) {
-            _parent._timer += Time.deltaTime;
-            _parent.timer.text = _parent._timer.ToString(".0##");
+            _parent.timer.text = GameLoop.instance.Timer.ToString(".0##");
         }
         public void Enter(GameUiController parent)
         {
             parent.countDownAnimator.SetTrigger("move_corner");
 
             _parent = parent;
-            _parent._timer = 0;
 
         }
         public void Exit() { }
