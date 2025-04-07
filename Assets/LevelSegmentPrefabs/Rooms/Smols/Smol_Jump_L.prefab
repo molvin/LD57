@@ -1044,7 +1044,7 @@ MonoBehaviour:
   RoomTypes: 0
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   SpawnSlot: {fileID: 0}
   Prefab: {fileID: 0}
 --- !u!1001 &1541472634246108344
