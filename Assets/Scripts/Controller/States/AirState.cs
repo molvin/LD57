@@ -79,7 +79,7 @@ public class AirState : State
         Owner.Anim.transform.forward = Vector2.right * Mathf.Sign(Owner.Velocity.x);
 
         float vertical = Input.GetAxisRaw("Vertical");
-        if (!fastFalling && vertical < -0.7f && Owner.Velocity.y < 0f)
+        if (!fastFalling && vertical < -0.7f && Owner.Velocity.y < 0f && Ground.HasSlidePower)
         {
             fastFalling = true;
             Owner.Velocity.x /= 2f;
