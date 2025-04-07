@@ -26,8 +26,9 @@ public class GameLoop : MonoBehaviour
     private int respawns = 0;
     private bool runTimer = false;
 
-    public enum MeddalType
+    public enum MedalType
     {
+        None,
         Bronze,
         Silver,
         Gold,
@@ -159,10 +160,30 @@ public class GameLoop : MonoBehaviour
             bool doRetry = false;
             System.Action retry = () => { doRetry = true;  };
 
-            MeddalType meddal = MeddalType.Bronze;
-            
+            MedalType medal = MedalType.None;
+            float nextMeddalTime = CurrentGoodSeed.Bronze;
+            if(Timer <= CurrentGoodSeed.Author)
+            {
+                medal = MedalType.Author;
+                nextMeddalTime = -1;
+            }
+            else if (Timer <= CurrentGoodSeed.Gold)
+            {
+                medal = MedalType.Gold;
+                nextMeddalTime = -1;
+            }
+            else if (Timer <= CurrentGoodSeed.Silver)
+            {
+                medal = MedalType.Silver;
+                nextMeddalTime = CurrentGoodSeed.Gold;
+            }
+            if (Timer <= CurrentGoodSeed.Bronze)
+            {
+                medal = MedalType.Bronze;
+                nextMeddalTime = CurrentGoodSeed.Silver;
+            }
 
-            GameUi.CompleteLevel(retry, Timer, );
+            GameUi.CompleteLevel(retry, Timer, nextMeddalTime, medal);
             while (!doRetry)
             {
                 yield return null;

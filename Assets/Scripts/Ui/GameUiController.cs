@@ -248,7 +248,7 @@ public class GameUiController : MonoBehaviour
         }
     }
 
-    public void CompleteLevel(System.Action retry, float completeTime, float timeToNextMeddal, MeddalType meddalType)
+    public void CompleteLevel(System.Action retry, float completeTime, float timeToNextMeddal, MedalType meddalType)
     {
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
