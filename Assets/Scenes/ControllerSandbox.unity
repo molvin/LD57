@@ -2252,9 +2252,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3481498922970582336, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: DoubleJumpPower
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778927470258749633, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: Gravity
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778927470258749633, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: GroundCheckDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6939691093548209201, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8309590663219349725, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: HasSlidePower
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
