@@ -5,6 +5,7 @@ public class HardLandState : State
     public float Duration;
     public GroundState Ground;
     public float Friction;
+    public AudioEventData BadLandingSound;
 
     private float enterTime;
 
@@ -13,6 +14,7 @@ public class HardLandState : State
     {
         enterTime = Time.time;
         Owner.Anim.SetTrigger("Hard-Land");
+        BadLandingSound?.Play();
     }
 
     public override void Exit()
