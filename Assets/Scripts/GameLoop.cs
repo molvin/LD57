@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
+using TMPro;
 
 public class GameLoop : MonoBehaviour
 {
@@ -13,19 +14,67 @@ public class GameLoop : MonoBehaviour
     public Player playerPrefab;
     public GameUiController GameUi;
     public AbilitiesUiCotroller AbilitiesUi;
+    public TextMeshProUGUI RespawnsRemaining;
     private Player player;
     private LevelGenerator generator;
-
     public int MaxRespawns = 3;
     public float Timer = 0.0f;
 
     private int respawns = 0;
     private bool runTimer = false;
+    private void TeleportToStartInitial()
+    {
+        StartCoroutine(Coroutine());
+
+        IEnumerator Coroutine()
+        {
+            Player.enabled = false;
+            Player.Anim.gameObject.SetActive(false);
+            Player.transform.position = Level.StartPosition;
+            Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
+            yield return new WaitForSeconds(1.5f);
+            Player.enabled = true;
+            Player.Anim.gameObject.SetActive(true);
+        }
+
+
+    }
+
+    private bool disallowRespawn = false;
+    private bool ending = false;
 
     private void TeleportToStart()
     {
-        Player.transform.position = Level.StartPosition;
-        Player.Velocity = Vector2.zero;
+        //Player.transform.position = Level.StartPosition;
+        StartCoroutine(Coroutine());
+
+        IEnumerator Coroutine()
+        {
+            //play teleport out anim
+
+            float speed = 10;
+            Player.enabled = false;
+            Player.GetComponent<PlayerParticleController>().PlayTeleportout(Player.Velocity, Player.CurrentState);
+            Player.Velocity = Vector2.zero;
+            Player.Anim.enabled = false;
+            yield return new WaitForSeconds(1);
+            Player.Anim.gameObject.SetActive(false);
+            while (Vector3.Distance(Player.transform.position, Level.StartPosition) > 1f)
+            {
+                Player.transform.position +=  ((Vector3)Level.StartPosition - Player.transform.position).normalized * speed * Time.deltaTime;
+         
+                yield return null;
+            }
+            Player.transform.position = Level.StartPosition;
+            Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
+            yield return new WaitForSeconds(1.5f);
+            Player.enabled = true;
+            Player.Anim.enabled = true;
+            Player.Anim.gameObject.SetActive(true);
+
+            //play teleport in anim
+            yield return null;
+        }
     }
 
     private void Awake()
@@ -61,7 +110,7 @@ public class GameLoop : MonoBehaviour
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
-            TeleportToStart();
+            TeleportToStartInitial();
 
             bool countdownDone = false;
             System.Action go = () => { countdownDone = true;  };
@@ -80,6 +129,9 @@ public class GameLoop : MonoBehaviour
 
     private void EndLevel()
     {
+        if (ending)
+            return;
+        ending = true;
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
         {
@@ -94,6 +146,7 @@ public class GameLoop : MonoBehaviour
                 yield return null;
             }
 
+            ending = false;
             StartLevel();
         }
     }
@@ -107,6 +160,8 @@ public class GameLoop : MonoBehaviour
             Timer += Time.deltaTime;
         }
 
+        RespawnsRemaining.text = $"Remaining Respawns: {MaxRespawns - respawns}";
+
         if (Input.GetButtonDown("Respawn"))
         {
             Respawn();
@@ -115,6 +170,11 @@ public class GameLoop : MonoBehaviour
 
     public void Respawn()
     {
+        if(disallowRespawn)
+        {
+            return;
+        }
+
         if(respawns < MaxRespawns)
         {
             Timer = 0.0f;
@@ -126,7 +186,6 @@ public class GameLoop : MonoBehaviour
         }
         else
         {
-            StartLevel();
         }
         
     }
@@ -139,9 +198,12 @@ public class GameLoop : MonoBehaviour
             instance.StartCoroutine(Coroutine());
             IEnumerator Coroutine()
             {
+                instance.disallowRespawn = true;
                 instance.AbilitiesUi.AddAbility(pos, itemType.ToString());
                 yield return new WaitForSeconds(2.0f);
                 instance.TeleportToStart();
+                instance.disallowRespawn = false;
+
             }
         }
         else

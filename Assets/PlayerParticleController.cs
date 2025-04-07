@@ -17,10 +17,20 @@ public class PlayerParticleController : MonoBehaviour
     public ParticleSystem bonkParticle;
     public ParticleSystem bonkedParticle;
 
+    public ParticleSystem teleportIn;
+    public TeleportOutParticleController teleportOut;
 
     void Start()
     {
         
+    }
+    public void PlayTeleportIn()
+    {
+        teleportIn.Play();
+    }
+    public void PlayTeleportout(Vector3 velocity, State state)
+    {
+        teleportOut.Play(velocity, state);
     }
 
     public void PlayPerfectParticle(Vector3 velocity)
