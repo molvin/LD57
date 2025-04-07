@@ -17,8 +17,8 @@ public class AudioEventData : ScriptableObject
     public bool m_IsLooping;
     public bool m_DontDestroyOnLoad;
 
-    public void Play()
+    public void Play(Transform attachPoint = null)
     {
-        AudioManager.PlayAudio(this);
+        AudioManager.PlayAudio(this, attachPoint);
     }
 }
