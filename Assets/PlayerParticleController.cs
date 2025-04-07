@@ -26,6 +26,10 @@ public class PlayerParticleController : MonoBehaviour
 
     public void PlayJumpParticle(Vector3 velocity)
     {
+        if(velocity.x == 0)
+        {
+            return;
+        }
         Material mat_to_use = 
             velocity.x > 0 ? jump_rigth : jump_left;
 
