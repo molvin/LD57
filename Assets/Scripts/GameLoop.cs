@@ -52,7 +52,7 @@ public class GameLoop : MonoBehaviour
         {
             //play teleport out anim
 
-            float speed = 10;
+            float speed = Vector3.Distance(Player.transform.position, Level.StartPosition);
             Player.enabled = false;
             Player.GetComponent<PlayerParticleController>().PlayTeleportout(Player.Velocity, Player.CurrentState);
             Player.Velocity = Vector2.zero;
@@ -71,7 +71,7 @@ public class GameLoop : MonoBehaviour
             Player.enabled = true;
             Player.Anim.enabled = true;
             Player.Anim.gameObject.SetActive(true);
-
+            Timer = 0.0f;
             //play teleport in anim
             yield return null;
         }
@@ -164,7 +164,7 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
-            Respawn();
+           Respawn();
         }
     }
 
@@ -177,11 +177,10 @@ public class GameLoop : MonoBehaviour
 
         if(respawns < MaxRespawns)
         {
-            Timer = 0.0f;
+         
             respawns += 1;
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
-
             TeleportToStart();
         }
         else
