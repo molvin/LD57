@@ -318,10 +318,10 @@ MonoBehaviour:
   - {x: 17.736002, y: -3.1135178}
   - {x: 18.378017, y: -3.3373518}
   - {x: 20.5, y: -4.0008698}
-  - {x: 20.975742, y: -3.9925747}
-  - {x: 21, y: -4.070074}
-  - {x: 21, y: -9.5}
-  - {x: 0.95507956, y: -5.0998955}
+  - {x: 21, y: -4}
+  - {x: 21, y: -9.123076}
+  - {x: 20.696402, y: -9.433356}
+  - {x: 0.95121145, y: -5.099046}
   - {x: 0.5, y: -4.7989254}
   m_ShadowSegment: []
 --- !u!60 &4026139077205187294
@@ -396,10 +396,10 @@ PolygonCollider2D:
       - {x: 17.736002, y: -3.1135178}
       - {x: 18.378017, y: -3.3373518}
       - {x: 20.5, y: -4.0008698}
-      - {x: 20.975742, y: -3.9925747}
-      - {x: 21, y: -4.070074}
-      - {x: 21, y: -9.5}
-      - {x: 0.95507956, y: -5.0998955}
+      - {x: 21, y: -4}
+      - {x: 21, y: -9.123076}
+      - {x: 20.696402, y: -9.433356}
+      - {x: 0.95121145, y: -5.099046}
       - {x: 0.5, y: -4.7989254}
   m_UseDelaunayMesh: 0
 --- !u!1 &9081807909345465021
@@ -715,7 +715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7265920297378715246, guid: bed54da736bd5a3408c09b40ce247d43, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278159029949984594, guid: bed54da736bd5a3408c09b40ce247d43, type: 3}
       propertyPath: m_Name
@@ -723,7 +723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8278159029949984594, guid: bed54da736bd5a3408c09b40ce247d43, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -796,7 +796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7265920297378715246, guid: bed54da736bd5a3408c09b40ce247d43, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8278159029949984594, guid: bed54da736bd5a3408c09b40ce247d43, type: 3}
       propertyPath: m_Name
@@ -804,7 +804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8278159029949984594, guid: bed54da736bd5a3408c09b40ce247d43, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
