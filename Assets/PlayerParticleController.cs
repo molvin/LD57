@@ -18,7 +18,9 @@ public class PlayerParticleController : MonoBehaviour
     public ParticleSystem bonkedParticle;
 
     public ParticleSystem teleportIn;
+    public AudioEventData teleportInSfx;
     public TeleportOutParticleController teleportOut;
+    public AudioEventData teleportOutSfx;
 
     void Start()
     {
