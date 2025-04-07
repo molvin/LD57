@@ -19,6 +19,12 @@ public class GameUiController : MonoBehaviour
     public UnityEngine.UI.Image m_MedalImage;
     public TMPro.TextMeshProUGUI m_CompleteTime;
     public TMPro.TextMeshProUGUI m_TimeToNextMedal;
+    public TMPro.TextMeshProUGUI m_MedalText;
+
+    public Sprite m_AuthorSprite;
+    public Sprite m_GoldSprite;
+    public Sprite m_SilverSprite;
+    public Sprite m_BronzSprite;
 
     private int state = 0;
 
@@ -251,16 +257,50 @@ public class GameUiController : MonoBehaviour
         }
     }
 
+    private Sprite GetMedalSprite(MedalType medal)
+    {
+        switch (medal)
+        {
+            case MedalType.None:
+                return null;
+            case MedalType.Bronze:
+                return m_BronzSprite;
+            case MedalType.Silver:
+                return m_SilverSprite;
+            case MedalType.Gold:
+                return m_GoldSprite;
+            case MedalType.Author:
+                return m_AuthorSprite;
+        }
+
+        return null;
+    }
+
     public void CompleteLevel(System.Action retry, float completeTime, float timeToNextMeddal, MedalType meddalType)
     {
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
         {
             Change(new LevelCompleated());
-            while(!retryPressed)
+            m_MedalImage.gameObject.SetActive(true);
+            m_MedalText.gameObject.SetActive(true);
+            m_TimeToNextMedal.gameObject.SetActive(true);
+            m_CompleteTime.gameObject.SetActive(true);
+
+            m_CompleteTime.text = completeTime.ToString(".0##");
+            m_TimeToNextMedal.text = timeToNextMeddal.ToString(".0##");
+            m_MedalText.text = meddalType.ToString();
+            m_MedalImage.sprite = GetMedalSprite(meddalType);
+
+            while (!retryPressed)
             {
                 yield return null;
             }
+
+            m_MedalImage.gameObject.SetActive(false);
+            m_MedalText.gameObject.SetActive(false);
+            m_TimeToNextMedal.gameObject.SetActive(false);
+            m_CompleteTime.gameObject.SetActive(false);
             retryPressed = false;
             retry();
         }
