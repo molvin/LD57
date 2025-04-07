@@ -13,6 +13,13 @@ public class MenuAudioController : MonoBehaviour
     public AudioClip go;
 
 
+    public void play(AudioClip audioClip)
+    {
+        source.PlayOneShot(audioClip);
+
+    }
+
+
     void Start()
     {
         source = this.GetComponent<AudioSource>();

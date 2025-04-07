@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -10,7 +11,7 @@ public class GameUiController : MonoBehaviour
     public Animator countDownAnimator;
     public TMPro.TextMeshProUGUI timer;
     public Button retryButton;
-
+    public Button returnToMenuButton;
     private AudioSource source;
 
 
@@ -117,7 +118,7 @@ public class GameUiController : MonoBehaviour
     public void EnableRetryButton(bool enable)
     {
         retryButton.gameObject.SetActive(enable);
-
+        returnToMenuButton.gameObject.SetActive(enabled);
     }
 
 
@@ -191,6 +192,12 @@ public class GameUiController : MonoBehaviour
     public void Reset()
     {
         Change(new CountDown());
+
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);  
 
     }
 
