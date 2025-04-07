@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06cbcef0b5b95d6479e041d0a1f5b526, type: 3}
-  m_Name: AudioEvent_Steps
+  m_Name: AudioEvent_Jump
   m_EditorClassIdentifier: 
   m_Clips:
-  - {fileID: 8300000, guid: 744f3200be313b544bce919b9963324c, type: 3}
-  - {fileID: 8300000, guid: 7e8b75a0f2af57042abb25ba2d049063, type: 3}
-  - {fileID: 8300000, guid: e4c151016b7b3ba44b52a0d819f5324f, type: 3}
-  - {fileID: 8300000, guid: d37ef971093130645a4e6eccb4c60086, type: 3}
-  m_PitchRange: 0.05
+  - {fileID: 0}
+  m_PitchRange: 0
   m_Volume: 1
-  m_AmplitudeRange: 0.1
-  m_MixerGroup: {fileID: -4934486290842149544, guid: 7feb24e6d00a1654bba1b3fc8a217352, type: 2}
+  m_AmplitudeRange: 0
+  m_MixerGroup: {fileID: 0}
   m_IsLooping: 0
   m_DontDestroyOnLoad: 0
   m_FadeInAndOutTime: -1
