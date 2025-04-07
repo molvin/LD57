@@ -159,15 +159,22 @@ MonoBehaviour:
   - {fileID: 9209771237482449530, guid: bfc8931ce5013214ab1a9c5c1c4a0300, type: 3}
   SplitterSegments:
   - {fileID: 9209771237482449530, guid: 0635f264fc1907545ba9c17752c7cfa9, type: 3}
-  - {fileID: 9209771237482449530, guid: 9210fca9be2519f498e144ef5357c34b, type: 3}
+  - {fileID: 9209771237482449530, guid: ecf62fa7e1366144db65ea56b8aaf5b7, type: 3}
   GoalSegments:
   - {fileID: 996395430905241531, guid: 018ce861d25424a4a88c49441af44655, type: 3}
   - {fileID: 996395430905241531, guid: d235b7002d62e1041bfc346e8fda21ff, type: 3}
+  DoubleJumpChallenges:
+  - {fileID: 9209771237482449530, guid: 91c66c32647e8d94b945924ef84a4aec, type: 3}
+  - {fileID: 9209771237482449530, guid: d8563fdda4a9e30499e40c45bd496ecb, type: 3}
+  SlideChallenges:
+  - {fileID: 9209771237482449530, guid: 91c66c32647e8d94b945924ef84a4aec, type: 3}
+  - {fileID: 9209771237482449530, guid: d8563fdda4a9e30499e40c45bd496ecb, type: 3}
   TargetLeafAmount: 3
-  EndProbabilityGrowthRate: 0.2
-  SplitterProbabilityGrowthRate: 0.2
+  EndProbabilityGrowthRate: 0.3
+  SplitterProbabilityGrowthRate: 0.4
+  ChallengeProbabilityGrowthRate: 0.2
   RetryAttemptsPerPath: 10
-  Seed: 0
+  Seed: 1078
   debugMode: 0
 --- !u!4 &228091927
 Transform:
@@ -518,6 +525,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1298762913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8388569149597181873, guid: e24cf79fe618b9441b8bfc6f6b79dce4, type: 3}
+  m_PrefabInstance: {fileID: 913998427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c4a6fb0beb599429bb0e47b0f2792c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1409487244
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,6 +567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2515709973946877244, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
   GameUi: {fileID: 913998429}
+  AbilitiesUi: {fileID: 1298762913}
 --- !u!4 &1409487246
 Transform:
   m_ObjectHideFlags: 0
