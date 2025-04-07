@@ -185,7 +185,7 @@ MonoBehaviour:
   TargetLeafAmount: 3
   EndProbabilityGrowthRate: 0.3
   SplitterProbabilityGrowthRate: 0.4
-  ChallengeProbabilityGrowthRate: 0.2
+  ChallengeProbabilityGrowthRate: 0.3
   RetryAttemptsPerPath: 10
   Seed: 2000
   debugMode: 1

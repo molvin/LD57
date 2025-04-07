@@ -14,15 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Seeds:
   - Seed: 1987
-    Author: 20
-    Gold: 30
-    Silver: 40
-    Bronze: 50
-  - Seed: 1989
-    Author: 20
-    Gold: 30
-    Silver: 40
-    Bronze: 50
+    Author: 65
+    Gold: 75
+    Silver: 90
+    Bronze: 110
   - Seed: 1993
     Author: 20
     Gold: 30
@@ -39,7 +34,7 @@ MonoBehaviour:
     Silver: 40
     Bronze: 50
   - Seed: 1998
-    Author: 20
+    Author: 80
     Gold: 30
     Silver: 40
     Bronze: 50
@@ -49,16 +44,6 @@ MonoBehaviour:
     Silver: 40
     Bronze: 50
   - Seed: 2000
-    Author: 20
-    Gold: 30
-    Silver: 40
-    Bronze: 50
-  - Seed: 2004
-    Author: 20
-    Gold: 30
-    Silver: 40
-    Bronze: 50
-  - Seed: 2004
     Author: 20
     Gold: 30
     Silver: 40
