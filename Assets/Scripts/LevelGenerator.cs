@@ -297,6 +297,7 @@ public class LevelGenerator : MonoBehaviour
                     spawned.Prefab = next;
                     exit.Connection = spawned;
                     state.LastPlaced = spawned;
+                    exit.gameObject.SetActive(false);
                     break;
                 }
             }
