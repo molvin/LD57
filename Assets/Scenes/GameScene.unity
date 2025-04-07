@@ -149,9 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSegments:
-  - {fileID: 6618336650794968113, guid: d4c702a77329a324f9f14d196331a291, type: 3}
+  - {fileID: 9209771237482449530, guid: cdd5b78b944ad2441aebf80741d04c58, type: 3}
   FillerSegments:
-  - {fileID: 9209771237482449530, guid: 475f8a33e2e46294fb23689056b5174b, type: 3}
+  - {fileID: 9209771237482449530, guid: b0793792bc64e1e479fa0cababa00aac, type: 3}
   - {fileID: 9209771237482449530, guid: 91c66c32647e8d94b945924ef84a4aec, type: 3}
   - {fileID: 9209771237482449530, guid: 3b86d33e72dce7a478f0d0e642c554f9, type: 3}
   - {fileID: 9209771237482449530, guid: d8563fdda4a9e30499e40c45bd496ecb, type: 3}
@@ -159,12 +159,12 @@ MonoBehaviour:
   - {fileID: 9209771237482449530, guid: bfc8931ce5013214ab1a9c5c1c4a0300, type: 3}
   SplitterSegments:
   - {fileID: 9209771237482449530, guid: 0635f264fc1907545ba9c17752c7cfa9, type: 3}
-  - {fileID: 9209771237482449530, guid: 9210fca9be2519f498e144ef5357c34b, type: 3}
+  - {fileID: 9209771237482449530, guid: ecf62fa7e1366144db65ea56b8aaf5b7, type: 3}
   GoalSegments:
   - {fileID: 996395430905241531, guid: 018ce861d25424a4a88c49441af44655, type: 3}
   - {fileID: 996395430905241531, guid: d235b7002d62e1041bfc346e8fda21ff, type: 3}
   TargetLeafAmount: 3
-  EndProbabilityGrowthRate: 0.2
+  EndProbabilityGrowthRate: 0.15
   SplitterProbabilityGrowthRate: 0.2
   RetryAttemptsPerPath: 10
   Seed: 0
