@@ -474,6 +474,7 @@ MonoBehaviour:
   GroundCheckDistance: 0.2
   PerfectLanding: 0
   PerfectLandingBoost: 4
+  JumpGroundCheckDistance: 0.5
   AudioEvent: {fileID: 11400000, guid: f72f0f901c6f1a743b00b8e40dfb4418, type: 2}
 --- !u!114 &2943016116726350535
 MonoBehaviour:
@@ -970,6 +971,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 872980cd0b53b1c409dd2175c7e84ca0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6502445181388141890}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 872980cd0b53b1c409dd2175c7e84ca0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 191236723509394341}
   m_SourcePrefab: {fileID: 100100000, guid: 872980cd0b53b1c409dd2175c7e84ca0, type: 3}
 --- !u!1 &3942924916747275068 stripped
 GameObject:
@@ -998,6 +1002,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &191236723509394341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3942924916747275068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c81db15cd2d0244941ac51148a832b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StepAudio: {fileID: 11400000, guid: 423b96da33ebcbb49a50ec10f2f0eccd, type: 2}
 --- !u!4 &4464129353125613958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 872980cd0b53b1c409dd2175c7e84ca0, type: 3}
