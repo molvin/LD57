@@ -49,7 +49,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    public void GenerateGraph()
+    public void GenerateGraph(int? overrideSeed = null)
     {
         for(int i = 0; i < 100; i++)
         {
@@ -61,7 +61,7 @@ public class LevelGenerator : MonoBehaviour
             }
             parents.Clear();
 
-            bool success = GenerateLevel(Seed);
+            bool success = GenerateLevel(overrideSeed ?? Seed);
 
             Seed += 1;
 

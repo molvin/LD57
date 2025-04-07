@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaccad6ae80a3714aa21e0349c77fcac, type: 3}
+  m_Name: GoodSeeds
+  m_EditorClassIdentifier: 
+  Seeds:
+  - Seed: 1172
+    Times: []
+  - Seed: 1174
+    Times:
+    - 20
+    - 30
+    - 35
+    - 40
+  - Seed: 1189
+    Times: []
+  - Seed: 1205
+    Times: []
+  - Seed: 1218
+    Times: []
+  - Seed: 1221
+    Times: []
+  - Seed: 1222
+    Times: []
+  - Seed: 1224
+    Times: []
+  - Seed: 1233
+    Times: []

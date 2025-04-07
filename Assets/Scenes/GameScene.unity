@@ -252,7 +252,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Remaining Respawns: 3'
+  m_text: 'Retries: 3
+
+    Press R to Retry'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 736eb26731d57b94c9ba3564c3555081, type: 2}
   m_sharedMaterial: {fileID: 6370940302237069504, guid: 736eb26731d57b94c9ba3564c3555081, type: 2}
@@ -733,8 +735,16 @@ MonoBehaviour:
   GameUi: {fileID: 913998429}
   AbilitiesUi: {fileID: 1298762913}
   RespawnsRemaining: {fileID: 690388673}
-  MaxRespawns: 3
+  MaxRespawns: 100000
   Timer: 0
+  Seeds: {fileID: 11400000, guid: 184c9d1611de0f14e8befcca680b40ea, type: 2}
+  UseGoodSeeds: 0
+  CurrentGoodSeed:
+    Seed: 0
+    Author: 20
+    Gold: 30
+    Silver: 40
+    Bronze: 50
 --- !u!4 &1409487246
 Transform:
   m_ObjectHideFlags: 0
