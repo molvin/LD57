@@ -17,6 +17,10 @@ public class GameUiController : MonoBehaviour
 
     public Animator FadeAnim;
 
+    public UnityEngine.UI.Image m_MedalImage;
+    public TMPro.TextMeshProUGUI m_CompleteTime;
+    public TMPro.TextMeshProUGUI m_TimeToNextMedal;
+
     private int state = 0;
 
     private UIState _state;
