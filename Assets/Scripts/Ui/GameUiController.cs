@@ -21,6 +21,8 @@ public class GameUiController : MonoBehaviour
 
     private UIState _state;
 
+    private bool retryPressed;
+
     public void Start()
     {
         this._state = new EmptyState();
@@ -190,7 +192,10 @@ public class GameUiController : MonoBehaviour
     public void Reset()
     {
         // This happens when we click retry
-        Change(new CountDown());
+        // Change(new CountDown());
+
+        retryPressed = true;
+
     }
 
     public void BackToMenu()
@@ -245,8 +250,18 @@ public class GameUiController : MonoBehaviour
         }
     }
 
-    public void CompleteLevel()
+    public void CompleteLevel(System.Action retry)
     {
+        StartCoroutine(Coroutine());
+        IEnumerator Coroutine()
+        {
+            Change(new LevelCompleated());
+            while(!retryPressed)
+            {
+                yield return null;
+            }
 
+            retry();
+        }
     }
 }
