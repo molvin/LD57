@@ -128,12 +128,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 443271400}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d301ed91242ac024e96cd0c55e8295e2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d301ed91242ac024e96cd0c55e8295e2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d301ed91242ac024e96cd0c55e8295e2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d301ed91242ac024e96cd0c55e8295e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.015
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d301ed91242ac024e96cd0c55e8295e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.449
+      value: -0.479
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d301ed91242ac024e96cd0c55e8295e2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -222,6 +234,7 @@ GameObject:
   - component: {fileID: 443271400}
   - component: {fileID: 443271399}
   - component: {fileID: 443271398}
+  - component: {fileID: 443271409}
   - component: {fileID: 443271403}
   - component: {fileID: 443271404}
   - component: {fileID: 443271405}
@@ -384,9 +397,14 @@ MonoBehaviour:
   MaxSpeed: 13
   AirResistance: 3
   FastFallBoost: 8
-  HardLandVelocityMin: 8
+  HardLandVelocityMin: 20
   GroundCheckDistance: 0.2
   Jumped: 0
+  PerfectLandingFactor: 0.5
+  PerfectLandingMinSpeed: 8
+  PerfectLandingMinFallSpeed: -5
+  Ground: {fileID: 443271405}
+  DoubleJumpPower: 1
 --- !u!114 &443271405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +451,7 @@ MonoBehaviour:
   Air: {fileID: 443271404}
   Slide: {fileID: 443271406}
   GroundCheckDistance: 0.2
+  PerfectLanding: 0
 --- !u!114 &443271406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +505,43 @@ MonoBehaviour:
   Duration: 0.5
   Ground: {fileID: 443271405}
   Friction: 25
+--- !u!70 &443271409
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443271397}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1001 &761859264
 PrefabInstance:
   m_ObjectHideFlags: 0
