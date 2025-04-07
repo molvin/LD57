@@ -30,6 +30,7 @@ public class GameLoop : MonoBehaviour
         {
             Player.enabled = false;
             Player.Anim.gameObject.SetActive(false);
+            GameUi.FadeOut();
             Player.transform.position = Level.StartPosition;
             Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
             yield return new WaitForSeconds(1.5f);
