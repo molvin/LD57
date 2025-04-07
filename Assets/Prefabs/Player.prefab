@@ -588,6 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SpeedAudioData: {fileID: 11400000, guid: bd17cfe69357f98418e138edf7e530c2, type: 2}
   m_IsFastFactor: 0.8
+  m_GuessedMaxSpeed: 20
 --- !u!1001 &938543931204190371
 PrefabInstance:
   m_ObjectHideFlags: 0
