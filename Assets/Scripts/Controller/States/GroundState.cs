@@ -20,6 +20,8 @@ public class GroundState : State
     public AudioEventData perfectLandingSfx;
     public AudioEventData jumpSfx;
 
+    public float MaxSpeed {  get; private set; }
+
     private float angleRotate= 0f;
     public override void Enter()
     {
@@ -62,6 +64,7 @@ public class GroundState : State
             {
                 float angle = Vector2.SignedAngle(Vector2.up, groundHit.Normal) * -Mathf.Sign(rawInput.x);
                 float maxSpeed = MaxSpeedBySlopeAngle.Evaluate(angle);
+                MaxSpeed = maxSpeed;
                 Owner.Anim.SetBool("InputMove", true);
                 Owner.Anim.speed = (Owner.Velocity.magnitude / maxSpeed) + 0.5f;
                 // No Friction here
