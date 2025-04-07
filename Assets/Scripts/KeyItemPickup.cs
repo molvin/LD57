@@ -28,8 +28,8 @@ public class KeyItemPickup : MonoBehaviour
     {
         if (GameLoop.instance && Vector2.Distance(GameLoop.Player.transform.position, worldPosition) < PickupRange)
         {
-            GameLoop.PickupItem(ItemType);
             Destroy(gameObject);
+            GameLoop.PickupItem(ItemType);
         }
     }
 }

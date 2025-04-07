@@ -5,25 +5,23 @@ public class GameLoop : MonoBehaviour
 {
     public static GameLoop instance;
 
-    public static Player Player => instance.player;
+    public static PlayerController Player => instance.player;
     public static LevelGenerator Level => instance.generator;
 
-    private Player player;
+    public PlayerController playerPrefab;
+    private PlayerController player;
     private LevelGenerator generator;
 
     private void TeleportToStart()
     {
         Player.transform.position = Level.StartPosition;
-        Player.Velocity = Vector2.zero;
-        Player.TransitionTo(Player.GetComponent<AirState>());
+        Player.velocity = Vector2.zero;
     }
 
     private void Awake()
     {
-        Assert.IsNull(instance);
         instance = this;
 
-        player = FindFirstObjectByType<Player>();
         generator = FindAnyObjectByType<LevelGenerator>();
         generator.Seed = PlayerPrefs.GetInt("seed", 0);
         generator.debugMode = false;
@@ -34,27 +32,30 @@ public class GameLoop : MonoBehaviour
         StartLevel();
     }
 
+    private void Update()
+    {
+        instance = this;
+    }
+
     private void StartLevel()
     {
+        if (player != null)
+        {
+            Destroy(player);
+        }
+        player = Instantiate(playerPrefab);
+
         generator.GenerateGraph();
         PlayerPrefs.SetInt("seed", generator.Seed);
 
         TeleportToStart();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            TeleportToStart();
-        }
-    }
-
     public static void PickupItem(KeyItemType itemType)
     {
         Player.GrantedItems |= 1 << (int)itemType;
 
-        if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
+        if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) | (1 << (int)KeyItemType.Item2)))
         {
             instance.StartLevel();
         }
