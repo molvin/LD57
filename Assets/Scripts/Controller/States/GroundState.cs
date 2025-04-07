@@ -15,7 +15,7 @@ public class GroundState : State
     public bool PerfectLanding;
     public float PerfectLandingBoost;
     public bool HasSlidePower;
-
+    public AudioEventData AudioEvent;
 
     public override void Enter()
     {
@@ -25,10 +25,10 @@ public class GroundState : State
             Owner.Velocity += Owner.Velocity.normalized * PerfectLandingBoost;
             Debug.Log("Perfect landing");
             Owner.particleController.PlayPerfectParticle(Owner.Velocity);
-            
+            AudioEvent.Play();
+
         }
         Owner.particleController.PlayLandParticle();
-
     }
 
     public override void Tick()

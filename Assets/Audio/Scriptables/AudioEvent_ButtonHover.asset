@@ -17,5 +17,6 @@ MonoBehaviour:
   m_PitchRange: 0.1
   m_Volume: 1
   m_AmplitudeRange: 0
+  m_MixerGroup: {fileID: -4934486290842149544, guid: 7feb24e6d00a1654bba1b3fc8a217352, type: 2}
   m_IsLooping: 0
   m_DontDestroyOnLoad: 0

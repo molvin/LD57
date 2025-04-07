@@ -472,6 +472,7 @@ MonoBehaviour:
   PerfectLanding: 0
   PerfectLandingBoost: 4
   HasSlidePower: 0
+  AudioEvent: {fileID: 11400000, guid: f72f0f901c6f1a743b00b8e40dfb4418, type: 2}
 --- !u!114 &2943016116726350535
 MonoBehaviour:
   m_ObjectHideFlags: 0
