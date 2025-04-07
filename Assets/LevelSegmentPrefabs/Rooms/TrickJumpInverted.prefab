@@ -52,12 +52,11 @@ MonoBehaviour:
   Entrance: {fileID: 4755589743272792784}
   Exits:
   - {fileID: 1495304862483836259}
-  GroundColliders:
-  - {fileID: 3698865813135979229}
-  - {fileID: 2197675963103625161}
+  RoomTypes: 0
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
+  SpawnSlot: {fileID: 0}
   Prefab: {fileID: 0}
 --- !u!1 &6278790280492165344
 GameObject:
@@ -71,7 +70,7 @@ GameObject:
   - component: {fileID: 5326198744336755324}
   - component: {fileID: 3606171764111460544}
   - component: {fileID: 2197675963103625161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +479,7 @@ GameObject:
   - component: {fileID: 3640925413400508597}
   - component: {fileID: 8923017234799639164}
   - component: {fileID: 3698865813135979229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

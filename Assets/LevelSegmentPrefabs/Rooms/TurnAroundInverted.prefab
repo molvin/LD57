@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7406603658961924700}
   - component: {fileID: 1547631091585362170}
   - component: {fileID: 118551445888000728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 3248860233958781008}
   - component: {fileID: 1188781256100749243}
   - component: {fileID: 2816789247297561369}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,12 +792,11 @@ MonoBehaviour:
   Entrance: {fileID: 3797896873337486980}
   Exits:
   - {fileID: 436673001084340133}
-  GroundColliders:
-  - {fileID: 2816789247297561369}
-  - {fileID: 118551445888000728}
+  RoomTypes: 0
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
+  SpawnSlot: {fileID: 0}
   Prefab: {fileID: 0}
 --- !u!1001 &1832233076587646184
 PrefabInstance:
