@@ -42,7 +42,6 @@ public class GameLoop : MonoBehaviour
     private void TeleportToStart()
     {
         //Player.transform.position = Level.StartPosition;
-        Player.Velocity = Vector2.zero;
         StartCoroutine(Coroutine());
 
         IEnumerator Coroutine()
@@ -51,7 +50,9 @@ public class GameLoop : MonoBehaviour
 
             float speed = 10;
             Player.enabled = false;
-            Player.GetComponent<PlayerParticleController>().PlayTeleportout();
+            Player.GetComponent<PlayerParticleController>().PlayTeleportout(Player.Velocity, Player.CurrentState);
+            Player.Velocity = Vector2.zero;
+            Player.Anim.enabled = false;
             yield return new WaitForSeconds(1);
             Player.Anim.gameObject.SetActive(false);
             while (Vector3.Distance(Player.transform.position, Level.StartPosition) > 1f)
@@ -64,6 +65,7 @@ public class GameLoop : MonoBehaviour
             Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
             yield return new WaitForSeconds(1.5f);
             Player.enabled = true;
+            Player.Anim.enabled = true;
             Player.Anim.gameObject.SetActive(true);
 
             //play teleport in anim
