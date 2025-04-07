@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06cbcef0b5b95d6479e041d0a1f5b526, type: 3}
-  m_Name: AudioEvent_Jump
+  m_Name: AudioEvent_TeleportOut
   m_EditorClassIdentifier: 
   m_Clips:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: c7c11db9506d67e459752c53d154c068, type: 3}
   m_PitchRange: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_AmplitudeRange: 0
   m_MixerGroup: {fileID: -4934486290842149544, guid: 7feb24e6d00a1654bba1b3fc8a217352, type: 2}
   m_IsLooping: 0

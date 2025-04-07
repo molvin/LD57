@@ -556,7 +556,9 @@ MonoBehaviour:
   bonkParticle: {fileID: 3325480506809306635}
   bonkedParticle: {fileID: 5951959977839360601}
   teleportIn: {fileID: 4123474719356905964}
+  teleportInSfx: {fileID: 11400000, guid: 16931d7a55ab1944bba2cc977410e547, type: 2}
   teleportOut: {fileID: 8108191822597425754}
+  teleportOutSfx: {fileID: 11400000, guid: 66675f8753f735742a14648c9293b5f9, type: 2}
 --- !u!114 &-2797690009766322555
 MonoBehaviour:
   m_ObjectHideFlags: 0
