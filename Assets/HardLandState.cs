@@ -15,6 +15,11 @@ public class HardLandState : State
         Owner.Anim.SetTrigger("Hard-Land");
     }
 
+    public override void Exit()
+    {
+        
+    }
+
     public override void Tick()
     {
         Owner.Velocity -= Owner.Velocity.normalized * Mathf.Min(Friction * Time.deltaTime, Owner.Velocity.magnitude);

@@ -75,4 +75,8 @@ public class BonkState : State
         }
 
     }
+
+    public override void Exit()
+    {
+    }
 }

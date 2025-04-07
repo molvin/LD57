@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     private AirState air;
     private GroundState ground;
 
+    public PlayerParticleController particleController;
+
+
     private void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
@@ -190,6 +193,7 @@ public class Player : MonoBehaviour
 
     public void TransitionTo(State s)
     {
+        CurrentState.Exit();
         s.Enter();
         CurrentState = s;
     }
