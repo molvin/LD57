@@ -7,6 +7,7 @@ public struct HitData
     public Vector2 Normal;
     public Vector2 AlongGround;
     public float Time;
+    public Vector2 HitPoint;
 }
 
 public enum Abilities
@@ -100,7 +101,7 @@ public class Player : MonoBehaviour
 
             if (distanceToMove <= Velocity.magnitude * deltaTime)
             {
-                LastHit = new HitData { Hit = true, Normal = hit.normal, Time = Time.time, AlongGround = Vector2.Perpendicular(hit.normal)};
+                LastHit = new HitData { Hit = true, Normal = hit.normal, Time = Time.time, AlongGround = Vector2.Perpendicular(hit.normal), HitPoint = hit.point};
                 float velocityIntoCollision = Vector2.Dot(-hit.normal, Velocity);
                 float angle = Vector2.Angle(Vector2.up, hit.normal);
 
@@ -123,8 +124,10 @@ public class Player : MonoBehaviour
                             TransitionTo(ground);
                         }
                     }
-                    else if(velocityIntoCollision > BonkVelocityMin)
+                    else if(velocityIntoCollision > BonkVelocityMin && !(CurrentState is BonkState))
                     {
+                        BonkState state = GetComponent<BonkState>();
+                        state.HitThatGotMe = LastHit;
                         TransitionTo(GetComponent<BonkState>());
                     }
                 }

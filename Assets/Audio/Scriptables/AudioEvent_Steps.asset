@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AudioEvent_Steps
   m_EditorClassIdentifier: 
   m_Clips:
-  - {fileID: 8300000, guid: 88d43b920a05d79438157d83d8ca2c7d, type: 3}
-  m_PitchRange: 0
-  m_Volume: 1
-  m_AmplitudeRange: 0.1
+  - {fileID: 8300000, guid: 90bc1975a1c984145af3297547cb6f5e, type: 3}
+  m_PitchRange: 0.1
+  m_Volume: 0.52
+  m_AmplitudeRange: 0.2
   m_MixerGroup: {fileID: -4934486290842149544, guid: 7feb24e6d00a1654bba1b3fc8a217352, type: 2}
   m_IsLooping: 0
   m_DontDestroyOnLoad: 0
