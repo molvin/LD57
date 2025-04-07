@@ -8,8 +8,16 @@ public class SlideState : State
     public AirState Air;
     public GroundState Ground;
 
+
+
     public override void Enter()
     {
+        Owner.particleController.startSlide();
+    }
+
+    public override void Exit()
+    {
+        Owner.particleController.stopSlide();
     }
 
     public override void Tick()

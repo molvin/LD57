@@ -34,6 +34,8 @@ public class AirState : State
         EnterTime = Time.time;
         fastFalling = false;
         canJump = Jumped && DoubleJumpPower;
+        Owner.particleController.PlayJumpParticle();
+
     }
 
     public override void Tick()
@@ -95,5 +97,9 @@ public class AirState : State
                 canJump = false;
             }
         }
+    }
+
+    public override void Exit()
+    {
     }
 }
