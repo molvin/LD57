@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 408098438721104791}
   - component: {fileID: 4697174864087195071}
   - component: {fileID: 4501307643586514809}
-  - component: {fileID: 8228855604166517833}
+  - component: {fileID: 7765377519396180196}
   m_Layer: 0
   m_Name: Ceil
   m_TagString: Untagged
@@ -81,15 +81,15 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: 42283deb46e7a8946a014b1afccdced0, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: f89b403e97664ca4193b3a4938778896, type: 3}
   m_Sprites:
-  - {fileID: -603728358, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: -1615076764, guid: 34797efc3e689bf4fa7cb792977e76bf, type: 3}
   - {fileID: 0}
-  - {fileID: 578293512, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: 1070608097, guid: f386828eccf7dba419fcbe82c1a60166, type: 3}
   - {fileID: 0}
-  - {fileID: 1426953709, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: 783204761, guid: f386828eccf7dba419fcbe82c1a60166, type: 3}
   - {fileID: 0}
-  - {fileID: 1426953709, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: 783204761, guid: f386828eccf7dba419fcbe82c1a60166, type: 3}
   - {fileID: 0}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -100,8 +100,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0, y: 6.6575, z: 0}
-    m_Extent: {x: 0.75, y: 3.0925002, z: 0}
+    m_Center: {x: 0, y: 6.3196926, z: 0}
+    m_Extent: {x: 0.75, y: 3.4303074, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &4501307643586514809
 MonoBehaviour:
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_WorldSpaceUV: 0
   m_CornerAngleThreshold: 38.6
   m_ColliderDetail: 16
-  m_ColliderOffset: 0
+  m_ColliderOffset: 0.5
   m_UpdateCollider: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
@@ -170,10 +170,17 @@ MonoBehaviour:
   m_BoundsScale: 2
   m_Creator: {fileID: 0}
   m_Modifiers: []
-  m_ColliderSegment: []
+  m_ColliderSegment:
+  - {x: 0.5, y: 2.889386}
+  - {x: -0.5, y: 2.889386}
+  - {x: -0.5, y: 9.18311}
+  - {x: -0.24362963, y: 9.500001}
+  - {x: 0.24362963, y: 9.5}
+  - {x: 0.5, y: 9.25}
+  - {x: 0.5, y: 2.889386}
   m_ShadowSegment: []
---- !u!61 &8228855604166517833
-BoxCollider2D:
+--- !u!60 &7765377519396180196
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -206,7 +213,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00042274594, y: 6.7505674}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -216,8 +223,16 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0017018, y: 5.501341}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5, y: 2.889386}
+      - {x: -0.5, y: 2.889386}
+      - {x: -0.5, y: 9.18311}
+      - {x: -0.24362963, y: 9.500001}
+      - {x: 0.24362963, y: 9.5}
+      - {x: 0.5, y: 9.25}
+      - {x: 0.5, y: 2.889386}
+  m_UseDelaunayMesh: 0
 --- !u!1 &5482996547354155543
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +244,7 @@ GameObject:
   - component: {fileID: 5012574078132723740}
   - component: {fileID: 660752071777348050}
   - component: {fileID: 7988450758435442212}
-  - component: {fileID: 2127509716810444713}
+  - component: {fileID: 4395434490205601344}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -299,15 +314,15 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: 42283deb46e7a8946a014b1afccdced0, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: f89b403e97664ca4193b3a4938778896, type: 3}
   m_Sprites:
-  - {fileID: -603728358, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: -1615076764, guid: 34797efc3e689bf4fa7cb792977e76bf, type: 3}
   - {fileID: 0}
-  - {fileID: 578293512, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: 1070608097, guid: f386828eccf7dba419fcbe82c1a60166, type: 3}
   - {fileID: 0}
-  - {fileID: 1426953709, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: 783204761, guid: f386828eccf7dba419fcbe82c1a60166, type: 3}
   - {fileID: 0}
-  - {fileID: 1426953709, guid: c6dedc930c7512f49a68588c1f3ba71e, type: 3}
+  - {fileID: 783204761, guid: f386828eccf7dba419fcbe82c1a60166, type: 3}
   - {fileID: 0}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -318,8 +333,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: -0.125, y: -3.1575, z: 0}
-    m_Extent: {x: 0.625, y: 3.0925, z: 0}
+    m_Center: {x: -0.09500003, y: -2.819633, z: 0}
+    m_Extent: {x: 0.655, y: 3.430367, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &7988450758435442212
 MonoBehaviour:
@@ -377,7 +392,7 @@ MonoBehaviour:
   m_WorldSpaceUV: 0
   m_CornerAngleThreshold: 38.6
   m_ColliderDetail: 16
-  m_ColliderOffset: 0
+  m_ColliderOffset: 0.5
   m_UpdateCollider: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
@@ -388,10 +403,16 @@ MonoBehaviour:
   m_BoundsScale: 2
   m_Creator: {fileID: 0}
   m_Modifiers: []
-  m_ColliderSegment: []
+  m_ColliderSegment:
+  - {x: 0.5, y: -6}
+  - {x: -0.24044445, y: -5.9999995}
+  - {x: -0.5, y: -5.75}
+  - {x: -0.5, y: 0.6107341}
+  - {x: 0.5, y: 0.6107341}
+  - {x: 0.5, y: -6}
   m_ShadowSegment: []
---- !u!61 &2127509716810444713
-BoxCollider2D:
+--- !u!60 &4395434490205601344
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -424,7 +445,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00058963895, y: -3.2476943}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -434,8 +455,15 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9993915, y: 5.494263}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5, y: -6}
+      - {x: -0.24044445, y: -5.9999995}
+      - {x: -0.5, y: -5.75}
+      - {x: -0.5, y: 0.6107341}
+      - {x: 0.5, y: 0.6107341}
+      - {x: 0.5, y: -6}
+  m_UseDelaunayMesh: 0
 --- !u!1 &8278159029949984594
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +564,10 @@ PrefabInstance:
     - target: {fileID: 6099799710113933516, guid: dd604c415d6a98e43806dfca10955668, type: 3}
       propertyPath: m_Name
       value: CyberpunkRunnerManHeightRefrence
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099799710113933516, guid: dd604c415d6a98e43806dfca10955668, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
