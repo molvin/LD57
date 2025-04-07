@@ -100,6 +100,8 @@ public class GameLoop : MonoBehaviour
         generator = FindAnyObjectByType<LevelGenerator>();
         generator.Seed = PlayerPrefs.GetInt("seed", 0);
         generator.debugMode = false;
+
+        Seeds.Init();
     }
 
     private void Start()
@@ -122,8 +124,8 @@ public class GameLoop : MonoBehaviour
             }
             player = Instantiate(playerPrefab);
             player.TransitionTo(player.GetComponent<IdleState>());
-            CurrentGoodSeed = Seeds.GetRandom();
-            generator.GenerateGraph(CurrentGoodSeed.Seed);
+            CurrentGoodSeed = Seeds.GetNext();
+            generator.GenerateGraph(CurrentGoodSeed == null ? null : CurrentGoodSeed.Seed);
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
