@@ -10,6 +10,9 @@ public class PlayerParticleController : MonoBehaviour
 
     public ParticleSystem slideParticle;
 
+
+    public Material jump_rigth;
+    public Material jump_left;
     void Start()
     {
         
@@ -17,11 +20,20 @@ public class PlayerParticleController : MonoBehaviour
 
     public void PlayPerfectParticle(Vector3 velocity)
     {
+
         perfectEffect.Play(velocity);        
     }
 
-    public void PlayJumpParticle()
+    public void PlayJumpParticle(Vector3 velocity)
     {
+        if(velocity.x == 0)
+        {
+            return;
+        }
+        Material mat_to_use = 
+            velocity.x > 0 ? jump_rigth : jump_left;
+
+        jumpParticle.GetComponent<ParticleSystemRenderer>().material = mat_to_use;
         jumpParticle.Play();
     }
     public void PlayLandParticle()

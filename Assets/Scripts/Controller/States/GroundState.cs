@@ -96,6 +96,8 @@ public class GroundState : State
             Air.JumpBoost = JumpBoost;
             Air.Jumped = true;
             Owner.TransitionTo(Air);
+            Owner.particleController.PlayJumpParticle(Owner.Velocity);
+
             return true;
         }
         return false;
