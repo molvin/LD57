@@ -1420,10 +1420,24 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.3333334
+    functionName: play
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.4166666
     functionName: SetExitGameButtonText
     data: Ex
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4166666
+    functionName: play
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
@@ -1434,6 +1448,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.5
+    functionName: play
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.5833334
     functionName: SetExitGameButtonText
     data: 
@@ -1441,10 +1462,24 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.5833334
+    functionName: play
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.0833333
     functionName: SetExitGameButtonText
     data: Bye!
     objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.1
+    functionName: play
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: a3cf41801b9425241a92877423fc4430, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
