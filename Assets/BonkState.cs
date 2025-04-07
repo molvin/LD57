@@ -4,6 +4,7 @@ public class BonkState : State
 {
     public float StickDuration;
     public float RecoverDuration;
+    public float MaxDuration = 3f;
     public GroundState Ground;
     public float Gravity;
     public float MaxAngle;
@@ -63,6 +64,11 @@ public class BonkState : State
                         Owner.particleController.playedBonk();
                     }
                 }
+
+                if (Time.time - enterTime > MaxDuration)
+                    {
+                        Owner.TransitionTo(GetComponent<AirState>());
+                    }
                 break;
             }
             case SubState.Recovering:

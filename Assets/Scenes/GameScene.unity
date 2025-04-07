@@ -163,6 +163,7 @@ MonoBehaviour:
   - {fileID: 9209771237482449530, guid: d5d32ca2eb7f46b40bd16d75f63d125d, type: 3}
   - {fileID: 9209771237482449530, guid: 22b0f3d0a5e00b44ba09d6385ad61ba6, type: 3}
   - {fileID: 9209771237482449530, guid: 10611fdb851849d45bdc7dfa7c950ba7, type: 3}
+  - {fileID: 9209771237482449530, guid: 3e292d24dc9c19742bf2cf3b016c12ff, type: 3}
   SplitterSegments:
   - {fileID: 9209771237482449530, guid: 0635f264fc1907545ba9c17752c7cfa9, type: 3}
   - {fileID: 9209771237482449530, guid: ecf62fa7e1366144db65ea56b8aaf5b7, type: 3}
@@ -574,6 +575,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 2515709973946877244, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
   GameUi: {fileID: 913998429}
   AbilitiesUi: {fileID: 1298762913}
+  MaxRespawns: 3
+  Timer: 0
 --- !u!4 &1409487246
 Transform:
   m_ObjectHideFlags: 0
