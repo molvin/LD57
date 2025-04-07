@@ -5,6 +5,7 @@ public class AirState : State
     public float Gravity = 10.0f;
     public float SlowFallGravity = 7.0f;
     public float MaxSpeed;
+    public float AccelerationMaxSpeed;
     public float AirResistance;
     public float FastFallBoost;
     public float HardLandVelocityMin;
@@ -13,10 +14,26 @@ public class AirState : State
     public bool Jumped;
     private bool fastFalling;
     internal float JumpBoost;
+    public float PerfectLandingFactor;
+    public float PerfectLandingMinSpeed;
+    public float PerfectLandingMinFallSpeed;
+    public float PerfectLandingMinAirTime;
+
+    public float Acceleration;
+
+    public GroundState Ground;
+
+    public bool DoubleJumpPower;
+
+    private bool canJump;
+
+    public float EnterTime;
 
     public override void Enter()
     {
+        EnterTime = Time.time;
         fastFalling = false;
+        canJump = Jumped && DoubleJumpPower;
     }
 
     public override void Tick()
@@ -34,10 +51,25 @@ public class AirState : State
         }
         Owner.Velocity += Vector2.down * gravity * Time.deltaTime;
 
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        Vector2 veloDelta = input * Acceleration * Time.deltaTime;
+        float d = Vector2.Dot(veloDelta.normalized, Owner.Velocity.normalized);
+        if(d >= 0)
+        {
+            if((Owner.Velocity + veloDelta).magnitude < AccelerationMaxSpeed)
+            {
+                Owner.Velocity += veloDelta;
+            }
+        }
+        else
+        {
+            Owner.Velocity += veloDelta;
+        }
+
         // Air Resistance
         if (Owner.Velocity.magnitude < MaxSpeed)
         {
-            // Owner.Velocity += input * Acceleration * Time.deltaTime;
+            
         }
         else
         {
@@ -54,15 +86,14 @@ public class AirState : State
             Owner.Velocity += Vector2.down * FastFallBoost;
         }
 
-        CheckGround();
-    }
-
-    public void CheckGround()
-    {
-        HitData grounded = Owner.GroundCheck(GroundCheckDistance);
-        if (grounded.Hit && Owner.Velocity.y < 0.0f)
+        if(canJump && !fastFalling)
         {
-            Owner.TransitionTo(GetComponent<GroundState>());
+            if (Input.GetButtonDown("Jump") && Owner.Velocity.y < Ground.MaxJumpBoost)
+            {
+                float jumpSpeed = Mathf.Min(Mathf.Max(Owner.Velocity.y, 0) + JumpBoost, Ground.MaxJumpBoost);
+                Owner.Velocity.y = jumpSpeed;
+                canJump = false;
+            }
         }
     }
 }
