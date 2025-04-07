@@ -24,6 +24,16 @@ public class GameLoop : MonoBehaviour
 
     private int respawns = 0;
     private bool runTimer = false;
+
+    public enum MedalType
+    {
+        None,
+        Bronze,
+        Silver,
+        Gold,
+        Author,
+    }
+
     private void TeleportToStartInitial()
     {
         StartCoroutine(Coroutine());
@@ -32,7 +42,6 @@ public class GameLoop : MonoBehaviour
         {
             Player.enabled = false;
             Player.Anim.gameObject.SetActive(false);
-            GameUi.FadeOut();
             Player.transform.position = Level.StartPosition;
             Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
             yield return new WaitForSeconds(1.5f);
@@ -118,6 +127,7 @@ public class GameLoop : MonoBehaviour
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
+            GameUi.FadeOut();
             TeleportToStartInitial();
 
             bool countdownDone = false;
@@ -148,13 +158,39 @@ public class GameLoop : MonoBehaviour
 
             bool doRetry = false;
             System.Action retry = () => { doRetry = true;  };
-            GameUi.CompleteLevel(retry);
+
+            MedalType medal = MedalType.None;
+            float nextMeddalTime = CurrentGoodSeed.Bronze;
+            if(Timer <= CurrentGoodSeed.Author)
+            {
+                medal = MedalType.Author;
+                nextMeddalTime = -1;
+            }
+            else if (Timer <= CurrentGoodSeed.Gold)
+            {
+                medal = MedalType.Gold;
+                nextMeddalTime = -1;
+            }
+            else if (Timer <= CurrentGoodSeed.Silver)
+            {
+                medal = MedalType.Silver;
+                nextMeddalTime = CurrentGoodSeed.Gold;
+            }
+            if (Timer <= CurrentGoodSeed.Bronze)
+            {
+                medal = MedalType.Bronze;
+                nextMeddalTime = CurrentGoodSeed.Silver;
+            }
+
+            GameUi.CompleteLevel(retry, Timer, nextMeddalTime, medal);
             while (!doRetry)
             {
                 yield return null;
             }
 
             ending = false;
+            GameUi.FadeIn();
+            yield return new WaitForSeconds(0.5f);
             StartLevel();
         }
     }
@@ -172,7 +208,8 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
-           Respawn();
+            // EndLevel();
+            Respawn();
         }
     }
 
