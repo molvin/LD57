@@ -8,6 +8,8 @@ public class MenuAudioController : MonoBehaviour
 
     public AudioClip button_hover;
     public AudioClip swoosh;
+    public AudioClip bulbsmash;
+
 
     void Start()
     {
@@ -26,6 +28,11 @@ public class MenuAudioController : MonoBehaviour
     public void playButtonSwosh()
     {
         source.PlayOneShot(swoosh);
+    }
+
+    public void playBulbsmash()
+    {
+        source.PlayOneShot(bulbsmash);
     }
 
 }
