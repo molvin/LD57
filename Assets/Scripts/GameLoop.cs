@@ -11,6 +11,7 @@ public class GameLoop : MonoBehaviour
     public static LevelGenerator Level => instance.generator;
 
     public Player playerPrefab;
+    public GameUiController GameUi;
     private Player player;
     private LevelGenerator generator;
 
@@ -36,20 +37,36 @@ public class GameLoop : MonoBehaviour
 
     private void StartLevel()
     {
-        if (player != null)
+        
+
+        IEnumerator Coroutine()
         {
-            Destroy(player);
+            if (player != null)
+            {
+                Destroy(player);
+            }
+            player = Instantiate(playerPrefab);
+            player.TransitionTo(player.GetComponent<IdleState>());
+            generator.GenerateGraph();
+            PlayerPrefs.SetInt("seed", generator.Seed);
+            player.GrantedItems = 0;
+            player.GetComponent<GroundState>().HasSlidePower = false;
+            player.GetComponent<AirState>().DoubleJumpPower = false;
+            TeleportToStart();
+
+            bool countdownDone = false;
+            System.Action go = () => { countdownDone = true;  };
+            GameUi.StartCountdown(go);
+
+            while(!countdownDone)
+            {
+                yield return null;
+            }
+
+            player.TransitionTo(player.GetComponent<AirState>());
         }
-        player = Instantiate(playerPrefab);
 
-        generator.GenerateGraph();
-        PlayerPrefs.SetInt("seed", generator.Seed);
 
-        player.GrantedItems = 0;
-        player.GetComponent<GroundState>().HasSlidePower = false;
-        player.GetComponent<AirState>().DoubleJumpPower = false;
-
-        TeleportToStart();
     }
 
     private void EndLevel()

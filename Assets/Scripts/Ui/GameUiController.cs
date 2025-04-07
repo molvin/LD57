@@ -175,7 +175,7 @@ public class GameUiController : MonoBehaviour
     {
 
         _state.Update(Time.deltaTime);
-        _state.HandelInput();
+        // _state.HandelInput();
     }
    
 

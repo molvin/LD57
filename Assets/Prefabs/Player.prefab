@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 4778927470258749633}
   - component: {fileID: 8498141193777425764}
   - component: {fileID: 328276088282421154}
+  - component: {fileID: -2797690009766322555}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -547,6 +548,18 @@ MonoBehaviour:
   jump_left: {fileID: 2100000, guid: 827c58fc30dd7e947aedb4eb2badebaf, type: 2}
   bonkParticle: {fileID: 3325480506809306635}
   bonkedParticle: {fileID: 5951959977839360601}
+--- !u!114 &-2797690009766322555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939691093548209201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8fef0eef880e84cad555f5e19248cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &938543931204190371
 PrefabInstance:
   m_ObjectHideFlags: 0
