@@ -2165,15 +2165,15 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.5833333
-    functionName: playBulbsmash
-    data: 
+    functionName: SetStartGameButtonText
+    data: s
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 2.5833333
-    functionName: SetStartGameButtonText
-    data: s
+    functionName: playBulbsmash
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -2213,8 +2213,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 3.2666667
+    functionName: playlets
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 3.7333333
     functionName: SetStartGameButtonText
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4
+    functionName: playgo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

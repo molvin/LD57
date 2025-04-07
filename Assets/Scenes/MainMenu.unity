@@ -2969,6 +2969,8 @@ MonoBehaviour:
   button_hover: {fileID: 8300000, guid: 6066544cab5696b46b0960d5bad9a91c, type: 3}
   swoosh: {fileID: 8300000, guid: 87052bcd8021c01478df2408225a04cd, type: 3}
   bulbsmash: {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
+  lets: {fileID: 8300000, guid: c5576c2c7ccc7b0439580a5559e5198c, type: 3}
+  go: {fileID: 8300000, guid: 628f2ed4a65c89d40a8dfbed9e27088d, type: 3}
 --- !u!82 &1630518503
 AudioSource:
   m_ObjectHideFlags: 0
