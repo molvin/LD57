@@ -71,9 +71,11 @@ public class BonkState : State
                 }
 
                 if (Time.time - enterTime > MaxDuration)
-                    {
-                        Owner.TransitionTo(GetComponent<AirState>());
-                    }
+                {
+                    Owner.Anim.SetTrigger("Bonk-Recovery");
+                    Owner.Anim.SetTrigger("LeaveBonk");
+                    Owner.TransitionTo(GetComponent<AirState>());
+                }
                 break;
             }
             case SubState.Recovering:
