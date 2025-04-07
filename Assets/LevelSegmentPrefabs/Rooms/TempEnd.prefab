@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4825256749409596586}
   - component: {fileID: 5653099424738653354}
   - component: {fileID: 3324472363640856326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,8 +100,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: -14.283787, y: -12.961343, z: 0}
-    m_Extent: {x: 23.911285, y: 10.9675, z: 0}
+    m_Center: {x: -14.283749, y: -12.961343, z: 0}
+    m_Extent: {x: 23.911243, y: 10.9675, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &5653099424738653354
 MonoBehaviour:
@@ -213,8 +213,8 @@ MonoBehaviour:
   m_ColliderSegment:
   - {x: 9.627496, y: -7.9288425}
   - {x: 9.627496, y: -23.928843}
-  - {x: -36.954296, y: -22.948175}
-  - {x: -37.791756, y: -22.622}
+  - {x: -36.95424, y: -22.948175}
+  - {x: -37.79175, y: -22.621984}
   - {x: -32.93518, y: -4.1670074}
   - {x: -32.87327, y: -3.9292674}
   - {x: -32.5802, y: -4.4428215}
@@ -314,8 +314,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 9.627496, y: -7.9288425}
       - {x: 9.627496, y: -23.928843}
-      - {x: -36.954296, y: -22.948175}
-      - {x: -37.791756, y: -22.622}
+      - {x: -36.95424, y: -22.948175}
+      - {x: -37.79175, y: -22.621984}
       - {x: -32.93518, y: -4.1670074}
       - {x: -32.87327, y: -3.9292674}
       - {x: -32.5802, y: -4.4428215}
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 532876743629364691}
   - component: {fileID: 3548455113229388908}
   - component: {fileID: 4909692623096732759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +799,7 @@ MonoBehaviour:
   RoomTypes: 0
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   SpawnSlot: {fileID: 0}
   Prefab: {fileID: 0}
 --- !u!1 &6982158663790643471

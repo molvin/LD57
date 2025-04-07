@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Perf_slide
+  m_Name: Jump_mat_rev
   m_Shader: {fileID: -6465566751694194690, guid: 3a5b7d9d4779f1a4a9e406c35523c4a4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParticleShape:
-        m_Texture: {fileID: 2800000, guid: 1bd4c15f4a8b45d42ad5281f8369f3ed, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d7e9d8262475ef43bd3ad5252dd7d4e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -119,7 +119,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: 0
+    - _Intensity: -1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

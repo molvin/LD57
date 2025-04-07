@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class MainMenu : MonoBehaviour
 
     public void ActuallyStartGame()
     {
-        //TODO PÄÄÄÄR
+        SceneManager.LoadScene(1);
     }
 
     public void ExitGame()
@@ -35,7 +36,11 @@ public class MainMenu : MonoBehaviour
 
     public void ActuallyExitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     public void SetStartGameButtonText(string text)

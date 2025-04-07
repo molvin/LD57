@@ -23,6 +23,9 @@ public class LevelGenerator : MonoBehaviour
     private LevelSegment root;
     public bool debugMode = false;
 
+    List<Transform> parents = new();
+
+
     private void Awake()
     {
         LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
@@ -40,10 +43,15 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateGraph()
     {
-        DestroyPath(root);
         for(int i = 0; i < 100; i++)
         {
             Debug.Log($"Building with seed {Seed}");
+
+            foreach (Transform parent in parents)
+            {
+                DestroyImmediate(parent.gameObject);
+            }
+            parents.Clear();
 
             bool success = GenerateLevel(Seed);
             if(success)
@@ -133,12 +141,12 @@ public class LevelGenerator : MonoBehaviour
                         Start = exit,
                         MustPlaceSplitter = availableLeafs < TargetLeafAmount
                     };
-
-                    LevelSegment end = GeneratePath(state);
+                    Transform parent = new GameObject("Path").transform;
+                    LevelSegment end = GeneratePath(state, parent);
                     if (end == null)
                     {
                         success = false;
-                        DestroyPath(exit);
+                        DestroyImmediate(parent.gameObject);
                         Physics2D.SyncTransforms();
                         attempts += 1;
                     }
@@ -146,6 +154,7 @@ public class LevelGenerator : MonoBehaviour
                     {
                         success = true;
                         roots.Enqueue(end);
+                        parents.Add(parent);
 
                         if(end.Exits.Length > 1)
                         {
@@ -166,7 +175,7 @@ public class LevelGenerator : MonoBehaviour
         return true;
     }
 
-    private LevelSegment GeneratePath(GenerationState state)
+    private LevelSegment GeneratePath(GenerationState state, Transform parent)
     {
         bool isEnd = false;
         Queue<Door> pending = new();
@@ -201,7 +210,7 @@ public class LevelGenerator : MonoBehaviour
                 Vector3 offset = next.transform.position - next.Entrance.transform.position;
                 Vector3 targetPos = exit.transform.position + offset;
 
-                spawned = Instantiate(next, exit.transform);
+                spawned = Instantiate(next, parent);
                 spawned.transform.position = targetPos;
 
                 Physics2D.SyncTransforms();
@@ -241,24 +250,5 @@ public class LevelGenerator : MonoBehaviour
         // Should never happen
         Debug.Log("Failed to generate path unexpectedly");
         return null;
-    }
-
-    private void DestroyPath(Door start)
-    {
-        foreach (Transform child in start.transform)
-        {
-            LevelSegment segment = child.GetComponentInChildren<LevelSegment>();
-            if(segment != null)
-            {
-                DestroyImmediate(segment.gameObject);
-            }
-        }
-    }
-    private void DestroyPath(LevelSegment start)
-    {
-        foreach (Door exit in start.Exits)
-        {
-            DestroyPath(exit);
-        }
     }
 }
