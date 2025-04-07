@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,7 +8,7 @@ using Random = UnityEngine.Random;
 public class AudioManager : MonoBehaviour
 {
     private Queue<AudioSource> m_PooledAudio = new Queue<AudioSource>();
-
+    private Dictionary<AudioEventData, List<int>> m_AvailabeIndexes = new Dictionary<AudioEventData, List<int>>();
     private static AudioSource GetAudioSource {
         get { 
             if(Instance.m_PooledAudio.Count > 0)
@@ -72,7 +73,35 @@ public class AudioManager : MonoBehaviour
         if (audioSource == null || audioEvent.m_Clips.Count == 0)
             return;
 
-        audioSource.clip = audioEvent.m_Clips[Random.Range(0, audioEvent.m_Clips.Count)];
+        AudioClip clip = null;
+        if(audioEvent.m_Clips.Count == 1)
+        {
+            clip = audioEvent.m_Clips[0];
+        }
+        else
+        {
+            if (!m_AvailabeIndexes.ContainsKey(audioEvent))
+            {
+                var clips = new List<int>(audioEvent.m_Clips.Count);
+                for (int i = 0; i < audioEvent.m_Clips.Count; i++)
+                    clips.Add(i);
+
+                clips.OrderBy(x => Random.value);
+                clip = audioEvent.m_Clips[clips[0]];
+                clips.RemoveAt(0);
+                m_AvailabeIndexes[audioEvent] = clips;
+            }
+            else
+            {
+                var clips = m_AvailabeIndexes[audioEvent];
+                clip = audioEvent.m_Clips[clips[0]];
+                clips.RemoveAt(0);
+                if(clips.Count == 0)
+                    m_AvailabeIndexes.Remove(audioEvent);
+            }
+        }
+
+        audioSource.clip = clip;
         audioSource.pitch = 1 + Random.Range(-audioEvent.m_PitchRange, audioEvent.m_PitchRange);
         audioSource.volume = audioEvent.m_Volume + Random.Range(-audioEvent.m_AmplitudeRange, audioEvent.m_AmplitudeRange);
         audioSource.loop = audioEvent.m_IsLooping;
