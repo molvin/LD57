@@ -94,8 +94,7 @@ public class GroundState : State
             Owner.Velocity.y = jumpSpeed;
             Air.JumpBoost = JumpBoost;
             Air.Jumped = true;
-            Air.Enter();
-            Owner.CurrentState = Air;
+            Owner.TransitionTo(Air);
             return true;
         }
         return false;

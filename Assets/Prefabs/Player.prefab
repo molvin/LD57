@@ -410,6 +410,7 @@ MonoBehaviour:
   GroundCheckDistance: 0.2
   PerfectLanding: 0
   PerfectLandingBoost: 4
+  HasSlidePower: 0
   particleController: {fileID: 328276088282421154}
 --- !u!114 &2943016116726350535
 MonoBehaviour:
@@ -445,7 +446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Owner: {fileID: 2515709973946877244}
   Friction: 3
-  GroundCheckDistance: 0.2
+  Gravity: 16
+  GroundCheckDistance: 0.5
   Air: {fileID: 3481498922970582336}
   Ground: {fileID: 8309590663219349725}
 --- !u!114 &8498141193777425764
