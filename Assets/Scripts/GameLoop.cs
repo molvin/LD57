@@ -16,6 +16,12 @@ public class GameLoop : MonoBehaviour
     private Player player;
     private LevelGenerator generator;
 
+    public int MaxRespawns = 3;
+    public float Timer = 0.0f;
+
+    private int respawns = 0;
+    private bool runTimer = false;
+
     private void TeleportToStart()
     {
         Player.transform.position = Level.StartPosition;
@@ -38,6 +44,10 @@ public class GameLoop : MonoBehaviour
 
     private void StartLevel()
     {
+        respawns = 0;
+        runTimer = false;
+        Timer = 0.0f;
+
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
         {
@@ -61,6 +71,8 @@ public class GameLoop : MonoBehaviour
             {
                 yield return null;
             }
+
+            runTimer = true;
 
             player.TransitionTo(player.GetComponent<AirState>());
         }
@@ -90,14 +102,33 @@ public class GameLoop : MonoBehaviour
     {
         instance = this;
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if(runTimer)
         {
+            Timer += Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Respawn"))
+        {
+            Respawn();
+        }
+    }
+
+    public void Respawn()
+    {
+        if(respawns < MaxRespawns)
+        {
+            Timer = 0.0f;
+            respawns += 1;
+            player.CurrentAbilities.Clear();
+            AbilitiesUi.ClearAbilities();
+
             TeleportToStart();
         }
-        if(Input.GetKeyDown(KeyCode.P))
+        else
         {
             StartLevel();
         }
+        
     }
 
     public static void PickupItem(Abilities? itemType, Vector3 pos)
