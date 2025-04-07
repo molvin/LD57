@@ -4,7 +4,7 @@ using UnityEngine;
 public class KeyItemPickup : MonoBehaviour
 {
     public float PickupRange = 1.0f;
-    public Abilities ItemType;
+    public Abilities? ItemType = null;
 
     private Vector2 worldPosition;
 

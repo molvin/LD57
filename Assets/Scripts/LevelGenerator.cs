@@ -98,7 +98,7 @@ public class LevelGenerator : MonoBehaviour
         public bool MustPlaceSplitter = false;
         public float EndProbability = 0.0f;
         public float SplitterProbability = 0.0f;
-        public Abilities Ability;
+        public Abilities? Ability;
 
         public float ChallengeProbability = 0.0f;
         public bool MustPlaceChallenge = false;
@@ -188,7 +188,7 @@ public class LevelGenerator : MonoBehaviour
                     Start = exit,
                     MustPlaceSplitter = availableLeafs < TargetLeafAmount,
                     MustPlaceChallenge = abilityForChallenge != null,
-                    Ability = abilityForChallenge ?? allAbilities[Mathf.Min(nextAbility, allAbilities.Count - 1)],
+                    Ability = abilityForChallenge ?? (nextAbility < 2 ? allAbilities[Mathf.Min(nextAbility, allAbilities.Count - 1)] : null),
                 };
                 Transform parent = new GameObject($"Path: Split: {state.MustPlaceSplitter}, Challenge: {state.MustPlaceChallenge}, Ability: {state.Ability}").transform;
                 LevelSegment end = GeneratePath(state, parent);
@@ -264,7 +264,7 @@ public class LevelGenerator : MonoBehaviour
                 else if(state.ShouldPlaceChallenge())
                 {
                     isChallenge = true;
-                    validSegments = ChallengeSegments[state.Ability];
+                    validSegments = ChallengeSegments[state.Ability.Value];
                 }
                 if(state.LastPlaced != null)
                 {

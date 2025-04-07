@@ -49,7 +49,6 @@ public class GameLoop : MonoBehaviour
             player.TransitionTo(player.GetComponent<IdleState>());
             generator.GenerateGraph();
             PlayerPrefs.SetInt("seed", generator.Seed);
-            player.GrantedItems = 0;
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
             TeleportToStart();
@@ -101,26 +100,23 @@ public class GameLoop : MonoBehaviour
         }
     }
 
-    public static void PickupItem(Abilities itemType, Vector3 pos)
+    public static void PickupItem(Abilities? itemType, Vector3 pos)
     {
-        // Player.GrantedItems |= 1 << (int)itemType;
-        Player.GrantedItems += 1;
-        // if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
-
-        Player.CurrentAbilities.Add(itemType);
-        instance.StartCoroutine(Coroutine());
-        IEnumerator Coroutine()
+        if (itemType != null)
         {
-            if (Player.GrantedItems == 3)
-            {
-                instance.EndLevel();
-            }
-            else
+            Player.CurrentAbilities.Add(itemType.Value);
+            instance.StartCoroutine(Coroutine());
+            IEnumerator Coroutine()
             {
                 instance.AbilitiesUi.AddAbility(pos, itemType.ToString());
                 yield return new WaitForSeconds(2.0f);
                 instance.TeleportToStart();
             }
         }
+        else
+        {
+            instance.EndLevel();
+        }
+
     }
 }

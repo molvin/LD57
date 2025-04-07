@@ -5,18 +5,19 @@ public class SlideState : State
     public float Friction;
     public float Gravity;
     public float GroundCheckDistance = 0.2f;
+    public float PushForce;
     public AirState Air;
     public GroundState Ground;
-
-
 
     public override void Enter()
     {
         Owner.particleController.startSlide();
+        Owner.UseSmallCollider = true;
     }
 
     public override void Exit()
     {
+        Owner.UseSmallCollider = false;
         Owner.particleController.stopSlide();
     }
 
