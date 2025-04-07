@@ -7,17 +7,21 @@ public class SlideState : State
     public float GroundCheckDistance = 0.2f;
     public AirState Air;
     public GroundState Ground;
+    public AudioEventData LoopingSound;
 
-
+    private AudioSource LoopingAudioSource;
 
     public override void Enter()
     {
         Owner.particleController.startSlide();
+        LoopingAudioSource = LoopingSound.Play();
     }
 
     public override void Exit()
     {
         Owner.particleController.stopSlide();
+        if (LoopingAudioSource != null)
+            LoopingSound.Stop(LoopingAudioSource);
     }
 
     public override void Tick()
