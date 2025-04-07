@@ -10,6 +10,7 @@ public class GameLoop : MonoBehaviour
     public static Player Player => instance.player;
     public static LevelGenerator Level => instance.generator;
 
+    public Player playerPrefab;
     private Player player;
     private LevelGenerator generator;
 
@@ -17,15 +18,12 @@ public class GameLoop : MonoBehaviour
     {
         Player.transform.position = Level.StartPosition;
         Player.Velocity = Vector2.zero;
-        Player.TransitionTo(Player.GetComponent<AirState>());
     }
 
     private void Awake()
     {
-        Assert.IsNull(instance);
         instance = this;
 
-        player = FindFirstObjectByType<Player>();
         generator = FindAnyObjectByType<LevelGenerator>();
         generator.Seed = PlayerPrefs.GetInt("seed", 0);
         generator.debugMode = false;
@@ -38,6 +36,12 @@ public class GameLoop : MonoBehaviour
 
     private void StartLevel()
     {
+        if (player != null)
+        {
+            Destroy(player);
+        }
+        player = Instantiate(playerPrefab);
+
         generator.GenerateGraph();
         PlayerPrefs.SetInt("seed", generator.Seed);
 
@@ -63,7 +67,9 @@ public class GameLoop : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        instance = this;
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
             TeleportToStart();
         }

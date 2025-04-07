@@ -176,8 +176,6 @@ public class GameUiController : MonoBehaviour
 
         _state.Update(Time.deltaTime);
         _state.HandelInput();
-     
-
     }
    
 
@@ -191,14 +189,14 @@ public class GameUiController : MonoBehaviour
 
     public void Reset()
     {
+        // This happens when we click retry
         Change(new CountDown());
-
     }
 
     public void BackToMenu()
     {
+        // Back to manager
         SceneManager.LoadScene(0);  
-
     }
 
     public IEnumerator SetStateAfter(float wait_time, UIState new_state)
@@ -230,4 +228,25 @@ public class GameUiController : MonoBehaviour
 
     }
 
+
+    public void StartCountdown(System.Action completed)
+    {
+        StartCoroutine(Coroutine());
+        IEnumerator Coroutine()
+        {
+            Change(new CountDown());
+
+            while (_state is CountDown)
+            {
+                yield return null;
+            }
+
+            completed();
+        }
+    }
+
+    public void CompleteLevel()
+    {
+
+    }
 }
