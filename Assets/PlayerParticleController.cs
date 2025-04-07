@@ -18,7 +18,9 @@ public class PlayerParticleController : MonoBehaviour
     public ParticleSystem bonkedParticle;
 
     public ParticleSystem teleportIn;
+    public AudioEventData teleportInSfx;
     public TeleportOutParticleController teleportOut;
+    public AudioEventData teleportOutSfx;
 
     void Start()
     {
@@ -27,10 +29,12 @@ public class PlayerParticleController : MonoBehaviour
     public void PlayTeleportIn()
     {
         teleportIn.Play();
+        teleportInSfx.Play();
     }
     public void PlayTeleportout(Vector3 velocity, State state)
     {
         teleportOut.Play(velocity, state);
+        teleportOutSfx.Play();
     }
 
     public void PlayPerfectParticle(Vector3 velocity)
