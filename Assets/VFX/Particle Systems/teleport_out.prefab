@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3030488674609729788}
   - component: {fileID: 7387699726116784055}
   - component: {fileID: 256138690204958389}
+  - component: {fileID: 3177384324493388554}
   m_Layer: 0
   m_Name: teleport_out
   m_TagString: Untagged
@@ -4900,3 +4901,20 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3177384324493388554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737725968969339284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3e4adaf71239a4d8002ac29c1bf01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jump: {fileID: 2100000, guid: fa80727f84eec914d952d1d137f2a2c5, type: 2}
+  jump_rev: {fileID: 2100000, guid: 827c58fc30dd7e947aedb4eb2badebaf, type: 2}
+  jump_f: {fileID: 2100000, guid: fa80727f84eec914d952d1d137f2a2c5, type: 2}
+  jump_f_rev: {fileID: 2100000, guid: d1fc678cea35c5347b35773442ba17d6, type: 2}
+  idle: {fileID: 2100000, guid: 34119e2c8e09d3a44aa3f6b9625c8ef9, type: 2}
