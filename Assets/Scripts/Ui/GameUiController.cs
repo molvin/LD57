@@ -15,6 +15,7 @@ public class GameUiController : MonoBehaviour
     public Button returnToMenuButton;
     private AudioSource source;
 
+    public Animator FadeAnim;
 
     private int state = 0;
 
@@ -35,7 +36,17 @@ public class GameUiController : MonoBehaviour
 
 
     }
-    
+
+
+    public void FadeOut() {
+        FadeAnim.SetTrigger("FadeOut");
+    }
+
+    public void FadeIn()
+    {
+        FadeAnim.SetTrigger("FadeIn");
+    }
+
     public void playSound(AudioClip clip)
     {
         source.PlayOneShot(clip);

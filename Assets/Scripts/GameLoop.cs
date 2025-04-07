@@ -20,6 +20,9 @@ public class GameLoop : MonoBehaviour
     public int MaxRespawns = 3;
     public float Timer = 0.0f;
 
+    public GoodSeeds Seeds;
+    public bool UseGoodSeeds;
+
     private int respawns = 0;
     private bool runTimer = false;
 
@@ -39,20 +42,20 @@ public class GameLoop : MonoBehaviour
         {
             Player.enabled = false;
             Player.Anim.gameObject.SetActive(false);
+            GameUi.FadeOut();
             Player.transform.position = Level.StartPosition;
             Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
             yield return new WaitForSeconds(1.5f);
             Player.enabled = true;
             Player.Anim.gameObject.SetActive(true);
         }
-
-
     }
 
     private bool disallowRespawn = false;
     private bool ending = false;
+    public GoodSeed CurrentGoodSeed;
 
-    private void TeleportToStart()
+    private void TeleportToStart(bool resetTimer)
     {
         //Player.transform.position = Level.StartPosition;
         StartCoroutine(Coroutine());
@@ -60,6 +63,7 @@ public class GameLoop : MonoBehaviour
         IEnumerator Coroutine()
         {
             //play teleport out anim
+            runTimer = false;
 
             float speed = Vector3.Distance(Player.transform.position, Level.StartPosition);
             Player.enabled = false;
@@ -80,7 +84,11 @@ public class GameLoop : MonoBehaviour
             Player.enabled = true;
             Player.Anim.enabled = true;
             Player.Anim.gameObject.SetActive(true);
-            Timer = 0.0f;
+            if(resetTimer)
+            {
+                Timer = 0.0f;
+            }
+            runTimer = true;
             //play teleport in anim
             yield return null;
         }
@@ -115,7 +123,8 @@ public class GameLoop : MonoBehaviour
             }
             player = Instantiate(playerPrefab);
             player.TransitionTo(player.GetComponent<IdleState>());
-            generator.GenerateGraph();
+            CurrentGoodSeed = Seeds.GetRandom();
+            generator.GenerateGraph(CurrentGoodSeed.Seed);
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
@@ -173,7 +182,7 @@ public class GameLoop : MonoBehaviour
             Timer += Time.deltaTime;
         }
 
-        RespawnsRemaining.text = $"Remaining Respawns: {MaxRespawns - respawns}";
+        RespawnsRemaining.text = $"Retries: {respawns}\nPress R to Retry";
 
         if (Input.GetButtonDown("Respawn"))
         {
@@ -194,7 +203,7 @@ public class GameLoop : MonoBehaviour
             respawns += 1;
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
-            TeleportToStart();
+            TeleportToStart(true);
         }
         else
         {
@@ -213,7 +222,7 @@ public class GameLoop : MonoBehaviour
                 instance.disallowRespawn = true;
                 instance.AbilitiesUi.AddAbility(pos, itemType.ToString());
                 yield return new WaitForSeconds(2.0f);
-                instance.TeleportToStart();
+                instance.TeleportToStart(false);
                 instance.disallowRespawn = false;
 
             }
