@@ -1,15 +1,10 @@
 using UnityEngine;
 
-public enum KeyItemType
-{
-    Item1,
-    Item2
-}
 
 public class KeyItemPickup : MonoBehaviour
 {
     public float PickupRange = 1.0f;
-    public KeyItemType ItemType;
+    public Abilities ItemType;
 
     private Vector2 worldPosition;
 
