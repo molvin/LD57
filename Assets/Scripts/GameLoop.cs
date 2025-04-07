@@ -5,17 +5,17 @@ public class GameLoop : MonoBehaviour
 {
     public static GameLoop instance;
 
-    public static PlayerController Player => instance.player;
+    public static Player Player => instance.player;
     public static LevelGenerator Level => instance.generator;
 
-    public PlayerController playerPrefab;
-    private PlayerController player;
+    public Player playerPrefab;
+    private Player player;
     private LevelGenerator generator;
 
     private void TeleportToStart()
     {
         Player.transform.position = Level.StartPosition;
-        Player.velocity = Vector2.zero;
+        Player.Velocity = Vector2.zero;
     }
 
     private void Awake()
