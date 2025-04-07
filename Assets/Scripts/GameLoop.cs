@@ -30,7 +30,6 @@ public class GameLoop : MonoBehaviour
         {
             Player.enabled = false;
             Player.Anim.gameObject.SetActive(false);
-            GameUi.FadeOut();
             Player.transform.position = Level.StartPosition;
             Player.GetComponent<PlayerParticleController>().PlayTeleportIn();
             yield return new WaitForSeconds(1.5f);
@@ -111,6 +110,7 @@ public class GameLoop : MonoBehaviour
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
+            GameUi.FadeOut();
             TeleportToStartInitial();
 
             bool countdownDone = false;
@@ -148,6 +148,8 @@ public class GameLoop : MonoBehaviour
             }
 
             ending = false;
+            GameUi.FadeIn();
+            yield return new WaitForSeconds(0.5f);
             StartLevel();
         }
     }
@@ -165,7 +167,8 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
-           Respawn();
+            // EndLevel();
+            Respawn();
         }
     }
 
