@@ -79,9 +79,9 @@ public class GameUiController : MonoBehaviour
         public void HandleInput() { }
         public void Enter(GameUiController parent) {
             _parent = parent;
-      
 
-            parent.StartCoroutine(parent.SetTriggerAfterTime(parent.countDownAnimator, 0, "start_countdown"));
+            parent.countDownAnimator.SetTrigger("start_countdown");
+            //parent.StartCoroutine(parent.SetTriggerAfterTime(, 0, "start_countdown"));
     
             parent.StartCoroutine(parent.SetStateAfter(4, new Playing()));
 
@@ -246,7 +246,7 @@ public class GameUiController : MonoBehaviour
             {
                 yield return null;
             }
-
+            retryPressed = false;
             retry();
         }
     }
