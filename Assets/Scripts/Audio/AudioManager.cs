@@ -55,6 +55,25 @@ public class AudioManager : MonoBehaviour
         return audioSource;
     }
 
+    public static void StopAudio(AudioSource audioSource, AudioEventData audioData)
+    {
+        Instance.FadeOut(audioSource, audioData.m_FadeInAndOutTime);
+    }
+    async void FadeOut(AudioSource audioSource, float fadeTime)
+    {
+        float startVolume = audioSource.volume;
+        float timer = fadeTime;
+        while(audioSource != null && timer > 0)
+        {
+            timer -= Time.deltaTime;
+            audioSource.volume = startVolume * (timer / fadeTime);
+
+            await Task.Yield();
+        }
+
+        if (audioSource != null) 
+            audioSource.Stop();
+    }
     public static AudioSource PlayAudio(AudioClip clip, Transform attachPoint = null)
     {
         AudioSource audioSource = null;
@@ -63,7 +82,7 @@ public class AudioManager : MonoBehaviour
 
         audioSource.clip = clip;
         audioSource.Play();
-        Instance.WaitForCompletion(audioSource, (x) => { x.transform.parent = null; Instance.m_PooledAudio.Enqueue(x); });
+        Instance.WaitForCompletion(audioSource, -1, (x) => { x.transform.parent = null; Instance.m_PooledAudio.Enqueue(x); });
 
         return audioSource;
     }
@@ -86,7 +105,7 @@ public class AudioManager : MonoBehaviour
                 for (int i = 0; i < audioEvent.m_Clips.Count; i++)
                     clips.Add(i);
 
-                clips.OrderBy(x => Random.value);
+                clips = clips.OrderBy(x => Random.value).ToList();
                 clip = audioEvent.m_Clips[clips[0]];
                 clips.RemoveAt(0);
                 m_AvailabeIndexes[audioEvent] = clips;
@@ -118,17 +137,37 @@ public class AudioManager : MonoBehaviour
             if(audioEvent.m_DontDestroyOnLoad)
                 DontDestroyOnLoad(audioSource);
         }
-        audioSource.Play();
-        WaitForCompletion(audioSource, (x) => { x.transform.parent = null; m_PooledAudio.Enqueue(x); x.gameObject.SetActive(false);});
+
+
+        WaitForCompletion(audioSource, audioEvent.m_FadeInAndOutTime, (x) => { x.transform.parent = null; m_PooledAudio.Enqueue(x); x.gameObject.SetActive(false);});
     }
 
-    async void WaitForCompletion(AudioSource audioSource, Action<AudioSource> onStop)
+    async void WaitForCompletion(AudioSource audioSource, float fadeInOutTime ,Action<AudioSource> onStop)
     {
-        while(audioSource != null && audioSource.isPlaying)
+        bool doesFade = fadeInOutTime > 0;
+        float targetVolume = audioSource.volume;
+        float lerpValue = doesFade ? 0 : 1;
+        float timer = 0;
+        if (doesFade)
+            audioSource.volume = 0;
+
+        audioSource.Play();
+        
+        while (audioSource != null && audioSource.isPlaying)
         {
+            if(doesFade && timer <= fadeInOutTime)
+            {
+                timer += Time.time;
+                lerpValue = timer / fadeInOutTime;
+
+                audioSource.volume = lerpValue * targetVolume;
+            }
+
+
             await Task.Yield();
         }
-        if(audioSource != null)
+
+        if (audioSource != null)
             onStop?.Invoke(audioSource);
     }
 

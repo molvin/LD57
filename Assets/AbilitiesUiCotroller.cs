@@ -47,16 +47,19 @@ public class AbilitiesUiCotroller : MonoBehaviour
             yield return null;
         }
         elapsedTime = 0;
+        TextMeshProUGUI instance = GameObject.Instantiate(abilityPrefab, abilityLayoutGroup.transform);
+        instance.text = "";
         while (elapsedTime < expandTime)
         {
-            ghost.transform.position = Vector3.Lerp(startPos, abilityLayoutGroup.transform.position, moveCurve.Evaluate(elapsedTime / expandTime));
+            ghost.transform.position = Vector3.Lerp(startPos, instance.transform.position, moveCurve.Evaluate(elapsedTime / expandTime));
+            ghost.fontSize = Mathf.Lerp(32, 22, (elapsedTime / expandTime));
+
             elapsedTime += Time.deltaTime;
 
             // Yield here
             yield return null;
         }
         ghost.gameObject.SetActive(false);
-        TextMeshProUGUI instance = GameObject.Instantiate(abilityPrefab, abilityLayoutGroup.transform);
         instance.text = ghost.text;
         ghost.fontSize = 22;
 

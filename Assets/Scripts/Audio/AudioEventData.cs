@@ -17,8 +17,13 @@ public class AudioEventData : ScriptableObject
     public bool m_IsLooping;
     public bool m_DontDestroyOnLoad;
 
-    public void Play(Transform attachPoint = null)
+    public float m_FadeInAndOutTime = -1;
+    public void Stop(AudioSource audioSource)
     {
-        AudioManager.PlayAudio(this, attachPoint);
+        AudioManager.StopAudio(audioSource, this);
+    }
+    public AudioSource Play(Transform attachPoint = null)
+    {
+        return AudioManager.PlayAudio(this, attachPoint);
     }
 }
