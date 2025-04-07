@@ -14,7 +14,7 @@ public class GroundState : State
     public float GroundCheckDistance = 0.2f;
     public bool PerfectLanding;
     public float PerfectLandingBoost;
-    public bool HasSlidePower;
+    public bool HasSlidePower => Owner.CurrentAbilities.Contains(Abilities.Slide);
     public AudioEventData AudioEvent;
 
     public override void Enter()

@@ -23,7 +23,7 @@ public class AirState : State
 
     public GroundState Ground;
 
-    public bool DoubleJumpPower;
+    public bool HasDoubleJump => Owner.CurrentAbilities.Contains(Abilities.DoubleJump);
 
     private bool canJump;
 
@@ -33,7 +33,7 @@ public class AirState : State
     {
         EnterTime = Time.time;
         fastFalling = false;
-        canJump = Jumped && DoubleJumpPower;
+        canJump = Jumped && HasDoubleJump;
 
     }
 

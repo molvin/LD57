@@ -119,8 +119,9 @@ public class GameUiController : MonoBehaviour
 
     public void EnableRetryButton(bool enable)
     {
+        Debug.Log("Bah");
         retryButton.gameObject.SetActive(enable);
-        returnToMenuButton.gameObject.SetActive(enabled);
+        returnToMenuButton.gameObject.SetActive(enable);
     }
 
 
@@ -142,11 +143,6 @@ public class GameUiController : MonoBehaviour
         public void Exit() { }
         public void HandelInput()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _parent.Change(new LevelCompleated());
-
-            }
         }
     }
 
@@ -177,7 +173,6 @@ public class GameUiController : MonoBehaviour
     {
 
         _state.Update(Time.deltaTime);
-        // _state.HandelInput();
     }
    
 
@@ -191,11 +186,7 @@ public class GameUiController : MonoBehaviour
 
     public void Reset()
     {
-        // This happens when we click retry
-        // Change(new CountDown());
-
         retryPressed = true;
-
     }
 
     public void BackToMenu()

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -90,6 +89,7 @@ public class LevelGenerator : MonoBehaviour
         public bool MustPlaceSplitter = false;
         public float EndProbability = 0.0f;
         public float SplitterProbability = 0.0f;
+        public Abilities EndAbility;
 
         public bool ShouldEnd()
         {
@@ -133,6 +133,13 @@ public class LevelGenerator : MonoBehaviour
         Queue<LevelSegment> roots = new();
         roots.Enqueue(root);
 
+        List<Abilities> allAbilities = new();
+        foreach(Abilities ab in System.Enum.GetValues(typeof(Abilities)))
+        {
+            allAbilities.Add(ab);
+        }
+        allAbilities = allAbilities.OrderBy(x => Random.value).ToList();
+        int nextAbility = 0;
         while (roots.Count > 0)
         {
             LevelSegment start = roots.Dequeue();
@@ -144,7 +151,8 @@ public class LevelGenerator : MonoBehaviour
                     GenerationState state = new GenerationState
                     {
                         Start = exit,
-                        MustPlaceSplitter = availableLeafs < TargetLeafAmount
+                        MustPlaceSplitter = availableLeafs < TargetLeafAmount,
+                        EndAbility = allAbilities[Mathf.Min(nextAbility, allAbilities.Count - 1)],
                     };
                     Transform parent = new GameObject("Path").transform;
                     LevelSegment end = GeneratePath(state, parent);
@@ -164,6 +172,10 @@ public class LevelGenerator : MonoBehaviour
                         if(end.Exits.Length > 1)
                         {
                             availableLeafs += end.Exits.Length - 1;
+                        }
+                        else
+                        {
+                            nextAbility += 1;
                         }
                         break;
                     }
@@ -248,8 +260,7 @@ public class LevelGenerator : MonoBehaviour
             }
 
             // Evaluate the next segment
-            if (!isEnd && 
-                spawned.Exits.Length == 1)
+            if (!isEnd && spawned.Exits.Length == 1)
             {
                 state.Place(this);
                 pending.Enqueue(spawned.Exits[0]);
@@ -257,6 +268,11 @@ public class LevelGenerator : MonoBehaviour
             // We have reached a split or an end, they need to be evaluated as separate paths
             else
             {
+                if(isEnd)
+                {
+                    spawned.GetComponentInChildren<KeyItemPickup>().ItemType = state.EndAbility;
+                }
+
                 return spawned;
             }
         }
