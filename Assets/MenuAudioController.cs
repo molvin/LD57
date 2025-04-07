@@ -6,9 +6,9 @@ public class MenuAudioController : MonoBehaviour
 
     private AudioSource source;
 
-    public AudioClip button_hover;
-    public AudioClip swoosh;
-    public AudioClip bulbsmash;
+    public AudioEventData button_hover;
+    public AudioEventData swoosh;
+    public AudioEventData bulbsmash;
     public AudioClip lets;
     public AudioClip go;
 
@@ -19,37 +19,27 @@ public class MenuAudioController : MonoBehaviour
 
     }
 
-
-    void Start()
-    {
-        source = this.GetComponent<AudioSource>();
-        if (this.GetComponent<AudioSource>() == null)
-        {
-            source = this.AddComponent<AudioSource>();
-        }
-    }
-
     public void playButtonHover()
     {
-        source.PlayOneShot(button_hover);
+        AudioManager.PlayAudio(button_hover);
     }
 
     public void playButtonSwosh()
     {
-        source.PlayOneShot(swoosh);
+        AudioManager.PlayAudio(swoosh);
     }
 
     public void playBulbsmash()
     {
-        source.PlayOneShot(bulbsmash);
+        AudioManager.PlayAudio(bulbsmash);
     }
 
     public void playlets()
     {
-        source.PlayOneShot(lets);
+        AudioManager.PlayAudio(lets);
     }
     public void playgo()
     {
-        source.PlayOneShot(go);
+        AudioManager.PlayAudio(go);
     }
 }

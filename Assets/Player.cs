@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     private GroundState ground;
 
     public PlayerParticleController particleController;
-
+    public int GrantedItems = 0;
 
     private void Awake()
     {

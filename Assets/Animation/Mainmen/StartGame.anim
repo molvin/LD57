@@ -1102,12 +1102,12 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 5
+    m_StopTime: 5.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -2151,15 +2151,15 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.4166667
-    functionName: playBulbsmash
-    data: 
+    functionName: SetStartGameButtonText
+    data: st
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 2.4166667
-    functionName: SetStartGameButtonText
-    data: st
+    functionName: playBulbsmash
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -2237,6 +2237,13 @@ AnimationClip:
   - time: 4
     functionName: SetStartGameButtonText
     data: GO!
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.5
+    functionName: ActuallyStartGame
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

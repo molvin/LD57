@@ -119,6 +119,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &161875424
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 151.30777
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 44.70779
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.043721132
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820233352799964691, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804585770187903917, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939691093548209201, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 397c82c5155e32d4c9ac09493a4db21c, type: 3}
 --- !u!1 &207831891
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &207831892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,14 +379,17 @@ MonoBehaviour:
   - {fileID: 3692772593882420861, guid: 5ae9bcc6fb0a7204ea702a2d81ae76ea, type: 3}
   - {fileID: 8370458266534878204, guid: f608446e0d41b6448881db723815a7ac, type: 3}
   - {fileID: 8370458266534878204, guid: cf0985c33c7ab5a4da0114c26f8d6219, type: 3}
+  - {fileID: 3343905382387278298, guid: 02878b912b37a13429991465d5087359, type: 3}
+  - {fileID: 8989801034918991360, guid: fa756cc9d98a3a44597b33a736655e21, type: 3}
+  - {fileID: 4419501559742056962, guid: 79b73366a104f3b4280b43d91bb506f3, type: 3}
   SplitterSegments:
   - {fileID: 6618336650794968113, guid: d4c702a77329a324f9f14d196331a291, type: 3}
   GoalSegments:
   - {fileID: 996395430905241531, guid: 018ce861d25424a4a88c49441af44655, type: 3}
   - {fileID: 996395430905241531, guid: d235b7002d62e1041bfc346e8fda21ff, type: 3}
-  TargetLeafAmount: 4
-  EndProbabilityGrowthRate: 0.1
-  SplitterProbabilityGrowthRate: 0.1
+  TargetLeafAmount: 3
+  EndProbabilityGrowthRate: 0.3
+  SplitterProbabilityGrowthRate: 0.4
   RetryAttemptsPerPath: 10
   Seed: 0
   debugMode: 0
@@ -734,3 +798,4 @@ SceneRoots:
   - {fileID: 1414432580}
   - {fileID: 207831895}
   - {fileID: 1409487246}
+  - {fileID: 161875424}
