@@ -119,7 +119,6 @@ public class GameUiController : MonoBehaviour
 
     public void EnableRetryButton(bool enable)
     {
-        Debug.Log("Bah");
         retryButton.gameObject.SetActive(enable);
         returnToMenuButton.gameObject.SetActive(enable);
     }

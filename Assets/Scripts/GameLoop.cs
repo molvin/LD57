@@ -12,6 +12,7 @@ public class GameLoop : MonoBehaviour
 
     public Player playerPrefab;
     public GameUiController GameUi;
+    public AbilitiesUiCotroller AbilitiesUi;
     private Player player;
     private LevelGenerator generator;
 
@@ -42,7 +43,7 @@ public class GameLoop : MonoBehaviour
         {
             if (player != null)
             {
-                Destroy(player);
+                Destroy(player.gameObject);
             }
             player = Instantiate(playerPrefab);
             player.TransitionTo(player.GetComponent<IdleState>());
@@ -50,6 +51,7 @@ public class GameLoop : MonoBehaviour
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.GrantedItems = 0;
             player.CurrentAbilities.Clear();
+            AbilitiesUi.ClearAbilities();
             TeleportToStart();
 
             bool countdownDone = false;
@@ -63,8 +65,6 @@ public class GameLoop : MonoBehaviour
 
             player.TransitionTo(player.GetComponent<AirState>());
         }
-
-
     }
 
     private void EndLevel()
@@ -95,23 +95,32 @@ public class GameLoop : MonoBehaviour
         {
             TeleportToStart();
         }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            StartLevel();
+        }
     }
 
-    public static void PickupItem(Abilities itemType)
+    public static void PickupItem(Abilities itemType, Vector3 pos)
     {
         // Player.GrantedItems |= 1 << (int)itemType;
         Player.GrantedItems += 1;
         // if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
 
         Player.CurrentAbilities.Add(itemType);
-
-        if (Player.GrantedItems == 3)
+        instance.StartCoroutine(Coroutine());
+        IEnumerator Coroutine()
         {
-            instance.EndLevel();
-        }
-        else
-        {
-            instance.TeleportToStart();
+            if (Player.GrantedItems == 3)
+            {
+                instance.EndLevel();
+            }
+            else
+            {
+                instance.AbilitiesUi.AddAbility(pos, itemType.ToString());
+                yield return new WaitForSeconds(2.0f);
+                instance.TeleportToStart();
+            }
         }
     }
 }

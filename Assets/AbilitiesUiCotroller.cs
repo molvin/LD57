@@ -1,13 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AbilitiesUiCotroller : MonoBehaviour
 {
     public TextMeshProUGUI ghost;
     public GameObject abilityLayoutGroup;
-
 
     public TextMeshProUGUI abilityPrefab;
 
@@ -15,21 +14,32 @@ public class AbilitiesUiCotroller : MonoBehaviour
     public float expandTime = 1;
     public AnimationCurve moveCurve;
 
+    private List<TextMeshProUGUI> instances = new();
+
     public void Update()
     {
+        /*
         if(Input.GetKeyDown(KeyCode.Space))
         {
             AddAbility(Vector3.zero, "BABBIDOO");
         }
+        */
     }
 
     public void AddAbility(Vector3 worldPos, string name)
     {
-    
-        StartCoroutine(lerpToCorner(worldPos));
+        StartCoroutine(lerpToCorner(worldPos, name));
+    }
+    public void ClearAbilities()
+    {
+        foreach(var text in instances)
+        {
+            Destroy(text.gameObject);
+        }
+        instances.Clear();
     }
 
-    public IEnumerator lerpToCorner(Vector3 worldPos)
+    public IEnumerator lerpToCorner(Vector3 worldPos, string name)
     {
         ghost.text = name;
         Vector3 startPos = Camera.main.WorldToScreenPoint(worldPos);
@@ -62,6 +72,8 @@ public class AbilitiesUiCotroller : MonoBehaviour
         ghost.gameObject.SetActive(false);
         instance.text = ghost.text;
         ghost.fontSize = 22;
+
+        instances.Add(instance);
 
         yield return 0;
     }

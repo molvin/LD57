@@ -10,13 +10,18 @@ public class LevelGenerator : MonoBehaviour
     public LevelSegment[] FillerSegments;
     public LevelSegment[] SplitterSegments;
     public LevelSegment[] GoalSegments;
+    public LevelSegment[] DoubleJumpChallenges;
+    public LevelSegment[] SlideChallenges;
 
     public int TargetLeafAmount = 2;
     public float EndProbabilityGrowthRate = 0.1f;
     public float SplitterProbabilityGrowthRate = 0.2f;
+    public float ChallengeProbabilityGrowthRate = 0.2f;
     public int RetryAttemptsPerPath = 10;
 
     public int Seed;
+
+    public Dictionary<Abilities, LevelSegment[]> ChallengeSegments;
 
     public Vector2 StartPosition => root.SpawnSlot.transform.position;
     private LevelSegment root;
@@ -30,6 +35,10 @@ public class LevelGenerator : MonoBehaviour
         LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
         LevelSegment start = Instantiate(startPrefab, Vector3.zero, Quaternion.identity);
         root = start;
+
+        ChallengeSegments = new();
+        ChallengeSegments.Add(Abilities.DoubleJump, DoubleJumpChallenges);
+        ChallengeSegments.Add(Abilities.Slide, SlideChallenges);
     }
 
     private void Update()
@@ -89,11 +98,17 @@ public class LevelGenerator : MonoBehaviour
         public bool MustPlaceSplitter = false;
         public float EndProbability = 0.0f;
         public float SplitterProbability = 0.0f;
-        public Abilities EndAbility;
+        public Abilities Ability;
+
+        public float ChallengeProbability = 0.0f;
+        public bool MustPlaceChallenge = false;
+        public List<Abilities> PlacedAbilities;
 
         public bool ShouldEnd()
         {
             if (MustPlaceSplitter)
+                return false;
+            if (MustPlaceChallenge)
                 return false;
             float rand = Random.value;
             if (rand < EndProbability)
@@ -116,11 +131,25 @@ public class LevelGenerator : MonoBehaviour
             return false;
         }
 
+        public bool ShouldPlaceChallenge()
+        {
+            if (!MustPlaceChallenge)
+                return false;
+
+            float rand = Random.value;
+            if (rand < SplitterProbability)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Place(LevelGenerator gen)
         {
             Placed += 1;
             EndProbability += gen.EndProbabilityGrowthRate;
             SplitterProbability += gen.SplitterProbabilityGrowthRate;
+            ChallengeProbability += gen.ChallengeProbabilityGrowthRate;
         }
     }
 
@@ -130,8 +159,11 @@ public class LevelGenerator : MonoBehaviour
         int attempts = 0;
 
         int availableLeafs = root.Exits.Length;
-        Queue<LevelSegment> roots = new();
-        roots.Enqueue(root);
+        Queue<Door> remainingPaths = new();
+        foreach(Door exit in root.Exits)
+        {
+            remainingPaths.Enqueue(exit);
+        }
 
         List<Abilities> allAbilities = new();
         foreach(Abilities ab in System.Enum.GetValues(typeof(Abilities)))
@@ -140,52 +172,65 @@ public class LevelGenerator : MonoBehaviour
         }
         allAbilities = allAbilities.OrderBy(x => Random.value).ToList();
         int nextAbility = 0;
-        while (roots.Count > 0)
+
+        Abilities? abilityForChallenge = null;
+
+        remainingPaths = new Queue<Door>(remainingPaths.OrderBy(x => Random.value));
+        while (remainingPaths.Count > 0)
         {
-            LevelSegment start = roots.Dequeue();
-            foreach (Door exit in start.Exits)
+            Door exit = remainingPaths.Dequeue();
+
+            bool success = true;
+            for (int i = 0; i < RetryAttemptsPerPath; i++)
             {
-                bool success = true;
-                for (int i = 0; i < RetryAttemptsPerPath; i++)
+                GenerationState state = new()
                 {
-                    GenerationState state = new GenerationState
-                    {
-                        Start = exit,
-                        MustPlaceSplitter = availableLeafs < TargetLeafAmount,
-                        EndAbility = allAbilities[Mathf.Min(nextAbility, allAbilities.Count - 1)],
-                    };
-                    Transform parent = new GameObject("Path").transform;
-                    LevelSegment end = GeneratePath(state, parent);
-                    if (end == null)
-                    {
-                        success = false;
-                        DestroyImmediate(parent.gameObject);
-                        Physics2D.SyncTransforms();
-                        attempts += 1;
-                    }
-                    else
-                    {
-                        success = true;
-                        roots.Enqueue(end);
-                        parents.Add(parent);
-
-                        if(end.Exits.Length > 1)
-                        {
-                            availableLeafs += end.Exits.Length - 1;
-                        }
-                        else
-                        {
-                            nextAbility += 1;
-                        }
-                        break;
-                    }
+                    Start = exit,
+                    MustPlaceSplitter = availableLeafs < TargetLeafAmount,
+                    MustPlaceChallenge = abilityForChallenge != null,
+                    Ability = abilityForChallenge ?? allAbilities[Mathf.Min(nextAbility, allAbilities.Count - 1)],
+                };
+                Transform parent = new GameObject($"Path: Split: {state.MustPlaceSplitter}, Challenge: {state.MustPlaceChallenge}, Ability: {state.Ability}").transform;
+                LevelSegment end = GeneratePath(state, parent);
+                if (end == null)
+                {
+                    success = false;
+                    DestroyImmediate(parent.gameObject);
+                    Physics2D.SyncTransforms();
+                    attempts += 1;
                 }
-
-                if (!success)
+                else
                 {
-                    return false;
+                    success = true;
+                    foreach(Door newExit in end.Exits)
+                    {
+                        remainingPaths.Enqueue(newExit);
+                    }
+                    parents.Add(parent);
+
+                    if(end.Exits.Length > 1) // Placed Splitter
+                    {
+                        availableLeafs += end.Exits.Length - 1;
+                    }
+                    else if(end.Exits.Length == 0) // Placed end
+                    {
+                        abilityForChallenge = state.Ability;
+                        nextAbility += 1;
+                    }
+                    else // Placed Challenge
+                    {
+                        abilityForChallenge = null;
+                    }
+                    break;
                 }
             }
+
+            if (!success)
+            {
+                return false;
+            }
+
+            remainingPaths = new Queue<Door>(remainingPaths.OrderBy(x => Random.value));
         }
 
         Debug.Log($"Succeded after {attempts} attemps");
@@ -195,6 +240,7 @@ public class LevelGenerator : MonoBehaviour
     private LevelSegment GeneratePath(GenerationState state, Transform parent)
     {
         bool isEnd = false;
+        bool isChallenge = false;
         Queue<Door> pending = new();
         pending.Enqueue(state.Start);
         while (pending.Count > 0)
@@ -215,9 +261,11 @@ public class LevelGenerator : MonoBehaviour
                 {
                     validSegments = SplitterSegments;
                 }
-                // Make more unlikely to repeat segments
-                // TODO: make less likely to repeat segments
-
+                else if(state.ShouldPlaceChallenge())
+                {
+                    isChallenge = true;
+                    validSegments = ChallengeSegments[state.Ability];
+                }
                 if(state.LastPlaced != null)
                 {
                     bucket = validSegments.OrderBy(x => x.Prefab == state.LastPlaced.Prefab ? 0.8f : Random.value).ToList();
@@ -260,7 +308,7 @@ public class LevelGenerator : MonoBehaviour
             }
 
             // Evaluate the next segment
-            if (!isEnd && spawned.Exits.Length == 1)
+            if (!isEnd && !isChallenge && spawned.Exits.Length == 1)
             {
                 state.Place(this);
                 pending.Enqueue(spawned.Exits[0]);
@@ -270,7 +318,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 if(isEnd)
                 {
-                    spawned.GetComponentInChildren<KeyItemPickup>().ItemType = state.EndAbility;
+                    spawned.GetComponentInChildren<KeyItemPickup>().ItemType = state.Ability;
                 }
 
                 return spawned;
