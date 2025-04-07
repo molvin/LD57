@@ -23,7 +23,7 @@ public class GroundState : State
         {
             PerfectLanding = false;
             Owner.Velocity += Owner.Velocity.normalized * PerfectLandingBoost;
-            Debug.Log("Perfect landing");
+            // Debug.Log("Perfect landing");
             Owner.particleController.PlayPerfectParticle(Owner.Velocity);
             AudioEvent.Play();
 

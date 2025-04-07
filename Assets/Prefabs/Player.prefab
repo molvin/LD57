@@ -512,6 +512,7 @@ MonoBehaviour:
   GroundCheckDistance: 0.2
   Air: {fileID: 3481498922970582336}
   Ground: {fileID: 8309590663219349725}
+  LoopingSound: {fileID: 11400000, guid: 503b27a0bb3448848ad8f5eddfe5e6e7, type: 2}
 --- !u!114 &8498141193777425764
 MonoBehaviour:
   m_ObjectHideFlags: 0
