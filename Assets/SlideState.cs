@@ -3,6 +3,7 @@ using UnityEngine;
 public class SlideState : State
 {
     public float Friction;
+    public float Gravity;
     public float GroundCheckDistance = 0.2f;
     public AirState Air;
     public GroundState Ground;
@@ -26,6 +27,7 @@ public class SlideState : State
         if(groundHit.Hit)
         {
             Owner.Velocity -= Owner.Velocity.normalized * Mathf.Min(Friction * Time.deltaTime, Owner.Velocity.magnitude);
+            Owner.Velocity += Vector2.down * Gravity * Time.deltaTime;
 
             float vertical = Input.GetAxisRaw("Vertical");
             if(vertical > -0.3f)

@@ -106,7 +106,6 @@ public class Player : MonoBehaviour
                         else
                         {
                             float alongGround = Vector2.Dot(-LastHit.Normal, Velocity.normalized);
-                            print(alongGround);
                             if (alongGround < air.PerfectLandingFactor && Velocity.y < air.PerfectLandingMinFallSpeed && Velocity.magnitude > air.PerfectLandingMinSpeed)
                             {
                                 float hangtime = (Time.time - air.EnterTime);

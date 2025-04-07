@@ -14,6 +14,7 @@ public class GroundState : State
     public float GroundCheckDistance = 0.2f;
     public bool PerfectLanding;
     public float PerfectLandingBoost;
+    public bool HasSlidePower;
 
 
     public override void Enter()
@@ -74,7 +75,7 @@ public class GroundState : State
             Jump();
 
             float vertical = Input.GetAxisRaw("Vertical");
-            if (vertical < -0.7f)
+            if (vertical < -0.7f && HasSlidePower)
             {
                 Owner.TransitionTo(Slide);
             }
