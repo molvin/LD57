@@ -529,6 +529,7 @@ MonoBehaviour:
   Duration: 0.5
   Ground: {fileID: 8309590663219349725}
   Friction: 25
+  BadLandingSound: {fileID: 11400000, guid: acaea8eba74a64b409ebf640b8bd837d, type: 2}
 --- !u!114 &328276088282421154
 MonoBehaviour:
   m_ObjectHideFlags: 0
