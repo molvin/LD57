@@ -49,8 +49,7 @@ public class GameLoop : MonoBehaviour
             generator.GenerateGraph();
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.GrantedItems = 0;
-            player.GetComponent<GroundState>().HasSlidePower = false;
-            player.GetComponent<AirState>().DoubleJumpPower = false;
+            player.CurrentAbilities.Clear();
             TeleportToStart();
 
             bool countdownDone = false;
@@ -98,20 +97,13 @@ public class GameLoop : MonoBehaviour
         }
     }
 
-    public static void PickupItem(KeyItemType itemType)
+    public static void PickupItem(Abilities itemType)
     {
         // Player.GrantedItems |= 1 << (int)itemType;
         Player.GrantedItems += 1;
         // if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
 
-        if(Player.GrantedItems == 1)
-        {
-            Player.GetComponent<GroundState>().HasSlidePower = true;
-        }
-        else if(Player.GrantedItems == 2)
-        {
-            Player.GetComponent<AirState>().DoubleJumpPower = true;
-        }
+        Player.CurrentAbilities.Add(itemType);
 
         if (Player.GrantedItems == 3)
         {
