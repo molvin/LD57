@@ -778,6 +778,7 @@ MonoBehaviour:
   RespawnsRemaining: {fileID: 690388673}
   MaxRespawns: 100000
   Timer: 0
+  m_VictorySfx: {fileID: 11400000, guid: e1e9115ea27ff034bb4a8853f8df4d90, type: 2}
   Seeds: {fileID: 11400000, guid: 184c9d1611de0f14e8befcca680b40ea, type: 2}
   CurrentGoodSeed:
     Seed: 0

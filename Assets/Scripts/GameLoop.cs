@@ -20,6 +20,8 @@ public class GameLoop : MonoBehaviour
     public int MaxRespawns = 3;
     public float Timer = 0.0f;
 
+    public AudioEventData m_VictorySfx;
+
     public GoodSeeds Seeds;
 
     private int respawns = 0;
@@ -183,6 +185,7 @@ public class GameLoop : MonoBehaviour
             }
 
             GameUi.CompleteLevel(retry, Timer, nextMeddalTime, medal);
+            m_VictorySfx.Play();
             while (!doRetry)
             {
                 yield return null;
