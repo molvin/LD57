@@ -32,10 +32,6 @@ public class LevelGenerator : MonoBehaviour
 
     private void Awake()
     {
-        LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
-        LevelSegment start = Instantiate(startPrefab, Vector3.zero, Quaternion.identity);
-        root = start;
-
         ChallengeSegments = new();
         ChallengeSegments.Add(Abilities.DoubleJump, DoubleJumpChallenges);
         ChallengeSegments.Add(Abilities.Slide, SlideChallenges);
@@ -53,8 +49,13 @@ public class LevelGenerator : MonoBehaviour
     {
         for(int i = 0; i < 100; i++)
         {
-            Debug.Log($"Building with seed {Seed}");
-
+            if(root != null)
+            {
+                DestroyImmediate(root.gameObject);
+            }
+            LevelSegment startPrefab = StartSegments[Random.Range(0, StartSegments.Length)];
+            LevelSegment start = Instantiate(startPrefab, Vector3.zero, Quaternion.identity);
+            root = start;
             foreach (Transform parent in parents)
             {
                 DestroyImmediate(parent.gameObject);
@@ -155,6 +156,7 @@ public class LevelGenerator : MonoBehaviour
 
     private bool GenerateLevel(int seed)
     {
+        Debug.Log($"Generating with seed {seed}");
         Random.InitState(seed);
         int attempts = 0;
 
@@ -305,6 +307,7 @@ public class LevelGenerator : MonoBehaviour
             // This path has failed to generate
             if (spawned == null)
             {
+                Debug.LogWarning($"Failed to find fitting segment for: {exit.GetComponentInParent<LevelSegment>()}");
                 return null;
             }
 

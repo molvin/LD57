@@ -187,8 +187,8 @@ MonoBehaviour:
   SplitterProbabilityGrowthRate: 0.4
   ChallengeProbabilityGrowthRate: 0.2
   RetryAttemptsPerPath: 10
-  Seed: 1078
-  debugMode: 0
+  Seed: 2000
+  debugMode: 1
 --- !u!4 &228091927
 Transform:
   m_ObjectHideFlags: 0
@@ -751,7 +751,6 @@ MonoBehaviour:
   MaxRespawns: 100000
   Timer: 0
   Seeds: {fileID: 11400000, guid: 184c9d1611de0f14e8befcca680b40ea, type: 2}
-  UseGoodSeeds: 0
   CurrentGoodSeed:
     Seed: 0
     Author: 20

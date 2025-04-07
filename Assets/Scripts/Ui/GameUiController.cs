@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GameLoop;
-using static System.Net.Mime.MediaTypeNames;
 
 public class GameUiController : MonoBehaviour
 {
