@@ -83,6 +83,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D hit;
         int iterator = 0;
+        float timeMovingAround = 0f;
 
         RaycastHit2D circleCast()
         {
@@ -141,6 +142,12 @@ public class Player : MonoBehaviour
 
                 if (distanceToMove > 0.0f)
                 {
+                    float currentSpeed = Velocity.magnitude;
+                    if (currentSpeed > 0)
+                    {
+                        float timeStep = distanceToMove / Velocity.magnitude;
+                        timeMovingAround += timeStep;
+                    }
                     transform.position += (Vector3)Velocity.normalized * distanceToMove;
                 }
                 Vector2 normalForce = CalculateNormalForce(hit.normal, Velocity);
@@ -157,11 +164,20 @@ public class Player : MonoBehaviour
                 Velocity = Vector2.zero;
                 break;
             }
+            if (timeMovingAround > deltaTime)
+            {
+                break;
+            }
+
             iterator++;
         }
 
+        float remainingTimeStep = deltaTime - timeMovingAround;
+        if (remainingTimeStep > 0)
+        {
+            transform.position += (Vector3)Velocity * remainingTimeStep;
+        }
 
-        transform.position += (Vector3)Velocity * Time.deltaTime;
         Collider2D overlap = useCircle ? 
             Physics2D.OverlapCircle((Vector2)transform.position, 0.5f, CollisionLayer) : 
             Physics2D.OverlapCapsule((Vector2)transform.position + Vector2.up * 0.5f, new Vector2(1, 2), CapsuleDirection2D.Vertical, 0.0f, CollisionLayer);

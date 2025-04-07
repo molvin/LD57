@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 8498141193777425764}
   - component: {fileID: 328276088282421154}
   - component: {fileID: -2797690009766322555}
+  - component: {fileID: 7910351830560993872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -475,7 +476,8 @@ MonoBehaviour:
   PerfectLanding: 0
   PerfectLandingBoost: 4
   JumpGroundCheckDistance: 0.5
-  AudioEvent: {fileID: 11400000, guid: f72f0f901c6f1a743b00b8e40dfb4418, type: 2}
+  perfectLandingSfx: {fileID: 11400000, guid: f72f0f901c6f1a743b00b8e40dfb4418, type: 2}
+  jumpSfx: {fileID: 11400000, guid: 2d2359a81e13571499c187c0cd0f65f3, type: 2}
 --- !u!114 &2943016116726350535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +574,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 0}
+--- !u!114 &7910351830560993872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939691093548209201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5afff8c22240c4ea0509a5179d8705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpeedAudioData: {fileID: 11400000, guid: bd17cfe69357f98418e138edf7e530c2, type: 2}
+  m_IsFastFactor: 0.8
+  m_GuessedMaxSpeed: 20
 --- !u!1001 &938543931204190371
 PrefabInstance:
   m_ObjectHideFlags: 0

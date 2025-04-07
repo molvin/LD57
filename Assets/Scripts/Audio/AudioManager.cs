@@ -157,7 +157,7 @@ public class AudioManager : MonoBehaviour
         {
             if(doesFade && timer <= fadeInOutTime)
             {
-                timer += Time.time;
+                timer += Time.deltaTime;
                 lerpValue = timer / fadeInOutTime;
 
                 audioSource.volume = lerpValue * targetVolume;
