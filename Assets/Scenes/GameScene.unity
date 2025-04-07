@@ -151,6 +151,7 @@ MonoBehaviour:
   StartSegments:
   - {fileID: 9209771237482449530, guid: cdd5b78b944ad2441aebf80741d04c58, type: 3}
   - {fileID: 9209771237482449530, guid: 85fc4b267adaf5145b9a6094bc96ff77, type: 3}
+  - {fileID: 9209771237482449530, guid: 3be475f7ff5c53548b824fdc8294ff8b, type: 3}
   FillerSegments:
   - {fileID: 9209771237482449530, guid: b0793792bc64e1e479fa0cababa00aac, type: 3}
   - {fileID: 9209771237482449530, guid: 91c66c32647e8d94b945924ef84a4aec, type: 3}
