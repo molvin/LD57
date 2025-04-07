@@ -10,6 +10,8 @@ public class BonkState : State
     public float RecoverFriction;
     public float GroundCheckDistance = 0.2f;
 
+    public AudioEventData m_BonkSound;
+
     private float enterTime;
     private Vector2 enterDir;
 
@@ -28,6 +30,7 @@ public class BonkState : State
         Owner.Anim.SetTrigger("Bonk");
         enterDir = Owner.transform.forward;
         Owner.particleController.playBonk();
+        m_BonkSound.Play();
     }
 
     public override void Tick()
