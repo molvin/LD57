@@ -11,18 +11,25 @@ public class KeyItemPickup : MonoBehaviour
     public float PickupRange = 1.0f;
     public KeyItemType ItemType;
 
-    private PlayerController playerController;
+    private Vector2 worldPosition;
 
     void Start()
     {
-        playerController = FindFirstObjectByType<PlayerController>();
+        worldPosition = Vector2.zero;
+        Transform t = transform;
+        while (t != null)
+        {
+            worldPosition += (Vector2)t.localPosition;
+            t = t.parent;
+        }
     }
 
     private void Update()
     {
-        if (Vector2.Distance(playerController.transform.position, transform.position) < PickupRange)
+        if (GameLoop.instance && Vector2.Distance(GameLoop.Player.transform.position, worldPosition) < PickupRange)
         {
-            playerController.GrantedItems |= 1 << (int)ItemType;
+            GameLoop.PickupItem(ItemType);
+            Destroy(gameObject);
         }
     }
 }

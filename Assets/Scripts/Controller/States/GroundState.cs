@@ -12,11 +12,21 @@ public class GroundState : State
     public AirState Air;
     public SlideState Slide;
     public float GroundCheckDistance = 0.2f;
+    public bool PerfectLanding;
+    public float PerfectLandingBoost;
 
+    PlayerParticleController particleController;
 
     public override void Enter()
     {
-
+        if(PerfectLanding)
+        {
+            PerfectLanding = false;
+            Owner.Velocity += Owner.Velocity.normalized * PerfectLandingBoost;
+            Debug.Log("Perfect landing");
+            particleController.PlayPerfectParticle(Owner.Velocity);
+            
+        }
     }
 
     public override void Tick()
@@ -81,9 +91,9 @@ public class GroundState : State
         {
             float jumpSpeed = Mathf.Min(Mathf.Max(Owner.Velocity.y, 0) + JumpBoost, MaxJumpBoost);
             Owner.Velocity.y = jumpSpeed;
-            Air.Enter();
             Air.JumpBoost = JumpBoost;
             Air.Jumped = true;
+            Air.Enter();
             Owner.CurrentState = Air;
             return true;
         }
