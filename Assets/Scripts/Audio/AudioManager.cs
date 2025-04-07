@@ -11,7 +11,14 @@ public class AudioManager : MonoBehaviour
     private static AudioSource GetAudioSource {
         get { 
             if(Instance.m_PooledAudio.Count > 0)
-             return Instance.m_PooledAudio.Dequeue();
+            {
+                var  audioSource = Instance.m_PooledAudio.Dequeue();
+                if (audioSource == null)
+                    return GetAudioSource;
+
+                audioSource.gameObject.SetActive(true);
+                return audioSource;
+            }
             else
             {
                 var audioSourceObject = new GameObject("PooledAudio");
@@ -82,17 +89,17 @@ public class AudioManager : MonoBehaviour
                 DontDestroyOnLoad(audioSource);
         }
         audioSource.Play();
-        WaitForCompletion(audioSource, (x) => { x.transform.parent = null; m_PooledAudio.Enqueue(x); });
+        WaitForCompletion(audioSource, (x) => { x.transform.parent = null; m_PooledAudio.Enqueue(x); x.gameObject.SetActive(false);});
     }
 
     async void WaitForCompletion(AudioSource audioSource, Action<AudioSource> onStop)
     {
-        while(audioSource.isPlaying)
+        while(audioSource != null && audioSource.isPlaying)
         {
             await Task.Yield();
         }
-        
-        onStop?.Invoke(audioSource);
+        if(audioSource != null)
+            onStop?.Invoke(audioSource);
     }
 
 }
