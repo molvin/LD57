@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Assertions;
 
 public class GameLoop : MonoBehaviour
@@ -9,6 +11,7 @@ public class GameLoop : MonoBehaviour
     public static LevelGenerator Level => instance.generator;
 
     public Player playerPrefab;
+    public GameUiController GameUi;
     private Player player;
     private LevelGenerator generator;
 
@@ -32,32 +35,87 @@ public class GameLoop : MonoBehaviour
         StartLevel();
     }
 
+    private void StartLevel()
+    {
+        StartCoroutine(Coroutine());
+        IEnumerator Coroutine()
+        {
+            if (player != null)
+            {
+                Destroy(player);
+            }
+            player = Instantiate(playerPrefab);
+            player.TransitionTo(player.GetComponent<IdleState>());
+            generator.GenerateGraph();
+            PlayerPrefs.SetInt("seed", generator.Seed);
+            player.GrantedItems = 0;
+            player.GetComponent<GroundState>().HasSlidePower = false;
+            player.GetComponent<AirState>().DoubleJumpPower = false;
+            TeleportToStart();
+
+            bool countdownDone = false;
+            System.Action go = () => { countdownDone = true;  };
+            GameUi.StartCountdown(go);
+
+            while(!countdownDone)
+            {
+                yield return null;
+            }
+
+            player.TransitionTo(player.GetComponent<AirState>());
+        }
+
+
+    }
+
+    private void EndLevel()
+    {
+        StartCoroutine(Coroutine());
+        IEnumerator Coroutine()
+        {
+            player.Velocity = Vector3.zero;
+            Debug.Log("Congrats");
+
+            bool doRetry = false;
+            System.Action retry = () => { doRetry = true;  };
+            while(!doRetry)
+            {
+                GameUi.CompleteLevel(retry);
+                yield return null;
+            }
+
+            StartLevel();
+        }
+    }
+
     private void Update()
     {
         instance = this;
-    }
 
-    private void StartLevel()
-    {
-        if (player != null)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Destroy(player);
+            TeleportToStart();
         }
-        player = Instantiate(playerPrefab);
-
-        generator.GenerateGraph();
-        PlayerPrefs.SetInt("seed", generator.Seed);
-
-        TeleportToStart();
     }
 
     public static void PickupItem(KeyItemType itemType)
     {
-        Player.GrantedItems |= 1 << (int)itemType;
+        // Player.GrantedItems |= 1 << (int)itemType;
+        Player.GrantedItems += 1;
+        // if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) & (1 << (int)KeyItemType.Item2)))
 
-        if (Player.GrantedItems == ((1 << (int)KeyItemType.Item1) | (1 << (int)KeyItemType.Item2)))
+        if(Player.GrantedItems == 1)
         {
-            instance.StartLevel();
+            Player.GetComponent<GroundState>().HasSlidePower = true;
+        }
+        else if(Player.GrantedItems == 2)
+        {
+            Player.GetComponent<AirState>().DoubleJumpPower = true;
+        }
+
+        if (Player.GrantedItems == 3)
+        {
+            instance.EndLevel();
         }
         else
         {

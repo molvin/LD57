@@ -76,6 +76,7 @@ public class AudioManager : MonoBehaviour
         audioSource.pitch = 1 + Random.Range(-audioEvent.m_PitchRange, audioEvent.m_PitchRange);
         audioSource.volume = audioEvent.m_Volume + Random.Range(-audioEvent.m_AmplitudeRange, audioEvent.m_AmplitudeRange);
         audioSource.loop = audioEvent.m_IsLooping;
+        audioSource.outputAudioMixerGroup = audioEvent.m_MixerGroup;
         if(attachPoint != null)
         {
             audioSource.transform.parent = attachPoint;

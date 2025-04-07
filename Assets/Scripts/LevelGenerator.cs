@@ -54,16 +54,20 @@ public class LevelGenerator : MonoBehaviour
             parents.Clear();
 
             bool success = GenerateLevel(Seed);
-            if(success)
+
+            Seed += 1;
+
+            if (success)
             {
-                Seed += 1;
                 break;
             }
-            Seed += 1;
             Debug.Log($"Failed: Retrying with seed {Seed}");
         }
 
-        ZeroZ(root.transform);
+        foreach(Transform parent in parents)
+        {
+            ZeroZ(parent);
+        }
     }
 
     private void ZeroZ(Transform trans)
@@ -81,6 +85,7 @@ public class LevelGenerator : MonoBehaviour
     private class GenerationState
     {
         public Door Start = null;
+        public LevelSegment LastPlaced = null;
         public int Placed = 0;
         public bool MustPlaceSplitter = false;
         public float EndProbability = 0.0f;
@@ -200,7 +205,15 @@ public class LevelGenerator : MonoBehaviour
                 }
                 // Make more unlikely to repeat segments
                 // TODO: make less likely to repeat segments
-                bucket = validSegments.OrderBy(x => Random.value).ToList();
+
+                if(state.LastPlaced != null)
+                {
+                    bucket = validSegments.OrderBy(x => x.Prefab == state.LastPlaced.Prefab ? 0.8f : Random.value).ToList();
+                }
+                else
+                {
+                    bucket = validSegments.OrderBy(x => Random.value).ToList();
+                }
             }
 
             // Try to place each available segment, if all fails this path fails
@@ -223,6 +236,7 @@ public class LevelGenerator : MonoBehaviour
                 {
                     spawned.Prefab = next;
                     exit.Connection = spawned;
+                    state.LastPlaced = spawned;
                     break;
                 }
             }

@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 4778927470258749633}
   - component: {fileID: 8498141193777425764}
   - component: {fileID: 328276088282421154}
+  - component: {fileID: -2797690009766322555}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -472,6 +473,7 @@ MonoBehaviour:
   PerfectLanding: 0
   PerfectLandingBoost: 4
   HasSlidePower: 0
+  AudioEvent: {fileID: 11400000, guid: f72f0f901c6f1a743b00b8e40dfb4418, type: 2}
 --- !u!114 &2943016116726350535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +494,7 @@ MonoBehaviour:
   MaxAngle: 25
   RecoverFriction: 40
   GroundCheckDistance: 0.2
+  m_BonkSound: {fileID: 11400000, guid: 513f6762a317c9841b8e7163c63019cb, type: 2}
 --- !u!114 &4778927470258749633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +529,7 @@ MonoBehaviour:
   Duration: 0.5
   Ground: {fileID: 8309590663219349725}
   Friction: 25
+  BadLandingSound: {fileID: 11400000, guid: acaea8eba74a64b409ebf640b8bd837d, type: 2}
 --- !u!114 &328276088282421154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +550,19 @@ MonoBehaviour:
   jump_left: {fileID: 2100000, guid: 827c58fc30dd7e947aedb4eb2badebaf, type: 2}
   bonkParticle: {fileID: 3325480506809306635}
   bonkedParticle: {fileID: 5951959977839360601}
+--- !u!114 &-2797690009766322555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939691093548209201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8fef0eef880e84cad555f5e19248cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Owner: {fileID: 0}
 --- !u!1001 &938543931204190371
 PrefabInstance:
   m_ObjectHideFlags: 0
