@@ -17,7 +17,6 @@ public class GameUiController : MonoBehaviour
     public Animator FadeAnim;
 
     public UnityEngine.UI.Image m_MedalImage;
-    public TMPro.TextMeshProUGUI m_CompleteTime;
     public TMPro.TextMeshProUGUI m_TimeToNextMedal;
     public TMPro.TextMeshProUGUI m_MedalText;
 
@@ -284,11 +283,12 @@ public class GameUiController : MonoBehaviour
             Change(new LevelCompleated());
             m_MedalImage.gameObject.SetActive(true);
             m_MedalText.gameObject.SetActive(true);
-            m_TimeToNextMedal.gameObject.SetActive(true);
-            m_CompleteTime.gameObject.SetActive(true);
+            if (meddalType != MedalType.Author)
+                m_TimeToNextMedal.gameObject.SetActive(true);
 
-            m_CompleteTime.text = completeTime.ToString(".0##");
-            m_TimeToNextMedal.text = timeToNextMeddal.ToString(".0##");
+            if(meddalType != MedalType.Author)
+                m_TimeToNextMedal.text = $"Time to {(meddalType + 1).ToString()} {timeToNextMeddal.ToString(".0##")}";
+
             m_MedalText.text = meddalType.ToString();
             m_MedalImage.sprite = GetMedalSprite(meddalType);
 
@@ -300,7 +300,6 @@ public class GameUiController : MonoBehaviour
             m_MedalImage.gameObject.SetActive(false);
             m_MedalText.gameObject.SetActive(false);
             m_TimeToNextMedal.gameObject.SetActive(false);
-            m_CompleteTime.gameObject.SetActive(false);
             retryPressed = false;
             retry();
         }

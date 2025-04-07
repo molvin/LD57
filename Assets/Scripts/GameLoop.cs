@@ -178,7 +178,7 @@ public class GameLoop : MonoBehaviour
                 medal = MedalType.Silver;
                 nextMeddalTime = CurrentGoodSeed.Gold;
             }
-            if (Timer <= CurrentGoodSeed.Bronze)
+            else if (Timer <= CurrentGoodSeed.Bronze)
             {
                 medal = MedalType.Bronze;
                 nextMeddalTime = CurrentGoodSeed.Silver;
@@ -210,6 +210,7 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
+            //EndLevel();
             Respawn();
         }
     }
