@@ -410,6 +410,7 @@ MonoBehaviour:
   GroundCheckDistance: 0.2
   PerfectLanding: 0
   PerfectLandingBoost: 4
+  particleController: {fileID: 328276088282421154}
 --- !u!114 &2943016116726350535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,15 +487,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6612536521382521559, guid: b22854a91e8ec5c428440b50ecd9871b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 108.2682
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6612536521382521559, guid: b22854a91e8ec5c428440b50ecd9871b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.052641
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6612536521382521559, guid: b22854a91e8ec5c428440b50ecd9871b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9519844
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6612536521382521559, guid: b22854a91e8ec5c428440b50ecd9871b, type: 3}
       propertyPath: m_LocalRotation.w
