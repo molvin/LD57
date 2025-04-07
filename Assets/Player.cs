@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public struct HitData
 {
@@ -6,6 +7,12 @@ public struct HitData
     public Vector2 Normal;
     public Vector2 AlongGround;
     public float Time;
+}
+
+public enum Abilities
+{
+    DoubleJump,
+    Slide,
 }
 
 public class Player : MonoBehaviour
@@ -35,6 +42,8 @@ public class Player : MonoBehaviour
 
     public PlayerParticleController particleController;
     public int GrantedItems = 0;
+
+    public List<Abilities> CurrentAbilities;
 
     private void Awake()
     {
