@@ -37,8 +37,7 @@ public class GameLoop : MonoBehaviour
 
     private void StartLevel()
     {
-        
-
+        StartCoroutine(Coroutine());
         IEnumerator Coroutine()
         {
             if (player != null)
