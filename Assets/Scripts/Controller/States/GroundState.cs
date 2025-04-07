@@ -15,7 +15,7 @@ public class GroundState : State
     public bool PerfectLanding;
     public float PerfectLandingBoost;
 
-    PlayerParticleController particleController;
+    public PlayerParticleController particleController;
 
     public override void Enter()
     {
