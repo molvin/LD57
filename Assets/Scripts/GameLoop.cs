@@ -191,7 +191,7 @@ public class GameLoop : MonoBehaviour
 
             ending = false;
             GameUi.FadeIn();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8f);
             StartLevel();
         }
     }
@@ -209,7 +209,6 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
-            // EndLevel();
             Respawn();
         }
     }
