@@ -8,6 +8,8 @@ public class AudioEventData : ScriptableObject
     [Range(0, 1)]
     public float m_PitchRange;
     [Range(0, 1)]
+    public float m_Volume = 1.0f;
+    [Range(0, 1)]
     public float m_AmplitudeRange;
     public bool m_IsLooping;
     public bool m_DontDestroyOnLoad;

@@ -74,7 +74,7 @@ public class AudioManager : MonoBehaviour
 
         audioSource.clip = audioEvent.m_Clips[Random.Range(0, audioEvent.m_Clips.Count)];
         audioSource.pitch = 1 + Random.Range(-audioEvent.m_PitchRange, audioEvent.m_PitchRange);
-        audioSource.volume = 1 + Random.Range(-audioEvent.m_AmplitudeRange, audioEvent.m_AmplitudeRange);
+        audioSource.volume = audioEvent.m_Volume + Random.Range(-audioEvent.m_AmplitudeRange, audioEvent.m_AmplitudeRange);
         audioSource.loop = audioEvent.m_IsLooping;
         if(attachPoint != null)
         {

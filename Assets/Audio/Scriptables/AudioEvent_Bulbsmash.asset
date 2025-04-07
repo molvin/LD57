@@ -15,6 +15,7 @@ MonoBehaviour:
   m_Clips:
   - {fileID: 8300000, guid: 14399c9d56b3000419bcdd54488e1970, type: 3}
   m_PitchRange: 0.05
+  m_Volume: 0.3
   m_AmplitudeRange: 0.1
   m_IsLooping: 0
   m_DontDestroyOnLoad: 0
