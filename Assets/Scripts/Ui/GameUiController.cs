@@ -291,6 +291,7 @@ public class GameUiController : MonoBehaviour
 
             m_MedalText.text = meddalType.ToString();
             m_MedalImage.sprite = GetMedalSprite(meddalType);
+            m_MedalImage.enabled = meddalType != MedalType.None;
 
             while (!retryPressed)
             {

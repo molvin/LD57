@@ -20,6 +20,8 @@ public class GameLoop : MonoBehaviour
     public int MaxRespawns = 3;
     public float Timer = 0.0f;
 
+    public AudioEventData m_VictorySfx;
+
     public GoodSeeds Seeds;
 
     private int respawns = 0;
@@ -100,6 +102,8 @@ public class GameLoop : MonoBehaviour
         generator = FindAnyObjectByType<LevelGenerator>();
         generator.Seed = PlayerPrefs.GetInt("seed", 0);
         generator.debugMode = false;
+
+        Seeds.Init();
     }
 
     private void Start()
@@ -122,8 +126,8 @@ public class GameLoop : MonoBehaviour
             }
             player = Instantiate(playerPrefab);
             player.TransitionTo(player.GetComponent<IdleState>());
-            CurrentGoodSeed = Seeds.GetRandom();
-            generator.GenerateGraph(CurrentGoodSeed.Seed);
+            CurrentGoodSeed = Seeds.GetNext();
+            generator.GenerateGraph(CurrentGoodSeed == null ? null : CurrentGoodSeed.Seed);
             PlayerPrefs.SetInt("seed", generator.Seed);
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
@@ -183,6 +187,7 @@ public class GameLoop : MonoBehaviour
             }
 
             GameUi.CompleteLevel(retry, Timer, nextMeddalTime, medal);
+            m_VictorySfx.Play();
             while (!doRetry)
             {
                 yield return null;
