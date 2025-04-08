@@ -19,6 +19,7 @@ public class GameLoop : MonoBehaviour
     private LevelGenerator generator;
     public int MaxRespawns = 3;
     public float Timer = 0.0f;
+    public bool Respawning = true;
 
     public AudioEventData m_VictorySfx;
 
@@ -188,12 +189,18 @@ public class GameLoop : MonoBehaviour
 
             GameUi.CompleteLevel(retry, Timer, nextMeddalTime, medal);
             m_VictorySfx.Play();
-            while (!doRetry)
+            Respawning = false;
+            while (!doRetry && !Respawning)
             {
                 yield return null;
             }
-
             ending = false;
+
+            if (Respawning)
+            {
+                yield break;
+            }
+
             GameUi.FadeIn();
             yield return new WaitForSeconds(0.8f);
             StartLevel();
@@ -213,7 +220,6 @@ public class GameLoop : MonoBehaviour
 
         if (Input.GetButtonDown("Respawn"))
         {
-            //EndLevel();
             Respawn();
         }
     }
@@ -227,7 +233,8 @@ public class GameLoop : MonoBehaviour
 
         if(respawns < MaxRespawns)
         {
-         
+            GameUi.Respawning = true;
+            Respawning = true;
             respawns += 1;
             player.CurrentAbilities.Clear();
             AbilitiesUi.ClearAbilities();
