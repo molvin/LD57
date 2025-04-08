@@ -19,20 +19,20 @@ MonoBehaviour:
     Silver: 90
     Bronze: 110
   - Seed: 1993
-    Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Author: 78
+    Gold: 89
+    Silver: 114
+    Bronze: 130
   - Seed: 1997
     Author: 65
     Gold: 69
     Silver: 88
     Bronze: 110
   - Seed: 1998
-    Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Author: 107
+    Gold: 112
+    Silver: 126
+    Bronze: 138
   - Seed: 1998
     Author: 65
     Gold: 85
@@ -45,9 +45,9 @@ MonoBehaviour:
     Bronze: 120
   - Seed: 2000
     Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Gold: 72
+    Silver: 89
+    Bronze: 111
   - Seed: 1612
     Author: 65
     Gold: 85
