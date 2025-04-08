@@ -426,6 +426,7 @@ MonoBehaviour:
   PerfectLandingMinAirTime: 0.5
   Acceleration: 9
   Ground: {fileID: 8309590663219349725}
+  m_DubbleJumpAudio: {fileID: 11400000, guid: 6d0bab93edd109d4581768a643c84d99, type: 2}
   EnterTime: 0
 --- !u!114 &8309590663219349725
 MonoBehaviour:

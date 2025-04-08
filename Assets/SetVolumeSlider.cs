@@ -24,7 +24,6 @@ public class SetVolumeSlider : MonoBehaviour
     }
     public void SetLevel(float slider_value)
     {
-        Debug.Log(slider_value);
         if(Mathf.Approximately(slider_value, float.Epsilon))
         {
             mixer.SetFloat(floatName, -80);
