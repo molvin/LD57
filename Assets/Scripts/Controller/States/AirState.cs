@@ -23,6 +23,8 @@ public class AirState : State
 
     public GroundState Ground;
 
+    public AudioEventData m_DubbleJumpAudio;
+
     public bool HasDoubleJump => Owner.CurrentAbilities.Contains(Abilities.DoubleJump);
 
     private bool canJump;
@@ -95,10 +97,11 @@ public class AirState : State
         {
             if (Input.GetButtonDown("Jump") && Owner.Velocity.y < Ground.MaxJumpBoost)
             {
-                Owner.particleController.PlayJumpParticle(Owner.Velocity);
+                 Owner.particleController.PlayJumpParticle(Owner.Velocity);
                 float jumpSpeed = Mathf.Min(Mathf.Max(Owner.Velocity.y, 0) + JumpBoost, Ground.MaxJumpBoost);
                 Owner.Velocity.y = jumpSpeed;
                 canJump = false;
+                m_DubbleJumpAudio.Play();
             }
         }
 
