@@ -75,7 +75,7 @@ public class LevelGenerator : MonoBehaviour
 
         foreach(Transform parent in parents)
         {
-            ZeroZ(parent);
+            //ZeroZ(parent);
         }
     }
 
