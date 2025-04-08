@@ -31,6 +31,8 @@ public class GameUiController : MonoBehaviour
 
     private bool retryPressed;
 
+    public bool Respawning;
+
     public void Start()
     {
         this._state = new EmptyState();
@@ -276,7 +278,7 @@ public class GameUiController : MonoBehaviour
         return null;
     }
 
-    public void CompleteLevel(System.Action retry, float completeTime, float timeToNextMeddal, MedalType meddalType)
+    public void CompleteLevel(System.Action retry, float completeTime, float timeForNextMedal, MedalType meddalType)
     {
         StartCoroutine(Coroutine());
         IEnumerator Coroutine()
@@ -284,17 +286,17 @@ public class GameUiController : MonoBehaviour
             Change(new LevelCompleated());
             m_MedalImage.gameObject.SetActive(true);
             m_MedalText.gameObject.SetActive(true);
-            if (meddalType != MedalType.Author)
+            if (meddalType != MedalType.Author && meddalType != MedalType.Gold)
+            {
                 m_TimeToNextMedal.gameObject.SetActive(true);
-
-            if(meddalType != MedalType.Author)
-                m_TimeToNextMedal.text = $"Time to {(meddalType + 1).ToString()} {timeToNextMeddal.ToString(".0##")}";
+                m_TimeToNextMedal.text = $"Time to {(meddalType + 1).ToString()} {(completeTime - timeForNextMedal).ToString(".0##")}";
+            }
 
             m_MedalText.text = meddalType.ToString();
             m_MedalImage.sprite = GetMedalSprite(meddalType);
             m_MedalImage.enabled = meddalType != MedalType.None;
-
-            while (!retryPressed)
+            Respawning = false;
+            while (!retryPressed && !Respawning)
             {
                 yield return null;
             }
@@ -302,8 +304,18 @@ public class GameUiController : MonoBehaviour
             m_MedalImage.gameObject.SetActive(false);
             m_MedalText.gameObject.SetActive(false);
             m_TimeToNextMedal.gameObject.SetActive(false);
+
+            if(Respawning)
+            {
+                Change(new Playing());
+            }
+            Respawning = false;
+
+            if (retryPressed)
+            {
+                retry();
+            }
             retryPressed = false;
-            retry();
         }
     }
 }
