@@ -193,7 +193,8 @@ public class GameUiController : MonoBehaviour
 
     public void Change(UIState state)
     {
-        _state.Exit();
+        if(_state != null)
+            _state.Exit();
         UIState next = state;
         next.Enter(this);
         _state = next;
