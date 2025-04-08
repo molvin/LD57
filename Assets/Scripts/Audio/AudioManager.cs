@@ -71,8 +71,12 @@ public class AudioManager : MonoBehaviour
             await Task.Yield();
         }
 
-        if (audioSource != null) 
+        if (audioSource != null)
+        {
             audioSource.Stop();
+            ReturnAudioSource(audioSource);
+            audioSource.mute = true;
+        }
     }
     public static AudioSource PlayAudio(AudioClip clip, Transform attachPoint = null)
     {
@@ -119,7 +123,7 @@ public class AudioManager : MonoBehaviour
                     m_AvailabeIndexes.Remove(audioEvent);
             }
         }
-
+        audioSource.mute = false;
         audioSource.clip = clip;
         audioSource.pitch = 1 + Random.Range(-audioEvent.m_PitchRange, audioEvent.m_PitchRange);
         audioSource.volume = audioEvent.m_Volume + Random.Range(-audioEvent.m_AmplitudeRange, audioEvent.m_AmplitudeRange);
@@ -139,7 +143,14 @@ public class AudioManager : MonoBehaviour
         }
 
 
-        WaitForCompletion(audioSource, audioEvent.m_FadeInAndOutTime, (x) => { x.transform.parent = null; m_PooledAudio.Enqueue(x); x.gameObject.SetActive(false);});
+        WaitForCompletion(audioSource, audioEvent.m_FadeInAndOutTime, ReturnAudioSource);
+    }
+
+    private void ReturnAudioSource(AudioSource audio)
+    {
+        audio.transform.parent = null; 
+        m_PooledAudio.Enqueue(audio); 
+        audio.gameObject.SetActive(false);
     }
 
     async void WaitForCompletion(AudioSource audioSource, float fadeInOutTime ,Action<AudioSource> onStop)
@@ -153,7 +164,7 @@ public class AudioManager : MonoBehaviour
 
         audioSource.Play();
         
-        while (audioSource != null && audioSource.isPlaying)
+        while (audioSource != null && (audioSource.isPlaying || !audioSource.mute))
         {
             if(doesFade && timer <= fadeInOutTime)
             {
