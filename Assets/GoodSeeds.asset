@@ -19,37 +19,37 @@ MonoBehaviour:
     Silver: 90
     Bronze: 110
   - Seed: 1993
-    Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Author: 78
+    Gold: 89
+    Silver: 114.2
+    Bronze: 130
   - Seed: 1997
     Author: 65
-    Gold: 69
-    Silver: 88
-    Bronze: 110
+    Gold: 69.1
+    Silver: 88.4
+    Bronze: 1107
+  - Seed: 1998
+    Author: 107.2
+    Gold: 112.4
+    Silver: 126.8
+    Bronze: 138.5
   - Seed: 1998
     Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
-  - Seed: 1998
-    Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Gold: 85.2
+    Silver: 99.7
+    Bronze: 120.4
   - Seed: 1999
     Author: 70
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Gold: 85.7
+    Silver: 102.8
+    Bronze: 120.9
   - Seed: 2000
     Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Gold: 72
+    Silver: 89
+    Bronze: 111.4
   - Seed: 1612
     Author: 65
-    Gold: 85
-    Silver: 100
-    Bronze: 120
+    Gold: 85.2
+    Silver: 101.3
+    Bronze: 120.6
